@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a35198f52a6a1e43892d14f5da2d0ff, type: 3}
+  m_Name: PlayerControllerSO
+  m_EditorClassIdentifier: 
+  _playerMaxHealth: 500
+  _playerMaxEnergy: 500
+  MoveSpeed: 6
+  SprintSpeed: 9
+  MoveSpeedBoost: 2
+  lookSpeed: 71.57789
+  SpeedChangeRate: 10
+  JumpHeight: 1.8
+  Gravity: -15
+  JumpTimeout: 0.5
+  FallTimeout: 0.15

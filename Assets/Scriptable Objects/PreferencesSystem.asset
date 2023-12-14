@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb6fe34c4eee7041840d38e3a73cce3, type: 3}
+  m_Name: PreferencesSystem
+  m_EditorClassIdentifier: 
+  volumeMusic: 0
+  volumeSound: 0
+  volumeAmbient: 0
+  mixer: {fileID: 24100000, guid: 28069a548cebf3c49ac63924d69331b4, type: 2}

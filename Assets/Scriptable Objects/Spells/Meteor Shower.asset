@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0575422f93b5de84486d65200ba4138e, type: 3}
+  m_Name: Meteor Shower
+  m_EditorClassIdentifier: 
+  itemName: Meteor Shower
+  itemDescription: 
+  icon: {fileID: 512847108, guid: 11665b29d1d74d24ba3544545ce4ab5b, type: 3}
+  itemClass: 0
+  itemLevel: 1
+  itemSellValue: 0
+  stackable: 0
+  buttonTagEnum: 2
+  spellType: 1
+  spellPrefab: {fileID: 2194223438642107371, guid: 62be41b2059cb2e4f9c619f27401a2bf,
+    type: 3}

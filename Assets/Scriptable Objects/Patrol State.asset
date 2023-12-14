@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0be8d9fbe00c0a4d984db54d1983db1, type: 3}
+  m_Name: Patrol State
+  m_EditorClassIdentifier: 
+  fleeState: {fileID: 0}
+  chaseState: {fileID: 11400000, guid: 74d9386b45c51a042a2a7a0141abfbf5, type: 2}
+  talkState: {fileID: 11400000, guid: e2011cd09e9231b49bf23c6dd506cca9, type: 2}
