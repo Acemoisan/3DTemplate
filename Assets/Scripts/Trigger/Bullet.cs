@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Bullet : Damage
 {
-
-    [SerializeField] protected float speed = 10f;
+    [SerializeField] Rigidbody rb;
     [SerializeField] GameObject attackVFX;
     Vector3 shootingDirection;
     [SerializeField] float destroyTimer = 5;
@@ -11,7 +10,7 @@ public class Bullet : Damage
 
     protected virtual void Start()
     {
-        Destroy(this.gameObject, destroyTimer);
+        SetupProjectile();
     }
 
     public override void PerformDamage()
@@ -24,19 +23,20 @@ public class Bullet : Damage
         base.OnDamage();
     }
 
-    
-    private void Update()
+
+    private void HandleCollision(GameObject otherObject)
     {
-        if(readyToMove == false) { return; }
-        transform.Translate(shootingDirection * speed * Time.deltaTime, Space.World);
-        Debug.Log(shootingDirection);
-        //transform.position =  Vector3.forward * speed * Time.deltaTime;
+        //collision is handled in the Base.Damage script. By checking for OnTriggerEnter
+    }
+
+    public void SetupProjectile()
+    {
+        Destroy(this.gameObject, destroyTimer);
+        rb.velocity = transform.forward * projectileSO.projectileSpeed;
     }
 
     public void SetDirection(Vector3 direction)
     {
-        //shootingDirection = (direction - transform.position).normalized;
-
         shootingDirection = direction.normalized;
         readyToMove = true;
     }

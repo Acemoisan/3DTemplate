@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class Damage : MonoBehaviour
 {
-    [SerializeField] protected float damage;
+    [SerializeField] protected ProjectileSO projectileSO;
     [SerializeField] protected bool damageOverTime;
 
 
@@ -28,6 +28,8 @@ public class Damage : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
+        OnDamage();
+
         if(other.GetComponent<Damageable>() == null) return;
         Debug.Log(other.name);
         target = other;
@@ -38,8 +40,6 @@ public class Damage : MonoBehaviour
         //if type matches, do damage. return regardless
 
         PerformDamage();
-
-        OnDamage();
     }
 
     public virtual void PerformDamage()
@@ -76,7 +76,7 @@ public class Damage : MonoBehaviour
             return Random.Range(minimumDamage, maximumDamage);
         }
         else {
-            return damage;
+            return projectileSO.projectileDamage;
         }
     }
 

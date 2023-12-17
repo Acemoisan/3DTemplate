@@ -10,7 +10,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     public void AttackHitEvent(GameObject vfx)
     {
-        playerCombat.InstantiateAttackEffectAtHand(vfx);
+        //playerCombat.InstantiateAttackEffectAtHand(vfx);
     }
 
     public void SpawnMagicAuraEvent()

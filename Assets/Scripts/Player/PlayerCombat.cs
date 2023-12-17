@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,62 +7,87 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] Transform attackPoint;
-    [SerializeField] Transform handPositionAttackPoint;
     [SerializeField] Camera virtualCamera;
+    [SerializeField] StarterAssetsInputs _input;
+    [SerializeField] GameObject debugTransform;
+    [SerializeField] LayerMask aimCollider;
 
     public UnityEvent OnAttackOne;
     public UnityEvent OnAttackTwo;
+    Vector3 aimWorldPosition;
+
+    [Header("Debug Settings")]
+    [SerializeField] float debugRayRange;
+    [SerializeField] LineRenderer baseLineRenderer;
+    [SerializeField] LineRenderer aimLineRenderer;
 
 
-    public void AttackOne(InputAction.CallbackContext value)
+    public void AttackOne()
     {
-        if (value.started)
-        {
-            Debug.Log("Attack One");
-            OnAttackOne.Invoke();
-        }
+        OnAttackOne?.Invoke();
     }
 
-    public void AttackTwo(InputAction.CallbackContext value)
+    public void AttackTwo()
     {
-        if (value.started)
-        {
-            OnAttackTwo.Invoke();
-        }
+        OnAttackTwo?.Invoke();
     }
 
-    public void InstantiateAttackEffect(GameObject vfx)
-    {
-        GameObject projectile = Instantiate(vfx, attackPoint.position, attackPoint.rotation) as GameObject;
-        if(projectile.GetComponent<Bullet>() != null)
-        {
-            Vector3 shootPosition = virtualCamera.transform.forward;
-            //Debug.Log(shootPosition);
-            projectile.GetComponent<Bullet>().SetDirection(shootPosition);
-        }
-    }
-
-    public void InstantiateAttackEffectAtHand(GameObject vfx)
-    {
-        GameObject projectile = Instantiate(vfx, handPositionAttackPoint.position, Quaternion.identity) as GameObject;
-        if(projectile.GetComponent<Bullet>() != null)
-        {
-            Vector3 shootPosition = virtualCamera.transform.forward;
-            //Debug.Log(shootPosition);
-            projectile.GetComponent<Bullet>().SetDirection(shootPosition);
-        }
-    }
 
     public void InstantiateBullet(GameObject go)
     {
-        GameObject projectile = Instantiate(go, attackPoint.position, Quaternion.LookRotation(virtualCamera.transform.forward)) as GameObject;
-        if(projectile.GetComponent<Bullet>() != null)
+        Vector3 aimDir; 
+        
+        if(_input.aiming)
         {
-            Vector3 shootPosition = virtualCamera.transform.forward;
-            Debug.Log(shootPosition);
-            Debug.DrawRay(attackPoint.position, shootPosition.normalized, Color.red, 15f);
-            //Debug.Log(shootPosition);
-            projectile.GetComponent<Bullet>().SetDirection(shootPosition);
+            aimDir = (aimWorldPosition - attackPoint.position).normalized;
+            Debug.DrawRay(attackPoint.position, aimDir, Color.blue, debugRayRange);
         }
+        else
+        {
+            aimDir = virtualCamera.transform.forward;
+            //Debug.DrawRay(attackPoint.position, shootPosition.normalized, Color.yellow, debugRayRange);
+        }
+
+        GameObject projectile = Instantiate(go, attackPoint.position, Quaternion.LookRotation(aimDir, Vector3.up)) as GameObject;
+        Debug.Log("Shooting in direction: " + aimDir + ". AIMING: " + _input.aiming +". Check Debug Ray for visual.");
+        //projectile.GetComponent<Bullet>().SetDirection(shootPosition);
+        
+
+    }
+
+    void Update()
+    {
+        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = virtualCamera.ScreenPointToRay(screenCenter);
+        if(Physics.Raycast(ray, out RaycastHit hit, 1000f, aimCollider))
+        {
+            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
+            debugTransform.transform.position = hit.point;
+            aimWorldPosition = hit.point;
+        }
+        else
+        {
+            Debug.DrawRay(ray.origin, ray.direction * debugRayRange, Color.red);
+        }
+
+        // if(_input.aiming)
+        // {
+        //     baseLineRenderer.SetActive(false);
+        //     aimLineRenderer.SetActive(true);
+        //     aimLineRenderer.transform.position = attackPoint.position;
+        //     aimLineRenderer.transform.LookAt(aimWorldPosition);
+        // }
+        // else
+        // {
+        //     baseLineRenderer.SetActive(true);
+        //     aimLineRenderer.SetActive(false);
+        //     baseLineRenderer.transform.position = attackPoint.position;
+        //     baseLineRenderer.transform.LookAt(attackPoint.position + virtualCamera.transform.forward);
+        // }
+
+            aimLineRenderer.transform.position = attackPoint.position;
+            aimLineRenderer.transform.LookAt(aimWorldPosition);
+            baseLineRenderer.transform.position = attackPoint.position;
+            baseLineRenderer.transform.LookAt(attackPoint.position + virtualCamera.transform.forward);
     }
 }

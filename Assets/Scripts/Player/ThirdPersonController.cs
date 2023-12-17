@@ -127,12 +127,6 @@ namespace StarterAssets
 
         protected override void HandleMovement()
         {
-            //ROTATE BODY WITH INPUT MOVEMENT
-            // Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-            // _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-            // new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-            //NO ROTATION BASED MOVEMENT
             inputDirection = inputDirection.x * _mainCamera.transform.right + inputDirection.z * _mainCamera.transform.forward;
             inputDirection.y = 0.0f;
             _controller.Move(inputDirection * (_speed * Time.deltaTime) +
@@ -141,16 +135,13 @@ namespace StarterAssets
 
         protected override void HandlePlayerObjectRotation()
         {
-            //_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
             _targetRotation = _mainCamera.transform.eulerAngles.y;
 
-
             //ROTATE BASED ON INPUT MOVEMENT
-            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                RotationSmoothTime);
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
             //rotate to face input direction relative to camera position
-             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
         protected override void HandleAnimator()

@@ -12,6 +12,10 @@ public abstract class PlayerController : MonoBehaviour
 		[SerializeField] protected StarterAssetsInputs _input;
         [SerializeField] protected PlayerControllerSO _playerControllerSO;
 
+        [Header("General Settings")]
+        [Tooltip("Determines whether the player body will physically rotate when standing still")]
+        [SerializeField] protected bool _rotateBodyWhenStandingStill = false;
+
 
 		[Header("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
@@ -139,16 +143,22 @@ public abstract class PlayerController : MonoBehaviour
             inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
 
-            if (_input.move != Vector2.zero)
+            //ROTATE PLAYER BODY ONLY WHEN MOVING
+            if (_input.move != Vector2.zero) 
             {
-                HandlePlayerObjectRotation(); // This method will be overridden by subclasses to handle rotation differently
+                HandlePlayerObjectRotation();
             }
-            
-            //HandlePlayerObjectRotation(); // This method will be overridden by subclasses to handle rotation differently
+            else 
+            {
+                if(_rotateBodyWhenStandingStill)
+                {
+                    HandlePlayerObjectRotation();
+                }
+            }
 
             HandleMovement();
 
-            HandleAnimator();            
+            HandleAnimator();                 
 
         }   
 
