@@ -15,18 +15,21 @@ namespace StarterAssets
         [SerializeField] Animator _animator;
 
 
-        [Tooltip("How fast the character turns to face movement direction")]
-        [Range(0.0f, 0.3f)]
-        public float RotationSmoothTime = 0.12f;
 
-        [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-        public float CameraAngleOverride = 0.0f;
 
-        [Tooltip("For locking the camera position on all axis")]
-        public bool LockCameraPosition = false;
-        public GameObject mainCamera;
-        public GameObject aimCamera;
-        public GameObject aimCursor;
+
+        [Header("Debug Settings")]
+        [SerializeField] float debugRayRange;
+        [SerializeField] LineRenderer baseLineRenderer;
+        [SerializeField] LineRenderer aimLineRenderer;
+        [SerializeField] GameObject debugTransform;
+        [SerializeField] LayerMask aimCollider;
+        Vector3 aimWorldPosition;
+        public Vector3 AimWorldPosition { get { return aimWorldPosition; } }
+        [SerializeField] Transform attackPoint;
+        public Transform AttackPoint { get { return attackPoint; } }
+
+
 
 
         // private variables
@@ -35,19 +38,11 @@ namespace StarterAssets
 
 
         // animation IDs
-        private int _animIDSpeed;
-        private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
+
         private bool _hasAnimator;
 
 
 
-        public override void Awake()
-        {
-            base.Awake();
-        }
 
 
         public override void Start()
@@ -59,8 +54,6 @@ namespace StarterAssets
             
             _hasAnimator = _animator != null;
 
-            AssignAnimationIDs();
-
             base.Start();
         }
 
@@ -68,44 +61,32 @@ namespace StarterAssets
         {
             _hasAnimator = _animator != null;
             base.Update();
-            AimCamera();
-        }
 
-        private void LateUpdate()
-        {
-            CameraRotation();
-        }
-
-        public void AimCamera()
-        {
-            if (_input.aiming)
+            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            Ray ray = _mainCamera.ScreenPointToRay(screenCenter);
+            if(Physics.Raycast(ray, out RaycastHit hit, 1000f, aimCollider))
             {
-                mainCamera.SetActive(false);
-                aimCamera.SetActive(true);
-                aimCursor.SetActive(true);
+                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
+                debugTransform.transform.position = hit.point;
+                aimWorldPosition = hit.point;
             }
             else
             {
-                mainCamera.SetActive(true);
-                aimCamera.SetActive(false);
-                aimCursor.SetActive(false);
+                Debug.DrawRay(ray.origin, ray.direction * debugRayRange, Color.red);
             }
-        }    
 
-        private void AssignAnimationIDs()
-        {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+
+            aimLineRenderer.transform.position = attackPoint.position;
+            aimLineRenderer.transform.LookAt(aimWorldPosition);
+            baseLineRenderer.transform.position = attackPoint.position;
+            baseLineRenderer.transform.LookAt(attackPoint.position + _mainCamera.transform.forward);
         }
 
 
-        private void CameraRotation()
+        protected override void CameraRotation()
         {
             // if there is an input and camera position is not fixed
-            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            if (_input.look.sqrMagnitude >= _threshold)
             {
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime * _playerControllerSO.lookSpeed;
@@ -127,21 +108,45 @@ namespace StarterAssets
 
         protected override void HandleMovement()
         {
-            inputDirection = inputDirection.x * _mainCamera.transform.right + inputDirection.z * _mainCamera.transform.forward;
-            inputDirection.y = 0.0f;
-            _controller.Move(inputDirection * (_speed * Time.deltaTime) +
-            new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            if (cameraMode == CameraModes.OverTheShoulder || cameraMode == CameraModes.OverTheShoulderLockRotation)
+            {
+                inputDirection = inputDirection.x * _mainCamera.transform.right + inputDirection.z * _mainCamera.transform.forward;
+                inputDirection.y = 0.0f;
+                _controller.Move(inputDirection * (_speed * Time.deltaTime) +
+                new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            } 
+            else if (cameraMode == CameraModes.TopDown)
+            {
+                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+                _controller.Move(targetDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            }
+
+            
         }    
 
         protected override void HandlePlayerObjectRotation()
         {
-            _targetRotation = _mainCamera.transform.eulerAngles.y;
+            //ROTATE BASED ON CAMERA (180 TURNS (OVER THE SHOULDER))
+            if (cameraMode == CameraModes.OverTheShoulder || cameraMode == CameraModes.OverTheShoulderLockRotation)
+            {
+                _targetRotation = _mainCamera.transform.eulerAngles.y;
+            }
+
+            //ROTATE BASED ON INPUT MOVEMENT (360 TURN ON THE SPOT) //if CAMERA MODE IS TOPDOWN
+            if (cameraMode == CameraModes.TopDown)
+            {
+                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+            }
+            
 
             //ROTATE BASED ON INPUT MOVEMENT
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
-            //rotate to face input direction relative to camera position
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            //ROTATE PLAYER WHEN MOVING. OR WHEN ROTATEWHILESTILL BOOL IS TRUE
+            if (_input.move != Vector2.zero || _rotateBodyWhenStandingStill) 
+            {
+                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            }
         }
 
         protected override void HandleAnimator()

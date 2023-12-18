@@ -15,12 +15,6 @@ namespace StarterAssets
 
 
 
-        public override void Awake()
-        {
-            base.Awake();
-        }
-
-
 		public override void Start()
 		{
 			TopClamp = 90f;

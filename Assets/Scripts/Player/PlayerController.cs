@@ -1,25 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
+public enum CameraModes
+{
+    OverTheShoulder,
+    OverTheShoulderLockRotation,
+    TopDown,
+
+}
+
+
 public abstract class PlayerController : MonoBehaviour
 {
-        [Header("Dependencies")]
+        //[GUIColor(0.3f, 0.8f, 0.8f, 1f)]
+        [Title("Dependencies")]
 		[SerializeField] protected PlayerInput _playerInput;
 		[SerializeField] protected CharacterController _controller;
 		[SerializeField] protected StarterAssetsInputs _input;
         [SerializeField] protected PlayerControllerSO _playerControllerSO;
-
-        [Header("General Settings")]
-        [Tooltip("Determines whether the player body will physically rotate when standing still")]
-        [SerializeField] protected bool _rotateBodyWhenStandingStill = false;
+        public Camera _mainCamera;
 
 
-		[Header("Player Grounded")]
+        [Space(20)]
+        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
+        [Title("Camera Settings")]
+        [EnumToggleButtons] public CameraModes cameraMode;
+
+
+        [Space(20)]
+        [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
+
+        [GUIColor(0.8f, 0.3f, 0.8f, 1f)]
+        public GameObject CinemachineCameraTarget;   
+
+
+        [Space(20)]
+        [Header("TopDown")]     
+        [ShowIf("@this.cameraMode == CameraModes.TopDown")] public GameObject topDownCamera;
+        [Space(20)]
+        [Header("OTS")]     
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public GameObject overTheShoulderCamera;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public GameObject overTheShoulderAimCamera;    
+        //[ShowIf("@this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public GameObject overTheShoulderFarCamera;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public GameObject aimCursor;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public float TopClamp;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public float BottomClamp;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] [Range(0.0f, 0.3f)] public float RotationSmoothTime = 0.12f;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulder || this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public float CameraAngleOverride = 0.0f;
+        [ShowIf("@this.cameraMode == CameraModes.OverTheShoulderLockRotation")] [DisableIf("@this.cameraMode == CameraModes.OverTheShoulderLockRotation")] [SerializeField] protected bool _rotateBodyWhenStandingStill = true; //"Determines whether the player body will physically rotate when standing still
+
+
+        [Space(20)]
+        [Header("General Mode Settings")]
+        [Tooltip("For locking the camera position on all axis")]
+        public bool LockCameraPosition = false;
+
+
+
+        [Space(20)]
+		[Title("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
-		public bool Grounded = true;
+		[SerializeField] protected bool Grounded = true;
 		[Tooltip("Useful for rough ground")]
 		public float GroundedOffset = -0.14f;
 		[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
@@ -28,22 +75,14 @@ public abstract class PlayerController : MonoBehaviour
 		public LayerMask GroundLayers;
 
 
-
-		[Header("Player Audio")]
+        [Space(20)]
+		[Title("Player Audio")]
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
 
 
-        [Header("Cinemachine")]
-        [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-        public GameObject CinemachineCameraTarget;        
-        [Tooltip("How far in degrees can you move the camera up")]
-        public float TopClamp;
-
-        [Tooltip("How far in degrees can you move the camera down")]
-        public float BottomClamp;
 
 
         #region Private Variables
@@ -69,31 +108,26 @@ public abstract class PlayerController : MonoBehaviour
 #endif
             }
         }
-        protected GameObject _mainCamera;
         protected float _cinemachineTargetYaw;
         protected float _cinemachineTargetPitch;
+
+        protected int _animIDSpeed;
+        protected int _animIDGrounded;
+        protected int _animIDJump;
+        protected int _animIDFreeFall;
+        protected int _animIDMotionSpeed;
         #endregion
 
 
 
         #region Methods
-        public virtual void Awake()
-        {
-            if (_mainCamera == null)
-            {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                if (_mainCamera == null)
-                {
-                    Debug.LogWarning("MainCamera tag not found. Remember to tag the main camera with 'MainCamera'");
-                }
-            }
-        }
-
-
         public virtual void Start()
         {
             _jumpTimeoutDelta = _playerControllerSO.JumpTimeout;
             _fallTimeoutDelta = _playerControllerSO.FallTimeout;
+            AssignAnimationIDs();
+
+            StartCoroutine(CheckCameraMode());
         }
 
 
@@ -102,8 +136,79 @@ public abstract class PlayerController : MonoBehaviour
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            if(cameraMode == CameraModes.OverTheShoulder || cameraMode == CameraModes.OverTheShoulderLockRotation)
+            {
+                AimOverTheShoulderCamera();
+            }
         }
 
+        void LateUpdate()
+        {
+            if (LockCameraPosition) return;
+            if (cameraMode == CameraModes.TopDown) return;
+            CameraRotation();
+        }   
+
+        IEnumerator CheckCameraMode()
+        {
+            while (true)
+            {
+                //Setting Camera Mode Mods
+                switch (cameraMode)
+                {
+                    //GOD Of War: Over the shoulder, 360 Camera rotation around player when still
+                    case CameraModes.OverTheShoulder:
+                        _rotateBodyWhenStandingStill = false;
+                        topDownCamera.SetActive(false);
+                        break;
+                    //Last Of Us: Over the shoulder, Locked camera rotation to player Forward
+                    case CameraModes.OverTheShoulderLockRotation:
+                        _rotateBodyWhenStandingStill = true;
+                        topDownCamera.SetActive(false);
+                        break;
+                    case CameraModes.TopDown:
+                        topDownCamera.SetActive(true);
+                        overTheShoulderCamera.SetActive(false);
+                        overTheShoulderAimCamera.SetActive(false);
+                        aimCursor.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
+
+                Debug.Log("Camera Mode: " + cameraMode);
+
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+
+        public void AimOverTheShoulderCamera()
+        {
+            if(LockCameraPosition) return;
+            
+            if (_input.aiming)
+            {
+                overTheShoulderCamera.SetActive(false);
+                overTheShoulderAimCamera.SetActive(true);
+                aimCursor.SetActive(true);
+            }
+            else
+            {
+                overTheShoulderCamera.SetActive(true);
+                overTheShoulderAimCamera.SetActive(false);
+                aimCursor.SetActive(false);
+            }    
+        } 
+
+        private void AssignAnimationIDs()
+        {
+            _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDGrounded = Animator.StringToHash("Grounded");
+            _animIDJump = Animator.StringToHash("Jump");
+            _animIDFreeFall = Animator.StringToHash("FreeFall");
+            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        }
 
         protected void Move()
         {
@@ -143,19 +248,9 @@ public abstract class PlayerController : MonoBehaviour
             inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
 
-            //ROTATE PLAYER BODY ONLY WHEN MOVING
-            if (_input.move != Vector2.zero) 
-            {
-                HandlePlayerObjectRotation();
-            }
-            else 
-            {
-                if(_rotateBodyWhenStandingStill)
-                {
-                    HandlePlayerObjectRotation();
-                }
-            }
-
+            
+            HandlePlayerObjectRotation();
+            
             HandleMovement();
 
             HandleAnimator();                 
@@ -258,7 +353,7 @@ public abstract class PlayerController : MonoBehaviour
 
 
 
-
+        protected virtual void CameraRotation(){}
         protected abstract void HandleMovement();
         protected virtual void HandlePlayerObjectRotation()
         {
