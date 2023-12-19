@@ -85,10 +85,9 @@ public class InventoryUI1 : MonoBehaviour
 
 
 
-    #region ///////////// EVENTS ////////////////
 
     
-    public void UpdateHotBarItemCount() //This is invoked by a global unity event. on the Player Canvas Game Object. Called from the player inventory script
+    public void UpdateHotBarItemCount()
     {
         //HOTBAR BUTTONS
         for (int i = 0; i < _playerInventory.hotBarSlots.Count && i < hotBarButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
@@ -103,8 +102,6 @@ public class InventoryUI1 : MonoBehaviour
             }
         }
     }
-    #endregion
- 
  
  
     #region ///////////// INVENTORY SLOTS ////////////////

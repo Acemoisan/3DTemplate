@@ -9,18 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441db97c48f509b4383a5bd46f3af0e4, type: 3}
-  m_Name: Stone
+  m_Script: {fileID: 11500000, guid: 0575422f93b5de84486d65200ba4138e, type: 3}
+  m_Name: Fire Spell
   m_EditorClassIdentifier: 
-  itemName: Stone
-  itemDescription: It's a Stone!
-  icon: {fileID: 21300030, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  handPrefab: {fileID: 6047399608940137495, guid: 7515c41ba380be1449e9a6183ce72a33,
+  itemName: Fire Spell
+  itemDescription: Shoot Fire!
+  icon: {fileID: 563319209, guid: 11665b29d1d74d24ba3544545ce4ab5b, type: 3}
+  handPrefab: {fileID: 9063909686237879955, guid: b10e94583b8f1f84d95fe71e60f1e356,
     type: 3}
-  itemClass: 13
-  animationString: 4
+  itemClass: 18
+  animationString: 3
   itemLevel: 1
   itemSellValue: 0
   stackable: 1
   buttonTagEnum: 2
   ItemAction: {fileID: 11400000, guid: 0596a7162965ca646b1337f71127cf2f, type: 2}
+  spellType: 0
+  spellPrefab: {fileID: 0}

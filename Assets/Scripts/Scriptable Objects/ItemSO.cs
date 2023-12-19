@@ -32,6 +32,7 @@ public abstract class ItemSO : ScriptableObject
     [HideLabel]
     //[BoxGroup("General Item Info")]
     [SerializeField] Sprite icon;
+    [SerializeField] GameObject handPrefab;
 
     
     [Tooltip("Used by Tooltip to show the class of item. And by incubator. To determine if the item is an 'Egg'")] 
@@ -42,6 +43,7 @@ public abstract class ItemSO : ScriptableObject
     [Range(1, 5)] [SerializeField] int itemLevel = 1;
     [Range(0, 10000)] [SerializeField] int itemSellValue;
     [SerializeField] bool stackable;
+    [SerializeField] float toolDamage;
 
 
     [Space(30)]
@@ -72,10 +74,20 @@ public abstract class ItemSO : ScriptableObject
     // }
 
 
-    public virtual float GetAttackSpeed() { return 0; }
+    public virtual float GetAttackSpeedMultiplier() { return 0; }
     public string GetItemName() { if(itemName != name) { Debug.Log(itemName + " is not the same name as its Scriptable Object. " + name); } return itemName; }
     public string GetItemDescription() { return itemDescription; }
     public Sprite GetIcon() { if(icon == null) { Debug.LogError("No Sprite attached to " + name); } return icon; }
+    public GameObject GetHandPrefab() 
+    { 
+        if(handPrefab != null)  
+        {return handPrefab; }
+        else 
+        {
+            Debug.Log("No HandPrefab on this Item: "); 
+            return null;
+        }
+    }
     public ItemClassNames GetClass() { if(itemClass == ItemClassNames.Null) { Debug.LogError(name + ": Item Class Name is set to NULL"); } return itemClass; }
     public ButtonTag GetButtonTag() { if(buttonTagEnum == ButtonTag.Null) { Debug.LogError(name + ": Button Tag is set to NULL"); } return buttonTagEnum; }
     public bool IsStackable() { return stackable; }
@@ -84,6 +96,10 @@ public abstract class ItemSO : ScriptableObject
     public void SetItemLevel(int level)
     {
         this.itemLevel = level;
+    }
+    public float GetToolDamage()
+    {
+        return toolDamage;
     }
 }
 
@@ -128,8 +144,9 @@ public enum ButtonTag
 public enum AnimationString
 {
     NoAnimation,
-    Attack,
     SwingTool,
+    SwordAttack,
+    ShootSpell,
     ThrowItem,
     Block
 }

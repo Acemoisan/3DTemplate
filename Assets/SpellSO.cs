@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "NewSpell", menuName = "Scriptable Objects/Spell")]
+[CreateAssetMenu(fileName = "NewSpell", menuName = "Scriptable Objects/Item/Spell")]
 public class SpellSO : ItemSO
 {
     public SpellType spellType;

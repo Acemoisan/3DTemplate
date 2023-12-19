@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour
 {
 
     [Header("------ DEPENDENCIES ------")]
+    [SerializeField] InventoryUI1 inventoryUI;
     //public InventorySO _inventorySO;
     //[SerializeField] PopUpIndicatorUI pickedUpItemUIReference;
     //[SerializeField] PlayerQuestManager playerQuestManager;
@@ -16,6 +17,7 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("------ CONFIGURABLES ------")]
     [SerializeField] int maxItemStackNumber;
+    [SerializeField] Transform primaryHandPosition;
 
     
 
@@ -71,6 +73,32 @@ public class PlayerInventory : MonoBehaviour
     public void SetActiveItem(ItemSO activatedItem)
     {
         _activeItem = activatedItem;
+
+        foreach (Transform child in primaryHandPosition)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        //check all children of hand position, if item"HandPrefab" is not a child instantiate object in hand position. if it is a child. set it to active
+        if(_activeItem != null)
+        {
+            if(_activeItem.GetHandPrefab() != null)
+            {
+                Debug.Log("Hand Prefab: " + _activeItem.GetHandPrefab().name);
+                foreach (Transform child in primaryHandPosition)
+                {
+                    if(child.gameObject.name == _activeItem.GetHandPrefab().name)
+                    {
+                        child.gameObject.SetActive(true);
+                        return;
+                    }
+                }
+
+                GameObject handItem = Instantiate(_activeItem.GetHandPrefab(), primaryHandPosition);
+                handItem.name = _activeItem.GetHandPrefab().name;
+                handItem.SetActive(true);
+            }
+        }
     }
 
 
@@ -117,7 +145,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         //pickedUpItemUIReference.ShowPopup(pickupItem.GetIcon(), pickupItem.GetItemName(), count);
-        //updateUIEvent.Raise();
+        inventoryUI.UpdateHotBarItemCount();
         //playerQuestManager.ItemCollectedForGoal(pickupItem, count);
     }
 
@@ -221,8 +249,7 @@ public class PlayerInventory : MonoBehaviour
             Invoke("ClearLastItem", .1f); //must delay because when a last item is destroyed the action afterwards is not called
         }
 
-        //updateUIEvent.Raise();
-
+        inventoryUI.UpdateHotBarItemCount();
     }
 
     public void RemoveItemFromMainInventory(ItemSO itemToRemove, int count = 1)
@@ -256,9 +283,6 @@ public class PlayerInventory : MonoBehaviour
             if (itemSlot == null) { return; }
             itemSlot.Clear();           
         }
-
-        //updateUIEvent.Raise();
-
     }
 
     public void ClearLastItem()

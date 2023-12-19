@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class Damage : MonoBehaviour
 {
-    [SerializeField] protected ProjectileSO projectileSO;
+    [SerializeField] protected float damage;
     [SerializeField] protected bool damageOverTime;
 
 
@@ -48,16 +48,13 @@ public class Damage : MonoBehaviour
             StartCoroutine(DamageOverTime());
         }
         else {
-            if(target != null)
-            {
-                target.GetComponent<Damageable>().Hit(GetDamage());
-            }
+            damageableTargetRef?.Hit(GetDamage());
         }
     }
 
     public virtual void OnDamage()
     {
-        if(OnDamageEvent != null) OnDamageEvent.Invoke();
+        OnDamageEvent?.Invoke();
     }
     
     IEnumerator DamageOverTime()
@@ -76,7 +73,7 @@ public class Damage : MonoBehaviour
             return Random.Range(minimumDamage, maximumDamage);
         }
         else {
-            return projectileSO.projectileDamage;
+            return damage;
         }
     }
 

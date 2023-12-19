@@ -4,6 +4,7 @@ public class Bullet : Damage
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject attackVFX;
+    [SerializeField] float projectileSpeed = 10f;
     Vector3 shootingDirection;
     [SerializeField] float destroyTimer = 5;
     bool readyToMove = false;
@@ -32,7 +33,7 @@ public class Bullet : Damage
     public void SetupProjectile()
     {
         Destroy(this.gameObject, destroyTimer);
-        rb.velocity = transform.forward * projectileSO.projectileSpeed;
+        rb.velocity = transform.forward * projectileSpeed;
     }
 
     public void SetDirection(Vector3 direction)

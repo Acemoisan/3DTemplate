@@ -28,7 +28,9 @@ public class PlayerActions : MonoBehaviour
                 {
 
                     //pass all necessary params to the tool / hit function. Grab any necessary functions / values
-                    playerInventory.GetActiveItem().ItemAction.OnPrimaryAction(playerInventory.GetActiveItem()); //out int _itemDurability
+                    playerInventory.GetActiveItem().ItemAction.OnPrimaryAction(playerInventory.GetActiveItem(), playerInventory); //out int _itemDurability
+
+                    playerInventory.GetActiveItem().ItemAction.OnItemUsed(playerInventory.GetActiveItem(), playerInventory);
                 }
                 else 
                 {

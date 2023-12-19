@@ -16039,7 +16039,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.2
+        time: 0.23333333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -16048,7 +16048,16 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.33333334
+        time: 0.36666667
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.8666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -16060,7 +16069,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Attack Box (1)
+    path: Geometry/untitled/Attack Box (1)
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -16073,7 +16082,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 768679188
+      path: 808938907
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -33358,7 +33367,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.2
+        time: 0.23333333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -33367,7 +33376,16 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.33333334
+        time: 0.36666667
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.8666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -33379,19 +33397,11 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Attack Box (1)
+    path: Geometry/untitled/Attack Box (1)
     classID: 1
     script: {fileID: 0}
     flags: 0
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
-  m_Events:
-  - time: 0.20681818
-    functionName: InstantiateAttackEffect
-    data: 
-    objectReferenceParameter: {fileID: 1171201465392465800, guid: 4aa9f30a28a77224ba84b2a2c334c71b,
-      type: 3}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
