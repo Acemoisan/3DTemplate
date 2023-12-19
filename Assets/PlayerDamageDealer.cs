@@ -49,6 +49,21 @@ public class PlayerDamageDealer : Damage
         {
             base.PerformDamage();
         }
+
+
+
+        // TerrainData terrainData = terrain.terrainData;
+        // TreeInstance[] terrainTrees = terrainData.treeInstances;
+        // foreach(Tree tree in terrainTrees.)
+        // {
+        //     if(tree.prototypeIndex == 0)
+        //     {
+        //         Tree tree1 = tree;
+        //         Debug.Log("Tree Found");
+        //         Debug.Log(tree.position);
+        //         tree
+        //     }
+        // }
     }
 
     public override void OnDamage()

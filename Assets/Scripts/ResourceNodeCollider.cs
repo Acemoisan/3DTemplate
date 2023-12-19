@@ -1,7 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using UnityEngine.TerrainUtils;
 
+[RequireComponent(typeof(SpawnItem))]
+[RequireComponent(typeof(Collider))]
 public class ResourceNodeCollider : MonoBehaviour, Damageable
 {
     [SerializeField] GameObject node;
@@ -19,6 +22,12 @@ public class ResourceNodeCollider : MonoBehaviour, Damageable
     void Start()
     {
         currentHealth = maxhealth;
+        InvokeRepeating("Test", 1f, 1f);
+    }
+
+    void Test()
+    {
+        Debug.Log("Test");
     }
 
 

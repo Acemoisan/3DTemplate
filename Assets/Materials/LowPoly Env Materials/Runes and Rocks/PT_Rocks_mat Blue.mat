@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PT_Rocks_mat Blue
-  m_Shader: {fileID: 4800000, guid: 69cfc5f6a7c726b418bd7100aa488fea, type: 3}
+  m_Shader: {fileID: 4800000, guid: cd18bd550ff6630468660d0150eed511, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:

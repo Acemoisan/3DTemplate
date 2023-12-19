@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PT_Grass_Mat 1
-  m_Shader: {fileID: 4800000, guid: 8a9c9453b796d9b4e8af20c911d7eab7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 233be0623027421449b81f7423abaf79, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -116,7 +116,7 @@ Material:
     - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SNOWONOFF: 0
@@ -142,6 +142,7 @@ Material:
     - _TransStrength: 1
     - _Translucency: 1
     - _UVSec: 0
+    - _WINDMASKONOFF: 0
     - _WindDensity: 1
     - _WindMovement: 1
     - _WindStrength: 0.5

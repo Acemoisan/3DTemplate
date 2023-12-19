@@ -10707,7 +10707,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8555331173500112218}
-  - component: {fileID: 2923698565981196675}
   - component: {fileID: 6060450318525082288}
   - component: {fileID: 5671990129920252004}
   - component: {fileID: 3686165879992785448}
@@ -10734,26 +10733,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2679260679484470121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2923698565981196675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4811198958052253811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f125f9a1903494eb364e96acc1f8fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSO: {fileID: 0}
-  damageOverTime: 0
-  randomDamage: 0
-  minimumDamage: 0
-  maximumDamage: 0
-  OnDamageEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!54 &6060450318525082288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12205,6 +12184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 931517464310953271}
+  hudReference: {fileID: 0}
   OnPlay:
     m_PersistentCalls:
       m_Calls:
@@ -17835,7 +17815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23d9fd9342842745a3af7d79e2d1218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
   maxItemStackNumber: 99
+  primaryHandPosition: {fileID: 0}
   playerCurrency: 543
   charmActive: 0
   _activeItem: {fileID: 0}
@@ -18078,24 +18060,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7220ada6271f5349814bd2949504a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1,
+    type: 2}
   _playerInput: {fileID: 931517464310953271}
   _controller: {fileID: 7356492435133001080}
   _input: {fileID: 890405177401033964}
-  _playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1,
-    type: 2}
   _mainCamera: {fileID: 0}
   cameraMode: 0
   CinemachineCameraTarget: {fileID: 6338181271085107448}
   topDownCamera: {fileID: 1950194671410646389}
+  rpgCamera: {fileID: 0}
   overTheShoulderCamera: {fileID: 6363718689294182}
   overTheShoulderAimCamera: {fileID: 8676552246236375160}
   aimCursor: {fileID: 2264055515732624872}
   TopClamp: 70
   BottomClamp: -30
-  RotationSmoothTime: 0.035
   CameraAngleOverride: 0
-  _rotateBodyWhenStandingStill: 1
   LockCameraPosition: 0
+  RotationSmoothTime: 0.035
+  attackPoint: {fileID: 9126144146649792987}
+  aimCollider:
+    serializedVersion: 2
+    m_Bits: 16640
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
@@ -18105,15 +18091,11 @@ MonoBehaviour:
   LandingAudioClip: {fileID: 0}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
-  _animator: {fileID: 8054147327841787449}
-  debugRayRange: 50
+  debugRays: 0
   baseLineRenderer: {fileID: 1328892891913780953}
   aimLineRenderer: {fileID: 4072513201658621090}
   debugTransform: {fileID: 0}
-  aimCollider:
-    serializedVersion: 2
-    m_Bits: 16640
-  attackPoint: {fileID: 9126144146649792987}
+  _animator: {fileID: 8054147327841787449}
 --- !u!114 &4758799307081529356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18255,24 +18237,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1,
+    type: 2}
   _playerInput: {fileID: 931517464310953271}
   _controller: {fileID: 7356492435133001080}
   _input: {fileID: 890405177401033964}
-  _playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1,
-    type: 2}
   _mainCamera: {fileID: 0}
   cameraMode: 0
   CinemachineCameraTarget: {fileID: 6338181271085107448}
   topDownCamera: {fileID: 0}
+  rpgCamera: {fileID: 0}
   overTheShoulderCamera: {fileID: 0}
   overTheShoulderAimCamera: {fileID: 0}
   aimCursor: {fileID: 0}
   TopClamp: 90
   BottomClamp: -90
-  RotationSmoothTime: 0.12
   CameraAngleOverride: 0
-  _rotateBodyWhenStandingStill: 1
   LockCameraPosition: 0
+  RotationSmoothTime: 0.12
+  attackPoint: {fileID: 0}
+  aimCollider:
+    serializedVersion: 2
+    m_Bits: 0
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.5
@@ -18282,6 +18268,10 @@ MonoBehaviour:
   LandingAudioClip: {fileID: 0}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
+  debugRays: 0
+  baseLineRenderer: {fileID: 0}
+  aimLineRenderer: {fileID: 0}
+  debugTransform: {fileID: 0}
   RotationSpeed: 1
 --- !u!114 &8247795516450947324
 MonoBehaviour:
@@ -18295,80 +18285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272531b9daea7f544a110b821f80e79b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnimation: {fileID: 1138916782569573013}
-  playerAttributes: {fileID: 4758799307081529356}
-  playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1, type: 2}
-  hudUI: {fileID: 1715643199746853}
-  inventoryUI1: {fileID: 1101721303007303048}
-  HUDMessage: {fileID: 2677786765741834086}
-  spells:
-  - {fileID: 11400000, guid: b02a63a021216674cad5bb51fe3dcf5b, type: 2}
-  handPositionAttackPoint: {fileID: 7012442996598321395}
-  virtualCamera: {fileID: 8698410632688313640}
-  leftHandIcon: {fileID: 3956333393056943406}
-  rightHandIcon: {fileID: 3088308933507818813}
-  projectileAudioClips:
-  - {fileID: 8300000, guid: 8b3b1a1c9eb96444aa8d57b12ea8848e, type: 3}
-  - {fileID: 8300000, guid: 3616271504784b844972202b972156d6, type: 3}
-  - {fileID: 8300000, guid: bd519d585a6712745ae61f2acfda5edb, type: 3}
-  playSFX: {fileID: 1323438270528948544}
-  projectileEnergyCost: 25
-  auraEnergyCost: 100
-  OnProjectileShoot:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1351371673831318735}
-        m_TargetAssemblyTypeName: VibrateController, Assembly-CSharp
-        m_MethodName: Vibrate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8247795516450947324}
-        m_TargetAssemblyTypeName: PlayerMagic, Assembly-CSharp
-        m_MethodName: PlayRandomAudioClip
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnAuraSpawn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1138916782569573013}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: AuraSpell
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1323438270528948544}
-        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
-        m_MethodName: PlayClip
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 88286a2e83db1664e9be9e9492ea5410,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1351371673831318735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26195,7 +26111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCombat: {fileID: 5747375131318703991}
-  playerMagic: {fileID: 8247795516450947324}
 --- !u!1001 &1420298706537607396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32520,18 +32435,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7444775497026490540}
   m_SourcePrefab: {fileID: 100100000, guid: caf5f455048f47d459f55ad4706007f2, type: 3}
---- !u!114 &1715643199746853 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3447695962308997458, guid: caf5f455048f47d459f55ad4706007f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3449393824126894711}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790243819225843156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00b4068ad6af2246a73290ca8f603b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &30657903607810573 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3436913211236452474, guid: caf5f455048f47d459f55ad4706007f2,
