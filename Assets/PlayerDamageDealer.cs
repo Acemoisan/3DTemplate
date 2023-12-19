@@ -14,8 +14,9 @@ public enum DamageClasses
 public class PlayerDamageDealer : Damage
 {
     [SerializeField] DamageClasses currentDamageType;
+    //[SerializeField] PlayerInventory playerInventory;
 
-    public void SetupDamageDealer(ItemSO item, DamageClasses damageType)//this is setup prior to animation playing. so that the collider has the right information
+    public void SetupDamageDealer(ItemSO item, DamageClasses damageType)
     {
         currentDamageType = damageType;
         damage = item.GetToolDamage();
@@ -23,6 +24,7 @@ public class PlayerDamageDealer : Damage
 
     public override void PerformDamage()
     {
+        float chanceOfGettingresources;
         //if the damageable is a resource node, then check if the damageable is the same type as the damage type
         if(damageableTargetRef != null && damageableTargetRef as ResourceNodeCollider != null)
         {
@@ -31,15 +33,22 @@ public class PlayerDamageDealer : Damage
             if(resourceNode.bestHarvestedWith == currentDamageType)
             {
                 Debug.Log("Damage type matches resource type"); //APPLY BONUS RESOURCES + DAMAGE
+                chanceOfGettingresources = Random.Range(0, 80); //Generally an 80% Chance of Getting resources.
             }
+            else 
+            {
+                chanceOfGettingresources = Random.Range(0, 20); //Generally a 20% Chance of Getting resources.
+            }
+
+
+            //Give Resources To Player OR Drop them on ground.
+            resourceNode.SpawnItem(chanceOfGettingresources);
             base.PerformDamage();
         }
         else
         {
             base.PerformDamage();
         }
-
-        base.PerformDamage();
     }
 
     public override void OnDamage()
@@ -49,7 +58,7 @@ public class PlayerDamageDealer : Damage
 
     public void SetupFists(float fistDamage)
     {
-        currentDamageType = DamageClasses.Fists;
+        SetDamageType(DamageClasses.Fists);
         SetDamage(fistDamage);
     }
 

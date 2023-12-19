@@ -1,13 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public class ResourceNodeCollider : MonoBehaviour, Damageable
 {
     [SerializeField] GameObject node;
     [SerializeField] float maxhealth;
     public DamageClasses bestHarvestedWith;
-    float currentHealth;
+    [SerializeField] SpawnItem spawnItem;
+    [ReadOnly]
+    [SerializeField] float currentHealth;
+
+    public UnityEvent OnHit;
+    public UnityEvent OnDeath;
 
 
     // Start is called before the first frame update
@@ -28,7 +33,7 @@ public class ResourceNodeCollider : MonoBehaviour, Damageable
 
         //visualize damage to resource
 
-        //OnHit?.Invoke();
+        OnHit?.Invoke();
 
         if (currentHealth <= 0)
         {
@@ -36,10 +41,17 @@ public class ResourceNodeCollider : MonoBehaviour, Damageable
         }
     }
 
+    public void SpawnItem(float dropChance)
+    {
+        if(spawnItem == null) { Debug.LogError(this + " has no spawn item Ref"); return;}
+        spawnItem.SetDropChance(dropChance);
+        spawnItem.SpawnAnItem();
+    }
+
     public void Die()
     {
         currentHealth = 0;
-        //OnDeath?.Invoke();
+        OnDeath?.Invoke();
         Destroy(node, .25f);
     }
 }

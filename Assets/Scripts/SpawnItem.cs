@@ -26,7 +26,7 @@ public class SpawnItem : MonoBehaviour//: ToolHit
     [SerializeField] ItemSpawnerSO _itemSpawner;
     [SerializeField] List<SpawnableItem> _spawnableItems;
     [SerializeField] Transform _spawnLocation;
-    [Range(0, 100)] [SerializeField] int chanceOfDropOutOf100;
+    [Range(0, 100)] [SerializeField] float chanceOfDropOutOf100;
     [SerializeField] int dropCountMinimum = 1;
     [SerializeField] int dropcountMaximum = 1;
     [SerializeField] float spreadOfObjects;
@@ -39,11 +39,17 @@ public class SpawnItem : MonoBehaviour//: ToolHit
         _spawnableItems.Add(new SpawnableItem(item, chance));
     }
 
+    public void SetDropChance(float chanceOutOf100)
+    {
+        chanceOfDropOutOf100 = (int)chanceOutOf100;
+    }
+
 
     public void SpawnAnItem()
     {
-
-        if(Random.Range(1, 101) > chanceOfDropOutOf100) { return; }
+        float random = Random.Range(1, 101);
+        Debug.Log("Random Chance: " + random + " Chance of Drop: " + chanceOfDropOutOf100);
+        if(random > chanceOfDropOutOf100) { return; }
 
 
         int randomCount = Random.Range(dropCountMinimum, dropcountMaximum);

@@ -18,10 +18,11 @@ MonoBehaviour:
   handPrefab: {fileID: 9063909686237879955, guid: b10e94583b8f1f84d95fe71e60f1e356,
     type: 3}
   itemClass: 16
+  damageClass: 2
   animationString: 1
   itemLevel: 1
   itemSellValue: 100
   stackable: 0
-  toolDamage: 0
+  toolDamage: 3
   buttonTagEnum: 2
-  ItemAction: {fileID: 0}
+  ItemAction: {fileID: 11400000, guid: 0596a7162965ca646b1337f71127cf2f, type: 2}

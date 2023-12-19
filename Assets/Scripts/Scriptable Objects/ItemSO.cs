@@ -38,6 +38,7 @@ public abstract class ItemSO : ScriptableObject
     [Tooltip("Used by Tooltip to show the class of item. And by incubator. To determine if the item is an 'Egg'")] 
     //[BoxGroup("General Item Info")]
     [SerializeField] ItemClassNames itemClass;
+    [SerializeField] DamageClasses damageClass;
     [SerializeField] AnimationString animationString;
     public AnimationString GetAnimationString { get { return animationString; } }
     [Range(1, 5)] [SerializeField] int itemLevel = 1;
@@ -89,6 +90,7 @@ public abstract class ItemSO : ScriptableObject
         }
     }
     public ItemClassNames GetClass() { if(itemClass == ItemClassNames.Null) { Debug.LogError(name + ": Item Class Name is set to NULL"); } return itemClass; }
+    public DamageClasses GetDamageClass() { return damageClass; }
     public ButtonTag GetButtonTag() { if(buttonTagEnum == ButtonTag.Null) { Debug.LogError(name + ": Button Tag is set to NULL"); } return buttonTagEnum; }
     public bool IsStackable() { return stackable; }
     public int GetItemLevel() { return itemLevel; }

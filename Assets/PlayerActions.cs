@@ -8,6 +8,7 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] PlayerDamageDealer playerDamageDealer;
     public UnityEvent OnPrimaryAttack;
     public UnityEvent OnSecondaryAttack;
     public UnityEvent EmptyHandEvent;
@@ -29,13 +30,13 @@ public class PlayerActions : MonoBehaviour
                 {
 
                     //pass all necessary params to the tool / hit function. Grab any necessary functions / values
-                    playerInventory.GetActiveItem().ItemAction.OnPrimaryAction(playerInventory.GetActiveItem(), playerInventory); //out int _itemDurability
+                    playerInventory.GetActiveItem().ItemAction.OnPrimaryAction(playerInventory.GetActiveItem(), playerInventory, playerDamageDealer); //out int _itemDurability
 
                     playerInventory.GetActiveItem().ItemAction.OnItemUsed(playerInventory.GetActiveItem(), playerInventory);
                 }
                 else 
                 {
-                    Debug.Log(playerInventory.GetActiveItem() + " Item Action is null");
+                    Debug.LogError(playerInventory.GetActiveItem() + " Was Used, But Item Action is null, try to give every item an action");
                 }
 
 
