@@ -10,6 +10,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] PlayerAnimation playerAnimation;
     public UnityEvent OnPrimaryAttack;
     public UnityEvent OnSecondaryAttack;
+    public UnityEvent EmptyHandEvent;
 
 
     
@@ -49,6 +50,10 @@ public class PlayerActions : MonoBehaviour
                 {
                     Debug.Log(playerInventory.GetActiveItem() + " Animation String is null");
                 }
+            }
+            else
+            {
+                EmptyHandEvent?.Invoke();
             }
         }
     }

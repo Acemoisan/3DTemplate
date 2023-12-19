@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum DamageClasses
 {
+    Fists,
     Sword,
     Pickaxe,
     Axe,
@@ -44,5 +45,16 @@ public class PlayerDamageDealer : Damage
     public override void OnDamage()
     {
         base.OnDamage();
+    }
+
+    public void SetupFists(float fistDamage)
+    {
+        currentDamageType = DamageClasses.Fists;
+        SetDamage(fistDamage);
+    }
+
+    public void SetDamageType(DamageClasses damageType)
+    {
+        currentDamageType = damageType;
     }
 }

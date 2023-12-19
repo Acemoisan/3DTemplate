@@ -77,6 +77,11 @@ public class Damage : MonoBehaviour
         }
     }
 
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
+    }
+
     void OnDestroy()
     {
         StopCoroutine(DamageOverTime());

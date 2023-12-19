@@ -27384,6 +27384,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8054147327841787449, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8555331173500112218, guid: 4566296c3539b504aba3d8d5d46d87b5,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -27507,6 +27512,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1402701044}
   m_SourcePrefab: {fileID: 100100000, guid: 4566296c3539b504aba3d8d5d46d87b5, type: 3}
+--- !u!95 &2125508127 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8054147327841787449, guid: 4566296c3539b504aba3d8d5d46d87b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2125508126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2125508128 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7836362113440333099, guid: 4566296c3539b504aba3d8d5d46d87b5,
@@ -27575,6 +27586,33 @@ MonoBehaviour:
   OnSecondaryAttack:
     m_PersistentCalls:
       m_Calls: []
+  EmptyHandEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1402701044}
+        m_TargetAssemblyTypeName: PlayerDamageDealer, Assembly-CSharp
+        m_MethodName: SetupFists
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2125508127}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SwingTool
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2125508166 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 669437382867835508, guid: 4566296c3539b504aba3d8d5d46d87b5,
