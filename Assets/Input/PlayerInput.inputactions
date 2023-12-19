@@ -150,7 +150,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextRightHandSpell",
+                    "name": "NextItem",
                     "type": "Button",
                     "id": "e0449889-da1e-41f0-8ec3-8fae1754bcd8",
                     "expectedControlType": "Button",
@@ -159,7 +159,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextLeftHandSpell",
+                    "name": "PreviousItem",
                     "type": "Button",
                     "id": "a0164714-f40a-4902-a37b-3a4859b7b81d",
                     "expectedControlType": "Button",
@@ -887,11 +887,11 @@
                 {
                     "name": "",
                     "id": "e1db3b95-73f4-4a26-ad53-0488d60c4627",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/rightBracket",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "NextRightHandSpell",
+                    "action": "NextItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -902,7 +902,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Playstation",
-                    "action": "NextRightHandSpell",
+                    "action": "NextItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -913,7 +913,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox",
-                    "action": "NextRightHandSpell",
+                    "action": "NextItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -924,18 +924,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "NextRightHandSpell",
+                    "action": "NextItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "53b36af6-d41a-46e7-b182-898c3df17b84",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/leftBracket",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "NextLeftHandSpell",
+                    "action": "PreviousItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -946,7 +946,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Playstation",
-                    "action": "NextLeftHandSpell",
+                    "action": "PreviousItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -957,7 +957,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Xbox",
-                    "action": "NextLeftHandSpell",
+                    "action": "PreviousItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -968,7 +968,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
-                    "action": "NextLeftHandSpell",
+                    "action": "PreviousItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

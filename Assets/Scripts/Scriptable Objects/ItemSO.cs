@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright © 2022 Omuhu Inc. - All Rights Reserved
  *  Unauthorized copying of this file, via any medium is strictly prohibited
  *  Proprietary and confidential
@@ -13,7 +13,7 @@ using Sirenix.OdinInspector;
 public abstract class ItemSO : ScriptableObject
 {
     //[GUIColor(0.3f, 0.8f, 0.8f, 1f)]
-    [Header("General ItemSO Values")]
+    [Title("General ItemSO Values")]
     [Tooltip("Should be same name as Scriptable Object")] 
     //[BoxGroup("General Item Info")]
     //[LabelWidth(150)]
@@ -37,6 +37,8 @@ public abstract class ItemSO : ScriptableObject
     [Tooltip("Used by Tooltip to show the class of item. And by incubator. To determine if the item is an 'Egg'")] 
     //[BoxGroup("General Item Info")]
     [SerializeField] ItemClassNames itemClass;
+    [SerializeField] AnimationString animationString;
+    public AnimationString GetAnimationString { get { return animationString; } }
     [Range(1, 5)] [SerializeField] int itemLevel = 1;
     [Range(0, 10000)] [SerializeField] int itemSellValue;
     [SerializeField] bool stackable;
@@ -53,7 +55,7 @@ public abstract class ItemSO : ScriptableObject
     //[GUIColor(0.3f, 0.8f, 0.8f, 1f)]
     //[Header("    Item Action - Currently used for (EatAction)")]
     //public ToolAction onSpecialAction;
-    //public ToolAction onItemUsed;
+    public ItemActionSO ItemAction;
 
 
     //[Header("Animation Trigger")]
@@ -120,4 +122,14 @@ public enum ButtonTag
     Potion,
     Hotbar,
     Misc,
+}
+
+[System.Serializable]
+public enum AnimationString
+{
+    NoAnimation,
+    Attack,
+    SwingTool,
+    ThrowItem,
+    Block
 }

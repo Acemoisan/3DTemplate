@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -11,34 +12,11 @@ namespace StarterAssets
     public class ThirdPersonController : PlayerController
     {
         [Space(20)]
-        [Header("THIRD PERSON --------------")]
+        [Title("THIRD PERSON --------------")]
         [SerializeField] Animator _animator;
 
 
-
-
-
-        [Header("Debug Settings")]
-        [SerializeField] float debugRayRange;
-        [SerializeField] LineRenderer baseLineRenderer;
-        [SerializeField] LineRenderer aimLineRenderer;
-        [SerializeField] GameObject debugTransform;
-        [SerializeField] LayerMask aimCollider;
-        Vector3 aimWorldPosition;
-        public Vector3 AimWorldPosition { get { return aimWorldPosition; } }
-        [SerializeField] Transform attackPoint;
-        public Transform AttackPoint { get { return attackPoint; } }
-
-
-
-
         // private variables
-        private float _animationBlend;
-        private float _targetRotation = 0.0f;
-
-
-        // animation IDs
-
         private bool _hasAnimator;
 
 
@@ -61,25 +39,6 @@ namespace StarterAssets
         {
             _hasAnimator = _animator != null;
             base.Update();
-
-            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-            Ray ray = _mainCamera.ScreenPointToRay(screenCenter);
-            if(Physics.Raycast(ray, out RaycastHit hit, 1000f, aimCollider))
-            {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
-                debugTransform.transform.position = hit.point;
-                aimWorldPosition = hit.point;
-            }
-            else
-            {
-                Debug.DrawRay(ray.origin, ray.direction * debugRayRange, Color.red);
-            }
-
-
-            aimLineRenderer.transform.position = attackPoint.position;
-            aimLineRenderer.transform.LookAt(aimWorldPosition);
-            baseLineRenderer.transform.position = attackPoint.position;
-            baseLineRenderer.transform.LookAt(attackPoint.position + _mainCamera.transform.forward);
         }
 
 
@@ -108,14 +67,14 @@ namespace StarterAssets
 
         protected override void HandleMovement()
         {
-            if (cameraMode == CameraModes.OverTheShoulder || cameraMode == CameraModes.OverTheShoulderLockRotation)
+            if (cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs)
             {
                 inputDirection = inputDirection.x * _mainCamera.transform.right + inputDirection.z * _mainCamera.transform.forward;
                 inputDirection.y = 0.0f;
                 _controller.Move(inputDirection * (_speed * Time.deltaTime) +
                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
             } 
-            else if (cameraMode == CameraModes.TopDown)
+            else if (cameraMode == CameraModes.AnimalCrossing || cameraMode == CameraModes.Ark)
             {
                 Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
                 _controller.Move(targetDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -127,13 +86,13 @@ namespace StarterAssets
         protected override void HandlePlayerObjectRotation()
         {
             //ROTATE BASED ON CAMERA (180 TURNS (OVER THE SHOULDER))
-            if (cameraMode == CameraModes.OverTheShoulder || cameraMode == CameraModes.OverTheShoulderLockRotation)
+            if (cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs)
             {
                 _targetRotation = _mainCamera.transform.eulerAngles.y;
             }
 
             //ROTATE BASED ON INPUT MOVEMENT (360 TURN ON THE SPOT) //if CAMERA MODE IS TOPDOWN
-            if (cameraMode == CameraModes.TopDown)
+            if (cameraMode == CameraModes.AnimalCrossing || cameraMode == CameraModes.Ark)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
             }
@@ -143,7 +102,7 @@ namespace StarterAssets
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
             //ROTATE PLAYER WHEN MOVING. OR WHEN ROTATEWHILESTILL BOOL IS TRUE
-            if (_input.move != Vector2.zero || _rotateBodyWhenStandingStill) 
+            if (_input.move != Vector2.zero || cameraMode == CameraModes.LastOfUs) 
             {
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }

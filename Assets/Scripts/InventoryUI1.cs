@@ -18,7 +18,7 @@ public class InventoryUI1 : MonoBehaviour
     [Header("Player Dependencies")]
     //[SerializeField] PlayerAttributes _playerAttributes;
     [SerializeField] PlayerInventory _playerInventory;
-    [SerializeField] PlayerMagic _playerMagic;
+    //[SerializeField] PlayerMagic _playerMagic;
     [SerializeField] TextMeshProUGUI _playersNameText;
     [SerializeField] Image _playersIcon;
 
@@ -75,7 +75,7 @@ public class InventoryUI1 : MonoBehaviour
 
         //BUTTONS
         SetIndexOfAllButtons();
-        //ShowButtons();
+        ShowButtons();
 
 
         //TABS
@@ -111,68 +111,67 @@ public class InventoryUI1 : MonoBehaviour
 
     public void ShowButtons()
     {
-        //ShowAllButtons();
+        ShowAllButtons();
         TurnOffUnavailableButtons();
     }
 
-    //TODO: CHANGE THIS BACK, AFTER THE WIZARD GAME IS DONE
-    // public void ShowAllButtons()
-    // {
-    //     //MAIN INVENTORY
-    //     for (int i = 0; i < _playerInventory.inventorySlots.Count && i < mainInventoryButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
-    //     {
-    //         if (_playerInventory.inventorySlots[i].item == null)
-    //         {
-    //             mainInventoryButtons[i].CleanButtons();
-    //         }
-    //         else
-    //         {
-    //             mainInventoryButtons[i].SetButtonSprites(_playerInventory.inventorySlots[i]);
-    //         }
-    //     }
-
-    //     //HOTBAR BUTTONS
-    //     for (int i = 0; i < _playerInventory.hotBarSlots.Count && i < hotBarButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
-    //     {
-    //         if (_playerInventory.hotBarSlots[i].item == null)
-    //         {
-    //             hotBarButtons[i].CleanButtons();
-    //         }
-    //         else
-    //         {
-    //             hotBarButtons[i].SetButtonSprites(_playerInventory.hotBarSlots[i]);
-    //         }
-    //     }
-
-    //     //MISC BUTTONS
-    //     for (int i = 0; i < _playerInventory.miscSlots.Count && i < miscButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
-    //     {
-    //         if (_playerInventory.miscSlots[i].item == null)
-    //         {
-    //             miscButtons[i].CleanButtons();
-    //         }
-    //         else
-    //         {
-    //             miscButtons[i].SetButtonSprites(_playerInventory.miscSlots[i]);
-    //         }
-    //     }
-    // }   
-
-
-    public void ShowAllSpellsOnButtons()
+    public void ShowAllButtons()
     {
-        //HOTBAR BUTTONS
-        for (int i = 0; i < 10; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
+        //MAIN INVENTORY
+        for (int i = 0; i < _playerInventory.inventorySlots.Count && i < mainInventoryButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
         {
-            hotBarButtons[i].CleanButtons();
+            if (_playerInventory.inventorySlots[i].item == null)
+            {
+                mainInventoryButtons[i].CleanButtons();
+            }
+            else
+            {
+                mainInventoryButtons[i].SetButtonSprites(_playerInventory.inventorySlots[i]);
+            }
         }
 
-        for (int i = 0; i < _playerMagic.spells.Count; i++)
+        //HOTBAR BUTTONS
+        for (int i = 0; i < _playerInventory.hotBarSlots.Count && i < hotBarButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
         {
-            if (_playerMagic.spells[i] == null) { continue; }
-            hotBarButtons[i].SetButtonSprites(_playerMagic.spells[i]);
+            if (_playerInventory.hotBarSlots[i].item == null)
+            {
+                hotBarButtons[i].CleanButtons();
+            }
+            else
+            {
+                hotBarButtons[i].SetButtonSprites(_playerInventory.hotBarSlots[i]);
+            }
+        }
+
+        //MISC BUTTONS
+        for (int i = 0; i < _playerInventory.miscSlots.Count && i < miscButtons.Count; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
+        {
+            if (_playerInventory.miscSlots[i].item == null)
+            {
+                miscButtons[i].CleanButtons();
+            }
+            else
+            {
+                miscButtons[i].SetButtonSprites(_playerInventory.miscSlots[i]);
+            }
         }
     }   
+
+
+    // public void ShowAllSpellsOnButtons()
+    // {
+    //     //HOTBAR BUTTONS
+    //     for (int i = 0; i < 10; i++)// && i < _playerInventory.availableInventorySlots.Count; i++)
+    //     {
+    //         hotBarButtons[i].CleanButtons();
+    //     }
+
+    //     for (int i = 0; i < _playerMagic.spells.Count; i++)
+    //     {
+    //         if (_playerMagic.spells[i] == null) { continue; }
+    //         hotBarButtons[i].SetButtonSprites(_playerMagic.spells[i]);
+    //     }
+    // }   
 
     void TurnOffUnavailableButtons()
     {

@@ -171,12 +171,12 @@ GameObject:
   - component: {fileID: 1154383450034629192}
   - component: {fileID: 3328360804745548024}
   m_Layer: 0
-  m_Name: Over The Shoulder
+  m_Name: Over The Shoulder (God Of War)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8477724441481119314
 Transform:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 6363718689294182}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11249769, y: 0.3050003, z: -1.5000019}
+  m_LocalPosition: {x: -0.0000014528632, y: 0.7750001, z: -1.4999969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1609069370673817057}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1609069370673817057}
   m_Lens:
     FieldOfView: 50
@@ -981,7 +981,7 @@ Transform:
   m_GameObject: {fileID: 620799328353139700}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 0.59000015, z: 0}
+  m_LocalPosition: {x: 0.11249932, y: 0.3050003, z: -0.0000012321398}
   m_LocalScale: {x: 0.6319451, y: 0.631945, z: 0.6319451}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7687,8 +7687,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950194671410646389}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.60962754, y: 0.0003272891, z: -0.000251621, w: 0.79268795}
-  m_LocalPosition: {x: 0.0000011567026, y: 5, z: -1.3000015}
+  m_LocalRotation: {x: -0.60450846, y: -0.03435264, z: 0.026107237, w: -0.7954293}
+  m_LocalPosition: {x: 0.0000018402934, y: 5, z: -1.3000014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10656,7 +10656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.5, y: -0.4, z: 0}
+  ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 0.5
   CameraDistance: 1.5
@@ -14135,7 +14135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8637747181399018004
 Transform:
   m_ObjectHideFlags: 0
@@ -14145,7 +14145,7 @@ Transform:
   m_GameObject: {fileID: 6186645280240298959}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11249769, y: 0.3050003, z: -1.5000019}
+  m_LocalPosition: {x: -0.0000014528632, y: 0.7750001, z: -1.4999969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14187,7 +14187,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 500
-  field of view: 50
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -14233,7 +14233,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -14623,7 +14623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1609069370673817057
 Transform:
   m_ObjectHideFlags: 0
@@ -14633,7 +14633,7 @@ Transform:
   m_GameObject: {fileID: 6338181271085107448}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 1.74, z: 0}
+  m_LocalPosition: {x: 0, y: 1.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16321,7 +16321,7 @@ Transform:
   m_GameObject: {fileID: 7622782433233461139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000002861023, y: 1.0900002, z: -3.0000033}
+  m_LocalPosition: {x: -0.05000083, y: 0.37999964, z: -4.000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16349,7 +16349,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1609069370673817057}
   m_Lens:
-    FieldOfView: 50
+    FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.2
     FarClipPlane: 500
@@ -16887,7 +16887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.1, y: 0.25, z: 0.3}
-  ShoulderOffset: {x: 0, y: 0.5, z: 1}
+  ShoulderOffset: {x: -1, y: -0.36, z: 0}
   VerticalArmLength: 0
   CameraSide: 0.6
   CameraDistance: 4
@@ -17457,7 +17457,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1609069370673817057}
@@ -17643,6 +17643,18 @@ MonoBehaviour:
       - m_Target: {fileID: 890405177401033964}
         m_TargetAssemblyTypeName: StarterAssets.StarterAssetsInputs, Assembly-CSharp
         m_MethodName: AttackTwo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 890405177401033964}
+        m_TargetAssemblyTypeName: StarterAssets.StarterAssetsInputs, Assembly-CSharp
+        m_MethodName: OnAim
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17928,13 +17940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90b35a7110e3cb4993e044084f388da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 9126144146649792987}
-  virtualCamera: {fileID: 8698410632688313640}
+  playerController: {fileID: 5802956518463312193}
   _input: {fileID: 890405177401033964}
-  debugTransform: {fileID: 0}
-  aimCollider:
-    serializedVersion: 2
-    m_Bits: 16640
   OnAttackOne:
     m_PersistentCalls:
       m_Calls:
@@ -17965,9 +17972,6 @@ MonoBehaviour:
           m_StringArgument: Shoot Spell
           m_BoolArgument: 0
         m_CallState: 2
-  debugRayRange: 25
-  baseLineRenderer: {fileID: 1328892891913780953}
-  aimLineRenderer: {fileID: 4072513201658621090}
 --- !u!114 &669437382867835508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18079,6 +18083,19 @@ MonoBehaviour:
   _input: {fileID: 890405177401033964}
   _playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1,
     type: 2}
+  _mainCamera: {fileID: 0}
+  cameraMode: 0
+  CinemachineCameraTarget: {fileID: 6338181271085107448}
+  topDownCamera: {fileID: 1950194671410646389}
+  overTheShoulderCamera: {fileID: 6363718689294182}
+  overTheShoulderAimCamera: {fileID: 8676552246236375160}
+  aimCursor: {fileID: 2264055515732624872}
+  TopClamp: 70
+  BottomClamp: -30
+  RotationSmoothTime: 0.035
+  CameraAngleOverride: 0
+  _rotateBodyWhenStandingStill: 1
+  LockCameraPosition: 0
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
@@ -18088,16 +18105,15 @@ MonoBehaviour:
   LandingAudioClip: {fileID: 0}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
-  CinemachineCameraTarget: {fileID: 6338181271085107448}
-  TopClamp: 70
-  BottomClamp: -30
   _animator: {fileID: 8054147327841787449}
-  RotationSmoothTime: 0.01
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
-  mainCamera: {fileID: 6363718689294182}
-  aimCamera: {fileID: 8676552246236375160}
-  aimCursor: {fileID: 2264055515732624872}
+  debugRayRange: 50
+  baseLineRenderer: {fileID: 1328892891913780953}
+  aimLineRenderer: {fileID: 4072513201658621090}
+  debugTransform: {fileID: 0}
+  aimCollider:
+    serializedVersion: 2
+    m_Bits: 16640
+  attackPoint: {fileID: 9126144146649792987}
 --- !u!114 &4758799307081529356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18244,6 +18260,19 @@ MonoBehaviour:
   _input: {fileID: 890405177401033964}
   _playerControllerSO: {fileID: 11400000, guid: b2ff54b1c6a2aa240854ff31c45232b1,
     type: 2}
+  _mainCamera: {fileID: 0}
+  cameraMode: 0
+  CinemachineCameraTarget: {fileID: 6338181271085107448}
+  topDownCamera: {fileID: 0}
+  overTheShoulderCamera: {fileID: 0}
+  overTheShoulderAimCamera: {fileID: 0}
+  aimCursor: {fileID: 0}
+  TopClamp: 90
+  BottomClamp: -90
+  RotationSmoothTime: 0.12
+  CameraAngleOverride: 0
+  _rotateBodyWhenStandingStill: 1
+  LockCameraPosition: 0
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.5
@@ -18253,9 +18282,6 @@ MonoBehaviour:
   LandingAudioClip: {fileID: 0}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
-  CinemachineCameraTarget: {fileID: 6338181271085107448}
-  TopClamp: 90
-  BottomClamp: -90
   RotationSpeed: 1
 --- !u!114 &8247795516450947324
 MonoBehaviour:

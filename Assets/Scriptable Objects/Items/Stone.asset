@@ -16,7 +16,9 @@ MonoBehaviour:
   itemDescription: Its a stone
   icon: {fileID: 21300044, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
   itemClass: 13
+  animationString: 2
   itemLevel: 1
   itemSellValue: 100
   stackable: 1
   buttonTagEnum: 2
+  ItemAction: {fileID: 11400000, guid: 0596a7162965ca646b1337f71127cf2f, type: 2}

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] HUDUI hudReference;
 
     [Header("Canvas Events")]
     public UnityEvent OnPlay;
@@ -69,4 +70,38 @@ public class CanvasManager : MonoBehaviour
             OnDebug?.Invoke();
         }
     }
+
+    public void NextHotbarButton(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        hudReference.NextButton();
+    }
+
+    public void PreviousHotbarButton(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        hudReference.PreviousButton();
+    }
+
+    float numberKey;
+    public void SelectHotBarSlotWithNumberKeys(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (context.ReadValue<float>() == 0)
+        {
+            numberKey = 9;
+        }else
+        {
+            numberKey = context.ReadValue<float>() - 1;
+        }
+
+        hudReference.SelectHotbarSlotWithKeyboard(numberKey);
+    }
+
+    public void SelectHotbarWithMouse(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        float delta = context.ReadValue<float>();
+        hudReference.SelectButtonWithScrollWheel(delta);   
+    }    
 }

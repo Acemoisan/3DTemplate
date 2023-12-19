@@ -70,7 +70,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void SetActiveItem(ItemSO activatedItem)
     {
-        this._activeItem = activatedItem;
+        _activeItem = activatedItem;
     }
 
 

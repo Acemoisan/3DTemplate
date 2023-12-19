@@ -111,9 +111,8 @@ public class HUDUI : MonoBehaviour
 
     public void SelectHotbarSlotWithKeyboard(float numberKey)
     {
-        _playersInventory.CharmActive(false);
-
-        SelectButton(Convert.ToInt32(numberKey));
+        int number = (int)numberKey;
+        SelectButton(number);
     }
 
 

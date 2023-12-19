@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMaxHealth: 500
   _playerMaxEnergy: 500
-  MoveSpeed: 6
-  SprintSpeed: 9
+  MoveSpeed: 3
+  SprintSpeed: 6
   MoveSpeedBoost: 2
-  lookSpeed: 71.57789
-  SpeedChangeRate: 10
+  lookSpeed: 199.44708
+  SpeedChangeRate: 8.3
   JumpHeight: 1.8
   Gravity: -15
   JumpTimeout: 0.5
