@@ -22,7 +22,7 @@ public class Damage : MonoBehaviour
 
     Collider target;
     protected Damageable damageableTargetRef;
-
+    protected Vector3 contactPoint;
 
 
     
@@ -34,6 +34,8 @@ public class Damage : MonoBehaviour
         Debug.Log(other.name);
         target = other;
         damageableTargetRef = target.GetComponent<Damageable>();
+
+        contactPoint = other.ClosestPoint(transform.position);
 
         //if damageable as runeCollider != null 
         //then ask for rune collidertype. 

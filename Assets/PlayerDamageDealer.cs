@@ -40,6 +40,12 @@ public class PlayerDamageDealer : Damage
                 chanceOfGettingresources = Random.Range(0, 20); //Generally a 20% Chance of Getting resources.
             }
 
+            if(contactPoint != null)
+            {
+                DamagePopup.Create(transform.position, (int)damage);
+            }
+            
+
 
             //Give Resources To Player OR Drop them on ground.
             resourceNode.SpawnItem(chanceOfGettingresources);
