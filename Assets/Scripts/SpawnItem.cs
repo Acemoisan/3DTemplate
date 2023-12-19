@@ -70,7 +70,7 @@ public class SpawnItem : MonoBehaviour//: ToolHit
 
             spawnPos.x += spreadOfObjects * Random.value - spreadOfObjects / 2;
             spawnPos.z += spreadOfObjects * Random.value - spreadOfObjects / 2;
-            spawnPos.y += spreadOfObjects * Random.value - spreadOfObjects / 2;
+            //spawnPos.y += spreadOfObjects * Random.value - spreadOfObjects / 2;
 
             SpawnableItem randomitem = _spawnableItems[Random.Range(0, _spawnableItems.Count)];
             int randomChance = Random.Range(1, 101);

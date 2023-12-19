@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e24f6d6a88c494b90bc410e2faffaa, type: 3}
   m_Name: ItemSpawner
   m_EditorClassIdentifier: 
-  itemEntity: {fileID: 5453977260421812685, guid: 6d5354d704167854281a028efd7b088c,
+  itemEntity: {fileID: 4654887021500184991, guid: ed6478498417855499b8f5cda811b107,
     type: 3}

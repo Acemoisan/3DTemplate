@@ -11,23 +11,24 @@ public class EntityTrigger : Interactable
 
     //[HideInInspector]
     public SpriteRenderer itemIcon;
+    public GameObject spawnedEntityObject;
     bool allowedToGive = false;
     //[SerializeField] ItemEggSO egg;
     
 
-    //void Start()
-    //{
-        //Invoke("SetAllowedToGive", 1f);
-    //}
+    void Start()
+    {
+        Invoke("SetAllowedToGive", 1f);
+    }
 
 
     public void GiveItemToPLayer()
     {
+        if(allowedToGive == false) { return; }
         if (GetPlayerInventory().CanFitItemInIventory(itemToGive, amountToGive))
         {
-
             GetPlayerInventory().AddItem(itemToGive, amountToGive);
-
+            allowedToGive = false;
             Destroy(entity);        
         }
     }
@@ -55,6 +56,8 @@ public class EntityTrigger : Interactable
 
         //this.egg = item as ItemEggSO;
         itemIcon.sprite = item.GetIcon();
+        if(item.GetHandPrefab() == null) { Debug.LogError("HandPrefab not found on " + item); return; }
+        //spawnedEntityObject = item.GetHandPrefab();
     }
 
 
