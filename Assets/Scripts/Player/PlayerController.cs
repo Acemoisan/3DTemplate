@@ -203,6 +203,20 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
+        public static Vector3 GetMouseWorldPosition3D(Camera camera, int layerMask)
+        {
+            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+            Ray ray = camera.ScreenPointToRay(screenCenter);
+            if(Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
+            {
+                return hit.point;
+            }
+            else 
+            {
+                return Vector3.zero;
+            }
+        }
+        
     void LateUpdate()
     {
         if (LockCameraPosition) return;

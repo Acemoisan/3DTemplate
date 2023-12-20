@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.acestudio.aceutils": {
-      "version": "https://github.com/Acemoisan/AceStudio.git#v0.1.9",
+      "version": "https://github.com/Acemoisan/AceStudio.git#v0.1.11",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "071800eb1ddef9775b6984c3bea1489f163301aa"
+      "hash": "60df138fdb543ee2bc9f32d2be744b3ce9f0f732"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
