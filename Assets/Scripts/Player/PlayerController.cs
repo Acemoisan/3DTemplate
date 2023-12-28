@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Acemoisan.Utils;
 
 
 
@@ -53,8 +54,8 @@ public abstract class PlayerController : MonoBehaviour
     [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject overTheShoulderAimCamera;    
     //[ShowIf("@this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public GameObject overTheShoulderFarCamera;
     [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject aimCursor;
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public float TopClamp;
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public float BottomClamp;
+    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs || this.cameraMode == CameraModes.Ark")] public float TopClamp;
+    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs || this.cameraMode == CameraModes.Ark")] public float BottomClamp;
     [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public float CameraAngleOverride = 0.0f;
 
 
@@ -180,14 +181,11 @@ public abstract class PlayerController : MonoBehaviour
            cameraMode == CameraModes.GodOfWar ||
            cameraMode == CameraModes.Ark)
         {
-            
-            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-            Ray ray = _mainCamera.ScreenPointToRay(screenCenter);
-            if(Physics.Raycast(ray, out RaycastHit hit, 1000f, aimCollider))
+            if(AceUtils.GetMouseWorldPosition3D(_mainCamera, aimCollider) != Vector3.zero)
             {
-                aimWorldPosition = hit.point;
+                aimWorldPosition = AceUtils.GetMouseWorldPosition3D(_mainCamera, aimCollider);
             }
-
+            
 
             if(debugRays)
             {
@@ -202,7 +200,7 @@ public abstract class PlayerController : MonoBehaviour
                     aimLineRenderer.transform.LookAt(aimWorldPosition);
                     baseLineRenderer.transform.position = attackPoint.position;
                     baseLineRenderer.transform.LookAt(attackPoint.position + _mainCamera.transform.forward);                
-                    debugTransform.transform.position = hit.point;
+                    debugTransform.transform.position = aimWorldPosition;
                 }
                 else 
                 {
@@ -218,20 +216,6 @@ public abstract class PlayerController : MonoBehaviour
             AimOverTheShoulderCamera();
         }
     }
-
-        public static Vector3 GetMouseWorldPosition3D(Camera camera, int layerMask)
-        {
-            Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-            Ray ray = camera.ScreenPointToRay(screenCenter);
-            if(Physics.Raycast(ray, out RaycastHit hit, 1000f, layerMask))
-            {
-                return hit.point;
-            }
-            else 
-            {
-                return Vector3.zero;
-            }
-        }
         
     void LateUpdate()
     {

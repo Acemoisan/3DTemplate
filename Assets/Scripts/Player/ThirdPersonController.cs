@@ -86,13 +86,13 @@ namespace StarterAssets
         protected override void HandlePlayerObjectRotation()
         {
             //ROTATE BASED ON CAMERA (180 TURNS (OVER THE SHOULDER))
-            if (cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs)
+            if (cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs || cameraMode == CameraModes.Ark)
             {
                 _targetRotation = _mainCamera.transform.eulerAngles.y;
             }
 
             //ROTATE BASED ON INPUT MOVEMENT (360 TURN ON THE SPOT) //if CAMERA MODE IS TOPDOWN
-            if (cameraMode == CameraModes.AnimalCrossing || cameraMode == CameraModes.Ark)
+            if (cameraMode == CameraModes.AnimalCrossing)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
             }
@@ -102,7 +102,7 @@ namespace StarterAssets
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
             //ROTATE PLAYER WHEN MOVING. OR WHEN ROTATEWHILESTILL BOOL IS TRUE
-            if (_input.move != Vector2.zero || cameraMode == CameraModes.LastOfUs) 
+            if (_input.move != Vector2.zero || cameraMode == CameraModes.LastOfUs || cameraMode == CameraModes.Ark) 
             {
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
