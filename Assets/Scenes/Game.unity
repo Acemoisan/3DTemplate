@@ -31386,6 +31386,33 @@ PrefabInstance:
       propertyPath: CameraDistance
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 37904811722119908, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: playerAnimation
+      value: 
+      objectReference: {fileID: 2125508146}
+    - target: {fileID: 37904811722119908, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: hotBarSlots.Array.data[5].item
+      value: 
+      objectReference: {fileID: 11400000, guid: a5e3f8051fb90ae4a92cf893e7ffda83,
+        type: 2}
+    - target: {fileID: 37904811722119908, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: hotBarSlots.Array.data[6].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 107b8fa34b3738b48a14291095d06760,
+        type: 2}
+    - target: {fileID: 37904811722119908, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: hotBarSlots.Array.data[5].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 37904811722119908, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: hotBarSlots.Array.data[6].count
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 424127085616324115, guid: 4566296c3539b504aba3d8d5d46d87b5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -32269,6 +32296,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23d9fd9342842745a3af7d79e2d1218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2125508146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 669437382867835508, guid: 4566296c3539b504aba3d8d5d46d87b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2125508126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131481011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868691bce8f5c0541864ddd94c12939b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2125898826

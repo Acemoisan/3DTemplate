@@ -42,7 +42,7 @@ public class PlayerActions : MonoBehaviour
 
 
                 //Play Animation Based on item's AnimationString enum
-                if(playerInventory.GetActiveItem().GetAnimationString != AnimationString.NoAnimation)
+                if(playerInventory.GetActiveItem().GetAnimationString != UseAnimationString.NoAnimation)
                 {
                     playerAnimation.SetTrigger(playerInventory.GetActiveItem().GetAnimationString.ToString());
                     Debug.Log(playerInventory.GetActiveItem() + " Animation String is " + playerInventory.GetActiveItem().GetAnimationString.ToString());

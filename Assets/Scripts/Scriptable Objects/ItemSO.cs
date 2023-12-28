@@ -39,8 +39,10 @@ public abstract class ItemSO : ScriptableObject
     //[BoxGroup("General Item Info")]
     [SerializeField] ItemClassNames itemClass;
     [SerializeField] DamageClasses damageClass;
-    [SerializeField] AnimationString animationString;
-    public AnimationString GetAnimationString { get { return animationString; } }
+    [SerializeField] UseAnimationString animationString;
+    public UseAnimationString GetAnimationString { get { return animationString; } }
+    [SerializeField] HoldAnimationString holdAnimationString = HoldAnimationString.Default;
+    public HoldAnimationString GetHoldAnimationString { get { return holdAnimationString; } }
     [Range(1, 5)] [SerializeField] int itemLevel = 1;
     [Range(0, 10000)] [SerializeField] int itemSellValue;
     [SerializeField] bool stackable;
@@ -143,7 +145,7 @@ public enum ButtonTag
 }
 
 [System.Serializable]
-public enum AnimationString
+public enum UseAnimationString
 {
     NoAnimation,
     SwingTool,
@@ -151,4 +153,12 @@ public enum AnimationString
     ShootSpell,
     ThrowItem,
     Block
+}
+
+[System.Serializable]
+public enum HoldAnimationString
+{
+    Default,
+    Gun,
+    Torch
 }

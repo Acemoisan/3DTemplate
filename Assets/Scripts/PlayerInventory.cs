@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("------ DEPENDENCIES ------")]
     [SerializeField] InventoryUI1 inventoryUI;
+    [SerializeField] PlayerAnimation playerAnimation;
     //public InventorySO _inventorySO;
     //[SerializeField] PopUpIndicatorUI pickedUpItemUIReference;
     //[SerializeField] PlayerQuestManager playerQuestManager;
@@ -74,29 +75,59 @@ public class PlayerInventory : MonoBehaviour
     {
         _activeItem = activatedItem;
 
+        ChangeObjectInHandVisual(_activeItem);
+        SetCorrectItemAnimation(_activeItem);
+    }
+
+    void ChangeObjectInHandVisual(ItemSO item)
+    {
         foreach (Transform child in primaryHandPosition)
         {
             child.gameObject.SetActive(false);
         }
 
         //check all children of hand position, if item"HandPrefab" is not a child instantiate object in hand position. if it is a child. set it to active
-        if(_activeItem != null)
+        if(item != null)
         {
-            if(_activeItem.GetHandPrefab() != null)
+            if(item.GetHandPrefab() != null)
             {
-                Debug.Log("Hand Prefab: " + _activeItem.GetHandPrefab().name);
+                Debug.Log("Hand Prefab: " + item.GetHandPrefab().name);
                 foreach (Transform child in primaryHandPosition)
                 {
-                    if(child.gameObject.name == _activeItem.GetHandPrefab().name)
+                    if(child.gameObject.name == item.GetHandPrefab().name)
                     {
                         child.gameObject.SetActive(true);
                         return;
                     }
                 }
 
-                GameObject handItem = Instantiate(_activeItem.GetHandPrefab(), primaryHandPosition);
-                handItem.name = _activeItem.GetHandPrefab().name;
+                GameObject handItem = Instantiate(item.GetHandPrefab(), primaryHandPosition);
+                handItem.name = item.GetHandPrefab().name;
                 handItem.SetActive(true);
+            }
+        }
+    }
+
+    void SetCorrectItemAnimation(ItemSO item)
+    {
+        //Setting Upper Body Idle Animation
+        if(item != null)
+        {
+            playerAnimation.SetBool("IsHoldingObject", false);
+            
+            if(item.GetHoldAnimationString == HoldAnimationString.Gun)
+            {
+                playerAnimation.SetFloat("UpperBodyIdlePose", 1);
+                playerAnimation.SetBool("IsHoldingObject", true);
+            }
+            else if(item.GetHoldAnimationString == HoldAnimationString.Torch)
+            {
+                playerAnimation.SetFloat("UpperBodyIdlePose", 2);
+                playerAnimation.SetBool("IsHoldingObject", true);
+            }
+            else 
+            {
+                playerAnimation.SetBool("IsHoldingObject", false);
             }
         }
     }
