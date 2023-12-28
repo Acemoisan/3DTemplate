@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using QFSW.QC;
 
 public class DebugController : MonoBehaviour
 {
@@ -258,9 +259,10 @@ public class DebugController : MonoBehaviour
 
         // ToTextFile.CreateNewTextFile("Databases/Item Names", itemListString, true);
     }
-    public void COM_GivePlayer1000Gold()
+    [Command("give_gold", "Gives player gold")]
+    public void COM_GivePlayerGold(int goldCount)
     {
-        playerInventory.AddCurrency(1000);
+        playerInventory.AddCurrency(goldCount);
     }
 
     public void COM_NextDay()
