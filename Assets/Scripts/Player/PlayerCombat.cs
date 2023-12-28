@@ -9,9 +9,12 @@ public class PlayerCombat : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] ThirdPersonController playerController;
     [SerializeField] StarterAssetsInputs _input;
+    [SerializeField] CameraModeController _cameraModeController;
 
     public UnityEvent OnAttackOne;
     public UnityEvent OnAttackTwo;
+    public UnityEvent AimEvent;
+    public UnityEvent StopAimEvent;
 
 
 
@@ -26,12 +29,21 @@ public class PlayerCombat : MonoBehaviour
         OnAttackTwo?.Invoke();
     }
 
+    public void Aim()
+    {
+        AimEvent?.Invoke();
+    }
+
+    public void StopAim()
+    {
+        StopAimEvent?.Invoke();
+    }
 
     public void InstantiateBullet(GameObject go)
     {
         Vector3 aimDir; 
-        Vector3 attackPoint = playerController.AttackPoint.position;
-        Vector3 aimPos = playerController.AimWorldPosition;
+        Vector3 attackPoint = _cameraModeController.AttackPoint.position;
+        Vector3 aimPos = _cameraModeController.AimWorldPosition;
         
         if(_input.aiming)
         {
@@ -39,7 +51,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            aimDir = playerController._mainCamera.transform.forward;
+            aimDir = _cameraModeController.GetCamera().transform.forward;
         }
 
         Instantiate(go, attackPoint, Quaternion.LookRotation(aimDir, Vector3.up));

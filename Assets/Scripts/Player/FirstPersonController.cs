@@ -17,8 +17,7 @@ namespace StarterAssets
 
 		public override void Start()
 		{
-			TopClamp = 90f;
-			BottomClamp = -90f;
+
 			base.Start();
 		}
 
@@ -36,23 +35,23 @@ namespace StarterAssets
 		private void CameraRotation()
 		{
 			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
-			{
-				//Don't multiply mouse input by Time.deltaTime
-				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime * _playerControllerSO.lookSpeed;
+			// if (_input.look.sqrMagnitude >= _threshold)
+			// {
+			// 	//Don't multiply mouse input by Time.deltaTime
+			// 	float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime * _playerControllerSO.lookSpeed;
 				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+			// 	_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
+			// 	_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
-				// clamp our pitch rotation
-				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+			// 	// clamp our pitch rotation
+			// 	_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+			// 	// Update Cinemachine camera target pitch
+			// 	CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
-			}
+			// 	// rotate the player left and right
+			// 	transform.Rotate(Vector3.up * _rotationVelocity);
+			// }
 		}
 
 

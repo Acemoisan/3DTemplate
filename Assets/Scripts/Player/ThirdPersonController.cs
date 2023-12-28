@@ -25,13 +25,7 @@ namespace StarterAssets
 
         public override void Start()
         {
-            TopClamp = 70.0f;
-            BottomClamp = -30.0f;
-
-            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
             _hasAnimator = _animator != null;
-
             base.Start();
         }
 
@@ -41,42 +35,29 @@ namespace StarterAssets
             base.Update();
         }
 
-
-        protected override void CameraRotation()
-        {
-            // if there is an input and camera position is not fixed
-            if (_input.look.sqrMagnitude >= _threshold)
-            {
-                //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime * _playerControllerSO.lookSpeed;
-
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
-            }
-
-
-            // clamp our rotations so our values are limited 360 degrees
-            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-            // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-                _cinemachineTargetYaw, 0.0f);
-        }        
-
-
         protected override void HandleMovement()
         {
-            if (cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs)
+            if (_cameraModeController.GetCameraMode() == CameraModes.GodOfWar || 
+            _cameraModeController.GetCameraMode() == CameraModes.LastOfUs || 
+            _cameraModeController.GetCameraMode() == CameraModes.Ark)
             {
-                inputDirection = inputDirection.x * _mainCamera.transform.right + inputDirection.z * _mainCamera.transform.forward;
-                inputDirection.y = 0.0f;
+                // Get the camera's forward and right vectors, but ignore the pitch.
+                Vector3 cameraForward = _cameraModeController.GetCamera().transform.forward;
+                cameraForward.y = 0; // Ignore camera's vertical angle
+                Vector3 cameraRight = _cameraModeController.GetCamera().transform.right;
+
+                // Calculate input direction based on camera's horizontal direction
+                inputDirection = inputDirection.x * cameraRight + inputDirection.z * cameraForward;
+                inputDirection.Normalize(); // Optional, to ensure consistent movement speed
+
                 _controller.Move(inputDirection * (_speed * Time.deltaTime) +
                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
             } 
-            else if (cameraMode == CameraModes.AnimalCrossing || cameraMode == CameraModes.Ark)
+            else if (_cameraModeController.GetCameraMode() == CameraModes.AnimalCrossing)
             {
-                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+                float _targetRot = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _cameraModeController.GetCamera().transform.eulerAngles.y;
+
+                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRot, 0.0f) * Vector3.forward;
                 _controller.Move(targetDirection * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
             }
 
@@ -85,24 +66,13 @@ namespace StarterAssets
 
         protected override void HandlePlayerObjectRotation()
         {
-            //ROTATE BASED ON CAMERA (180 TURNS (OVER THE SHOULDER))
-            if (cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs || cameraMode == CameraModes.Ark)
-            {
-                _targetRotation = _mainCamera.transform.eulerAngles.y;
-            }
+            //ROTATE BASED ON CAMERA 
+            float _targetRotation = _cameraModeController.GetCamera().transform.eulerAngles.y;
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _cameraModeController.RotationVelocity, _cameraModeController.RotationSmoothTime);
 
-            //ROTATE BASED ON INPUT MOVEMENT (360 TURN ON THE SPOT) //if CAMERA MODE IS TOPDOWN
-            if (cameraMode == CameraModes.AnimalCrossing)
-            {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-            }
-            
 
-            //ROTATE BASED ON INPUT MOVEMENT
-            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
-
-            //ROTATE PLAYER WHEN MOVING. OR WHEN ROTATEWHILESTILL BOOL IS TRUE
-            if (_input.move != Vector2.zero || cameraMode == CameraModes.LastOfUs || cameraMode == CameraModes.Ark) 
+            //ROTATE PLAYER WHEN MOVING. OR WHEN IN CERTAIN MODES
+            if (_input.move != Vector2.zero || _cameraModeController.GetCameraMode() == CameraModes.LastOfUs || _cameraModeController.GetCameraMode() == CameraModes.Ark) 
             {
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }

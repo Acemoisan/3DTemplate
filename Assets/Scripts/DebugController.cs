@@ -12,6 +12,7 @@ public class DebugController : MonoBehaviour
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] PlayerAttributes playerAttributes;
     [SerializeField] PlayerController playerController;
+    [SerializeField] CameraModeController cameraModeController;
     //[SerializeField] SceneLoader sceneLoader;
     [SerializeField] TimeManagerSO currentTime;
     [SerializeField] ItemDatabase itemDatabase;
@@ -71,6 +72,11 @@ public class DebugController : MonoBehaviour
 
     //PLAYER COMMANDS
     /////////////////
+    [Command("player_set_camera_mode", "Sets Player Camera Mode")]
+    public void SetPlayerCameraMode(CameraModes cameraMode)
+    {
+        cameraModeController.SetCameraMode(cameraMode);
+    }
     
     //GIVE COMMANDS
     [Command("player_give_gold", "Increases Player Gold")]
