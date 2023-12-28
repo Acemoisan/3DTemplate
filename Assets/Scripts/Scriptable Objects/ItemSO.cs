@@ -39,10 +39,6 @@ public abstract class ItemSO : ScriptableObject
     //[BoxGroup("General Item Info")]
     [SerializeField] ItemClassNames itemClass;
     [SerializeField] DamageClasses damageClass;
-    [SerializeField] UseAnimationString animationString;
-    public UseAnimationString GetAnimationString { get { return animationString; } }
-    [SerializeField] HoldAnimationString holdAnimationString = HoldAnimationString.Default;
-    public HoldAnimationString GetHoldAnimationString { get { return holdAnimationString; } }
     [Range(1, 5)] [SerializeField] int itemLevel = 1;
     [Range(0, 10000)] [SerializeField] int itemSellValue;
     [SerializeField] bool stackable;
@@ -62,7 +58,11 @@ public abstract class ItemSO : ScriptableObject
     //public ToolAction onSpecialAction;
     public ItemActionSO ItemAction;
 
-
+    [Header("Item Animations")]
+    [SerializeField] UseAnimationString animationString;
+    public UseAnimationString GetAnimationString { get { return animationString; } }
+    [SerializeField] HoldAnimationString holdAnimationString = HoldAnimationString.Default;
+    public HoldAnimationString GetHoldAnimationString { get { return holdAnimationString; } }
     //[Header("Animation Trigger")]
     //public AnimationSO primaryToolAnimationTriggerName;
     //public AnimationSO secondaryToolAnimationTriggerName;
@@ -151,6 +151,7 @@ public enum UseAnimationString
     SwingTool,
     SwordAttack,
     ShootSpell,
+    ShootGun,
     ThrowItem,
     Block
 }

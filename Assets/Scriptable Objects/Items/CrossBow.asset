@@ -19,7 +19,7 @@ MonoBehaviour:
     type: 3}
   itemClass: 13
   damageClass: 1
-  animationString: 2
+  animationString: 4
   holdAnimationString: 1
   itemLevel: 1
   itemSellValue: 100
