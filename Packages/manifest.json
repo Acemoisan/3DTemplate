@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.acestudio.aceutils": "https://github.com/Acemoisan/AceStudio.git#v0.1.11",
+    "com.acestudio.aceutils": "https://github.com/Acemoisan/AceStudio.git#v0.2.0",
+    "com.coffee.upm-git-extension": "https://github.com/mob-sakai/UpmGitExtension.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.2d.tilemap.extras": "3.1.1",

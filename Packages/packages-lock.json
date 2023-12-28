@@ -1,11 +1,18 @@
 {
   "dependencies": {
     "com.acestudio.aceutils": {
-      "version": "https://github.com/Acemoisan/AceStudio.git#v0.1.11",
+      "version": "https://github.com/Acemoisan/AceStudio.git#v0.2.0",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "60df138fdb543ee2bc9f32d2be744b3ce9f0f732"
+      "hash": "c7619a9459229a8f665b18daa354c756d4986563"
+    },
+    "com.coffee.upm-git-extension": {
+      "version": "https://github.com/mob-sakai/UpmGitExtension.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8fc54a2cdf0c2169dd26852ea0fe202e11158f43"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
