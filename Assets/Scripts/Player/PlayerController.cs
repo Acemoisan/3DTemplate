@@ -110,6 +110,10 @@ public abstract class PlayerController : MonoBehaviour
     //Private Variables
     protected float _speed;
     protected float _rotationVelocity;
+    protected float jumpHeight;
+    protected float originalJumpHeight;
+    protected float gravity;
+    protected float originalGravity;
     protected float _verticalVelocity;
     protected float _terminalVelocity = 53.0f;
     protected float _jumpTimeoutDelta;
@@ -118,6 +122,10 @@ public abstract class PlayerController : MonoBehaviour
     protected Vector3 inputDirection;
     protected float inputMagnitude;
     protected float targetSpeed;
+    protected float walkSpeed;
+    protected float sprintSpeed;
+    protected float originalWalkSpeed;
+    protected float originalSprintSpeed;
     protected bool IsCurrentDeviceMouse
     {
         get
@@ -148,6 +156,14 @@ public abstract class PlayerController : MonoBehaviour
     {
         _jumpTimeoutDelta = _playerControllerSO.JumpTimeout;
         _fallTimeoutDelta = _playerControllerSO.FallTimeout;
+        walkSpeed = _playerControllerSO.MoveSpeed;
+        sprintSpeed = _playerControllerSO.SprintSpeedMultiplier * walkSpeed;
+        originalWalkSpeed = walkSpeed;
+        originalSprintSpeed = sprintSpeed;
+        jumpHeight = _playerControllerSO.JumpHeight;
+        originalJumpHeight = jumpHeight;
+        gravity = _playerControllerSO.Gravity;
+        originalGravity = gravity;
         AssignAnimationIDs();
 
         StartCoroutine(CheckCameraMode());
@@ -299,7 +315,7 @@ public abstract class PlayerController : MonoBehaviour
     protected void Move()
     {
         // set target speed based on move speed, sprint speed and if sprint is pressed
-        targetSpeed = _input.sprint ? _playerControllerSO.SprintSpeed : _playerControllerSO.MoveSpeed;
+        targetSpeed = _input.sprint ? sprintSpeed : walkSpeed;
 
         // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -364,7 +380,7 @@ public abstract class PlayerController : MonoBehaviour
             if (_input.jump && _jumpTimeoutDelta <= 0.0f)
             {
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(_playerControllerSO.JumpHeight * -2f * _playerControllerSO.Gravity);
+                _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
                 JumpEvent();
             }
@@ -454,4 +470,28 @@ public abstract class PlayerController : MonoBehaviour
     protected virtual void FreeFallEvent() {}
     protected virtual void GroundCheckEvent(){}
     #endregion
+
+    public void SetMoveSpeed(float speed)
+    {
+        walkSpeed = speed;
+        sprintSpeed = walkSpeed * _playerControllerSO.SprintSpeedMultiplier;
+    }
+
+    public void SetJumpHeight(float height)
+    {
+        jumpHeight = height;
+    }
+
+    public void SetGravity(float value)
+    {
+        gravity = value;
+    }
+
+    public void RevertStats()
+    {
+        walkSpeed = originalWalkSpeed;
+        sprintSpeed = originalSprintSpeed;
+        jumpHeight = originalJumpHeight;
+        gravity = originalGravity;
+    }
 }

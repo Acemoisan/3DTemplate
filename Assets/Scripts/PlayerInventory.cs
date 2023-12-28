@@ -290,7 +290,25 @@ public class PlayerInventory : MonoBehaviour
         _activeItem = null;
     }
 
+    public void ClearInventory()
+    {
+        foreach(ItemSlot slot in inventorySlots)
+        {
+            slot.Clear();
+        }
 
+        foreach(ItemSlot slot in hotBarSlots)
+        {
+            slot.Clear();
+        }
+
+        foreach(ItemSlot slot in miscSlots)
+        {
+            slot.Clear();
+        }
+
+        inventoryUI.UpdateHotBarItemCount();
+    }
     #endregion 
 
 
@@ -414,6 +432,7 @@ public class PlayerInventory : MonoBehaviour
     public void AddCurrency(int amount)
     {
         this.playerCurrency += Mathf.Abs(amount);
+        if (playerCurrency < 0) { playerCurrency = 0; }
         //updateUIEvent.Raise();
     }
 

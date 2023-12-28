@@ -42,19 +42,26 @@ public class PlayerAttributes : MonoBehaviour
     public UnityEvent OnHitEvent;
     public UnityEvent OnDeathEvent;
 
+    float _originalHealth;
+    float _originalEnergy;
+
 
 
 
     void Start()
     {
-        SetPlayerName("Toni");
        UpdateStatBars();
-       UpdateHealth();
+       UpdateHealthBar();
+       SetPlayerName("Bob");
 
-       if(autoRegen)
+
+       if(autoRegen)    
        {
-            StartEnergyRegen(energyPerSecond);
+            EnergyRegenTimed(true, energyPerSecond, 1000);
        }
+
+        _originalHealth = _playerHealth;
+        _originalEnergy = _playerEnergy;
     }
 
 
@@ -68,6 +75,10 @@ public class PlayerAttributes : MonoBehaviour
         if (_playerEnergy > GetPlayerMaxEnergy())
         {
             _playerEnergy = GetPlayerMaxEnergy();
+        }
+        else if (_playerEnergy < 0)
+        {
+            _playerEnergy = 0;
         }
 
         EnergyIncreaseEvent.Invoke();
@@ -87,34 +98,33 @@ public class PlayerAttributes : MonoBehaviour
     }
 
 
+
+
     float energyRegenTime;
     bool regenerating = false;
     int regenCountIndex = 0;
 
 
-    public void StartEnergyRegen(float manaPerSecond, float regenTime)
+    public void EnergyRegenTimed(bool regen, float energyPerSecond, float regenTime)
     {
-        this.energyPerSecond = manaPerSecond;
+        if(regen == false)
+        {
+            regenerating = false;
+            StopCoroutine(RegenerateEnergyTimed());
+            return;
+        }
+
+        this.energyPerSecond = energyPerSecond;
         this.energyRegenTime = regenTime;
         if (regenerating) return;
         
         regenerating = true;
-        StopCoroutine(RegenerateEnergy());
-        StartCoroutine(RegenerateEnergy());
+        StopCoroutine(RegenerateEnergyTimed());
+        StartCoroutine(RegenerateEnergyTimed());
     }
 
-    public void StartEnergyRegen(float energyPerSecond)
-    {
-        this.energyPerSecond = energyPerSecond;
-        this.energyRegenTime = 1000000;
-        if (regenerating) return;
-        
-        regenerating = true;
-        StopCoroutine(RegenerateEnergy());
-        StartCoroutine(RegenerateEnergy());
-    }
 
-    public IEnumerator RegenerateEnergy()
+    public IEnumerator RegenerateEnergyTimed()
     {
         regenCountIndex = 0;
 
@@ -146,16 +156,20 @@ public class PlayerAttributes : MonoBehaviour
 
 
     #region HEALTH ==============================
+    public void IncreaseHealth(float value)
+    {
+        ChangeHealth(value);
+            
+        UpdateHealthBar();
+    }
+
     public void DecreaseHealth(float damage)
     {
         //if(_playerController.IsDodging()) { return; }
 
-
         float damageToDeal = damage - GetPlayerDefense();
 
-        _playerHealth -= damageToDeal;
-
-        UpdateHealth();
+        ChangeHealth(-damageToDeal);
 
         if(OnHitEvent != null) { OnHitEvent.Invoke(); }
         
@@ -165,14 +179,7 @@ public class PlayerAttributes : MonoBehaviour
             Kill();
         }
     }
-
-    public void Kill()
-    {
-        _playerHealth = 0;
-        if(OnDeathEvent != null) OnDeathEvent.Invoke();
-    }
-
-    public void IncreaseHealth(float value)
+    void ChangeHealth(float value)
     {
         _playerHealth += value;
 
@@ -180,9 +187,20 @@ public class PlayerAttributes : MonoBehaviour
         {
             _playerHealth = GetPlayerMaxHealth();
         }
+        else if (_playerHealth < 0)
+        {
+            _playerHealth = 0;
+        }
             
-        UpdateHealth();
+        UpdateHealthBar();
     }
+
+    public void Kill()
+    {
+        _playerHealth = 0;
+        if(OnDeathEvent != null) OnDeathEvent.Invoke();
+    }
+
 
     public void HealPlayerAction(InputAction.CallbackContext value)
     {
@@ -227,7 +245,7 @@ public class PlayerAttributes : MonoBehaviour
         }
     }
 
-    private void UpdateHealth()
+    private void UpdateHealthBar()
     {
         healthBar.UpdateHealthBars(GetPlayerHealth(), GetPlayerMaxHealth());
     }
@@ -258,6 +276,13 @@ public class PlayerAttributes : MonoBehaviour
     {
         _playerEnergy = GetPlayerMaxEnergy();
         _playerHealth = GetPlayerMaxHealth();
+        UpdateStatBars();
+    }
+
+    public void RevertStats()
+    {
+        _playerEnergy = _originalEnergy;
+        _playerHealth = _originalHealth;
         UpdateStatBars();
     }
 
@@ -306,6 +331,14 @@ public class PlayerAttributes : MonoBehaviour
     public void SetPlayerHealth(float health)
     {
         _playerHealth = health;
+        if(_playerHealth > GetPlayerMaxHealth())
+        {
+            _playerHealth = GetPlayerMaxHealth();
+        }
+        else if(_playerHealth < 0)
+        {
+            _playerHealth = 0;
+        }
     }
     public float GetPlayerHealth()
     {
@@ -313,7 +346,7 @@ public class PlayerAttributes : MonoBehaviour
     }
     public float GetPlayerMaxHealth()
     {
-        return _playerControllerSO.PlayerMaxHealth;
+        return _playerControllerSO._playerMaxHealth;
     }
 
 
@@ -321,6 +354,14 @@ public class PlayerAttributes : MonoBehaviour
     public void SetPlayerEnergy(float energy)
     {
         _playerEnergy = energy;
+        if (_playerEnergy > GetPlayerMaxEnergy())
+        {
+            _playerEnergy = GetPlayerMaxEnergy();
+        }
+        else if (_playerEnergy < 0)
+        {
+            _playerEnergy = 0;
+        }
     }
     public float GetPlayerEnergy()
     {
@@ -328,7 +369,7 @@ public class PlayerAttributes : MonoBehaviour
     }
     public float GetPlayerMaxEnergy()
     {
-        return _playerControllerSO.PlayerMaxEnergy;
+        return _playerControllerSO._playerMaxEnergy;
     }
 
 

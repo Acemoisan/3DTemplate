@@ -11,16 +11,20 @@ public class ItemDatabase : ScriptableObject
 
     public ItemSO GetMatchingItem(string itemName)
     {
+        // Replace underscores with spaces
+        string formattedItemName = itemName.Replace("_", " ");
 
         foreach (ItemSO item in items)
         {
-            if (item.name == itemName)
+            if (item.name == formattedItemName)
             {
-                //Debug.Log("Item found in database: " + item.GetItemName());
+                // Item found
                 return item;
             }
         }
-        Debug.LogError("<color=#ff0000>" +  itemName + "</color> Not found in database");
+
+        // Item not found
+        Debug.LogError("<color=#ff0000>" + formattedItemName + "</color> Not found in database");
         return null;
     }
 

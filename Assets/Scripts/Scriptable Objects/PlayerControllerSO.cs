@@ -9,14 +9,12 @@ public class PlayerControllerSO : ScriptableObject
 {
         [Header("Player Configurables")]
         [Header("Health")]
-        [SerializeField] float _playerMaxHealth;
-        public float PlayerMaxHealth { get { return _playerMaxHealth; } private set { _playerMaxHealth = value; } }
+        public float _playerMaxHealth;
 
 
         [Space(20)]
         [Header("Energy")]
-        [SerializeField] float _playerMaxEnergy;
-        public float PlayerMaxEnergy { get { return _playerMaxEnergy; } private set { _playerMaxEnergy = value; } }
+        public float _playerMaxEnergy;
 
 
 
@@ -24,7 +22,7 @@ public class PlayerControllerSO : ScriptableObject
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 5.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 8.0f;
+		public float SprintSpeedMultiplier = 1.5f;
         [Tooltip("Sprint speed of the character in m/s")]
 		public float MoveSpeedBoost = 6.0f;
         [Tooltip("Aim speed of the camera")]
@@ -74,17 +72,4 @@ public class PlayerControllerSO : ScriptableObject
         {
             if (key == Look_Speed_Key) lookSpeed = PlayerPrefs.GetFloat(Look_Speed_Key, 200);
         }
-
-        public void IncreaseMoveSpeed(float moveSpeedBoost)
-        {
-            MoveSpeed *= moveSpeedBoost;
-            SprintSpeed *= moveSpeedBoost;
-        }
-
-        public void DefaultMoveSpeed()
-        {
-            MoveSpeed = 5.0f;
-            SprintSpeed = 8.0f;
-        }
-
 }
