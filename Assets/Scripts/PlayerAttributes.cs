@@ -159,8 +159,6 @@ public class PlayerAttributes : MonoBehaviour
     public void IncreaseHealth(float value)
     {
         ChangeHealth(value);
-            
-        UpdateHealthBar();
     }
 
     public void DecreaseHealth(float damage)
@@ -169,7 +167,7 @@ public class PlayerAttributes : MonoBehaviour
 
         float damageToDeal = damage - GetPlayerDefense();
 
-        ChangeHealth(-damageToDeal);
+        _playerHealth -= damageToDeal;
 
         if(OnHitEvent != null) { OnHitEvent.Invoke(); }
         
@@ -178,19 +176,25 @@ public class PlayerAttributes : MonoBehaviour
         {
             Kill();
         }
+
+        UpdateHealthBar();
     }
     void ChangeHealth(float value)
     {
-        _playerHealth += value;
+        if(value < 0)
+        {
+            DecreaseHealth(-value);
+        }
+        else 
+        {
+            _playerHealth += value;
 
-        if (_playerHealth > GetPlayerMaxHealth())
-        {
-            _playerHealth = GetPlayerMaxHealth();
+            if (_playerHealth > GetPlayerMaxHealth())
+            {
+                _playerHealth = GetPlayerMaxHealth();
+            }
         }
-        else if (_playerHealth < 0)
-        {
-            _playerHealth = 0;
-        }
+
             
         UpdateHealthBar();
     }

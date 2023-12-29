@@ -18,6 +18,7 @@ public class DebugController : MonoBehaviour
     [SerializeField] PlayerAttributes playerAttributes;
     [SerializeField] PlayerController playerController;
     [SerializeField] PlayerInteraction playerInteraction;
+    [SerializeField] PlayerEffectsHandler playerEffectsHandler;
     [SerializeField] CameraModeController cameraModeController;
     //[SerializeField] SceneLoader sceneLoader;
     [SerializeField] TimeManagerSO currentTime;
@@ -44,7 +45,7 @@ public class DebugController : MonoBehaviour
 
     void Update()
     {
-        consoleStats.UpdatePlayerStats(playerEntity, playerInventory, playerAttributes, playerController, playerAnimation, cameraModeController, playerInteraction);
+        consoleStats.UpdatePlayerStats(playerEntity, playerInventory, playerAttributes, playerController, playerAnimation, cameraModeController, playerInteraction, playerEffectsHandler);
         consoleStats.UpdateWorldStats(currentTime);
     }
 
@@ -123,13 +124,20 @@ public class DebugController : MonoBehaviour
 
 
     //STAT COMMANDS
-    [Command("player_increase_health", "Increases Player Health")]
+
+    [Command("player_set_effect", "Sets Player Effect")]
+    public void SetPlayerEffect(EffectType effectType, float duration = 5)
+    {
+        playerEffectsHandler.AddEffect(effectType, duration);
+    }
+
+    [Command("player_set_health", "Increases / Decreases Player Health")]
     public void IncreaseHealth(float value)
     {
         playerAttributes.IncreaseHealth(value);
     }
 
-    [Command("player_increase_energy", "Increases Player Energy")]
+    [Command("player_set_energy", "Increases / Decreases Player Energy")]
     public void IncreaseEnergy(float value)
     {
         playerAttributes.IncreaseEnergy(value);

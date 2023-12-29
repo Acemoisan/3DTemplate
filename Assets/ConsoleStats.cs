@@ -16,6 +16,7 @@ public class ConsoleStats : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerWorldPosition;
     [SerializeField] TextMeshProUGUI playerAimWorldPosition;
     [SerializeField] TextMeshProUGUI currentAnimationRef;
+    [SerializeField] TextMeshProUGUI currentEffectTypeRef;
     [SerializeField] TextMeshProUGUI interacteeRef;
     [SerializeField] TextMeshProUGUI activeItem;
     [SerializeField] TextMeshProUGUI gravityValueRef;
@@ -48,8 +49,11 @@ public class ConsoleStats : MonoBehaviour
     }
 
 
-    public void UpdatePlayerStats(Transform player, PlayerInventory playerInventory, PlayerAttributes playerAttributes, PlayerController playerController, PlayerAnimation playerAnimation, CameraModeController cameraModeController, PlayerInteraction playerInteraction)
+    public void UpdatePlayerStats(Transform player, PlayerInventory playerInventory, PlayerAttributes playerAttributes, PlayerController playerController, 
+    PlayerAnimation playerAnimation, CameraModeController cameraModeController, PlayerInteraction playerInteraction, PlayerEffectsHandler playerEffectsHandler)
     {
+        if(playerEffectsHandler.currentEffect != EffectType.None) currentEffectTypeRef.text = $"<color=#{goldHex}>Current Effect: </color>{playerEffectsHandler.currentEffect} (<color=#{parameterHex}>Duration:</color> {playerEffectsHandler.remainingDuration})";
+        else currentEffectTypeRef.text = $"<color=#{goldHex}>Current Effect: </color>None";
         if(playerInteraction.GetInteractee() != null) interacteeRef.text = $"<color=#{goldHex}>Interactee: </color>{playerInteraction.GetInteractee().name}";
         else interacteeRef.text = $"<color=#{goldHex}>Interactee: </color>None";
         playerAimWorldPosition.text = $"<color=#{goldHex}>Aim Pos: </color>{cameraModeController.AimWorldPosition.x}, {cameraModeController.AimWorldPosition.y}, {cameraModeController.AimWorldPosition.z}";
