@@ -12,6 +12,9 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] HUDMessage HUDMessage;
     Interactable interactee;
 
+    public UnityEvent OnEnter;
+    public UnityEvent OnExit;
+
 
 
     void OnTriggerEnter(Collider other)
@@ -34,6 +37,7 @@ public class PlayerInteraction : MonoBehaviour
 
             interactee.TellInteractableAboutPlayer(playerEntity);
             interactee.OnEnter();
+            OnEnter?.Invoke();
         }
     }
 
@@ -58,6 +62,7 @@ public class PlayerInteraction : MonoBehaviour
             other.GetComponent<Interactable>().OnExit();
             //interactionHUD.SetActive(false);
             interactee = null;
+            OnExit?.Invoke();
         }
     }
 
