@@ -31,6 +31,9 @@ public class CameraModeController : MonoBehaviour
     [Title("Camera Settings")]
     [EnumToggleButtons] public CameraModes cameraMode;
     public CameraModes GetCameraMode() { return cameraMode; }
+    [Tooltip("For locking the camera position on all axis")]
+    public bool LockCameraPosition = false;
+    [Range(0.0f, 0.3f)] public float RotationSmoothTime = 0.12f;
 
 
 
@@ -44,26 +47,30 @@ public class CameraModeController : MonoBehaviour
     [Space(20)]
     [Header("TopDown")]     
     [ShowIf("@this.cameraMode == CameraModes.AnimalCrossing")] public GameObject topDownCamera;
+
+
     [Space(20)]
     [Header("Third Person / Ark")]     
     [ShowIf("@this.cameraMode == CameraModes.Ark")] public GameObject rpgCamera;
+    [ShowIf("@this.cameraMode == CameraModes.Ark")] public GameObject rpgAimCamera;
+
+
     [Space(20)]
     [Header("OTS")]     
     [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject overTheShoulderCamera;
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject overTheShoulderAimCamera;    
-    //[ShowIf("@this.cameraMode == CameraModes.OverTheShoulderLockRotation")] public GameObject overTheShoulderFarCamera;
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject aimCursor;
+    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject overTheShoulderAimCamera;  
+
+
+    [Header("Misc")]  
     [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs || this.cameraMode == CameraModes.Ark")] public float TopClamp;
     [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs || this.cameraMode == CameraModes.Ark")] public float BottomClamp;
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public float CameraAngleOverride = 0.0f;
+    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs || this.cameraMode == CameraModes.Ark")] public float CameraAngleOverride = 0.0f;
 
 
 
     [Space(20)]
     [Header("General Mode Settings")]
-    [Tooltip("For locking the camera position on all axis")]
-    public bool LockCameraPosition = false;
-    [Range(0.0f, 0.3f)] public float RotationSmoothTime = 0.12f;
+    [ShowIf("@this.cameraMode != CameraModes.AnimalCrossing")] public GameObject aimCursor;
     [SerializeField] Transform attackPointTransform;
     [SerializeField] LayerMask aimCollider;
 
@@ -86,11 +93,11 @@ public class CameraModeController : MonoBehaviour
     Vector3 aimWorldPosition;
     public Vector3 AimWorldPosition { get { return aimWorldPosition; } }
     public float RotationVelocity;
-    protected float _targetRotation = 0.0f;
-    protected float _cinemachineTargetYaw;
-    protected float _cinemachineTargetPitch;
-    protected const float _threshold = 0.01f;
-    protected bool IsCurrentDeviceMouse
+    float _targetRotation = 0.0f;
+    float _cinemachineTargetYaw;
+    float _cinemachineTargetPitch;
+    const float _threshold = 0.01f;
+    bool IsCurrentDeviceMouse
     {
         get
         {
@@ -103,8 +110,6 @@ public class CameraModeController : MonoBehaviour
     }
 
 
-    //GETTERS
-    public float GetTargetRotation() { return _targetRotation; }
 
 
     void Start()
@@ -167,49 +172,21 @@ public class CameraModeController : MonoBehaviour
     }   
 
 
-    IEnumerator CheckCameraMode()
+IEnumerator CheckCameraMode()
+{
+    while (true)
     {
-        //TODO: MOSTLY MEANT FOR TESTING.. WILL BE MOVED TO START() WHEN FINISHED
-        while (true)
-        {
-            //Setting Camera Mode Mods
-            switch (cameraMode)
-            {
-                //GOD Of War: Over the shoulder, 360 Camera rotation around player when still
-                case CameraModes.GodOfWar:
-                    overTheShoulderCamera.SetActive(true);
-                    overTheShoulderAimCamera.SetActive(true);
-                    topDownCamera.SetActive(false);
-                    rpgCamera.SetActive(false);
-                    break;
-                //Last Of Us: Over the shoulder, Locked camera rotation to player Forward
-                case CameraModes.LastOfUs:
-                    overTheShoulderCamera.SetActive(true);
-                    overTheShoulderAimCamera.SetActive(true);
-                    topDownCamera.SetActive(false);
-                    rpgCamera.SetActive(false);
-                    break;
-                case CameraModes.AnimalCrossing:
-                    topDownCamera.SetActive(true);
-                    overTheShoulderCamera.SetActive(false);
-                    overTheShoulderAimCamera.SetActive(false);
-                    rpgCamera.SetActive(false);
-                    aimCursor.SetActive(false);
-                    break;
-                case CameraModes.Ark:
-                    rpgCamera.SetActive(true);
-                    topDownCamera.SetActive(false);
-                    overTheShoulderCamera.SetActive(false);
-                    overTheShoulderAimCamera.SetActive(false);
-                    aimCursor.SetActive(true);
-                    break;
-                default:
-                    break;
-            }
+        overTheShoulderCamera.SetActive(cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs);
+        overTheShoulderAimCamera.SetActive(cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs);
+        topDownCamera.SetActive(cameraMode == CameraModes.AnimalCrossing);
+        rpgCamera.SetActive(cameraMode == CameraModes.Ark);
+        rpgAimCamera.SetActive(cameraMode == CameraModes.Ark);
+        aimCursor.SetActive(cameraMode == CameraModes.Ark || cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs);
 
-            yield return new WaitForSeconds(.5f);
-        }
+        yield return new WaitForSeconds(.5f);
     }
+}
+
 
     public void SetCameraMode(CameraModes mode)
     {
@@ -217,23 +194,20 @@ public class CameraModeController : MonoBehaviour
     }
 
 
-    public void AimOverTheShoulderCamera()
-    {
-        if(LockCameraPosition) return;
-        
-        if (_input.aiming)
-        {
-            overTheShoulderCamera.SetActive(false);
-            overTheShoulderAimCamera.SetActive(true);
-            aimCursor.SetActive(true);
-        }
-        else
-        {
-            overTheShoulderCamera.SetActive(true);
-            overTheShoulderAimCamera.SetActive(false);
-            aimCursor.SetActive(false);
-        }    
-    }   
+public void AimOverTheShoulderCamera()
+{
+    if (LockCameraPosition) return;
+
+    bool isGodOfWarOrLastOfUs = cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs;
+    bool isArk = cameraMode == CameraModes.Ark;
+
+    overTheShoulderCamera.SetActive(isGodOfWarOrLastOfUs && !_input.aiming);
+    overTheShoulderAimCamera.SetActive(isGodOfWarOrLastOfUs && _input.aiming);
+    rpgCamera.SetActive(isArk && !_input.aiming);
+    rpgAimCamera.SetActive(isArk && _input.aiming);
+    aimCursor.SetActive((isGodOfWarOrLastOfUs || isArk) && _input.aiming);
+}
+
 
     void CameraRotation()
     {

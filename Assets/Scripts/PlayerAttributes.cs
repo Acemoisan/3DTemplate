@@ -29,7 +29,7 @@ public class PlayerAttributes : MonoBehaviour
     [Header("Energy")]
     [SerializeField] float _playerEnergy;
     [SerializeField] float energyPerSecond;
-    [SerializeField] bool autoRegen;
+    [SerializeField] bool autoRegenEnergy;
 
 
 
@@ -55,7 +55,7 @@ public class PlayerAttributes : MonoBehaviour
        SetPlayerName("Bob");
 
 
-       if(autoRegen)    
+       if(autoRegenEnergy)    
        {
             EnergyRegenTimed(true, energyPerSecond, 1000);
        }
@@ -348,6 +348,14 @@ public class PlayerAttributes : MonoBehaviour
     {
         return _playerControllerSO._playerMaxHealth;
     }
+    public float GetPlayerHealthPercentage()
+    {
+        return _playerHealth / GetPlayerMaxHealth();
+    }
+    public float GetPlayerOriginalHealth()
+    {
+        return _originalHealth;
+    }
 
 
 
@@ -371,8 +379,18 @@ public class PlayerAttributes : MonoBehaviour
     {
         return _playerControllerSO._playerMaxEnergy;
     }
-
-
+    public float GetPlayerEnergyPercentage()
+    {
+        return _playerEnergy / GetPlayerMaxEnergy();
+    }
+    public float GetPlayerOriginalEnergy()
+    {
+        return _originalEnergy;
+    }
+    public bool AutoRegenEnergy()
+    {
+        return autoRegenEnergy;
+    }
 
 
 

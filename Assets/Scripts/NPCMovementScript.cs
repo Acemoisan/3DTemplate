@@ -44,6 +44,7 @@ public class NPCMovementScript : MonoBehaviour
 
     public void MoveNPCRandom()
     {
+        if(navMeshAgent == null) { return; }
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
         {
             StartCoroutine(SetRandomDestination());

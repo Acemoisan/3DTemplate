@@ -7,6 +7,15 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] Animator animator;
 
+    public Animator GetAnimator()
+    {
+        if(animator == null)
+        {
+            Debug.LogError("Animator is null on ");
+        }
+        return animator;
+    }
+
     public void SetAnimatorBoolToTrue(string boolName)
     {
         animator.SetBool(boolName, true);

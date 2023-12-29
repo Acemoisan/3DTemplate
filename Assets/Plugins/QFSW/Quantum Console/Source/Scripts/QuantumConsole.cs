@@ -1141,6 +1141,8 @@ namespace QFSW.QC
             Activate(_focusOnActivate);
         }
 
+
+
         /// <summary>
         /// Activates the Quantum Console.
         /// </summary>
@@ -1177,7 +1179,6 @@ namespace QFSW.QC
         {
             IsActive = false;
             _containerRect.gameObject.SetActive(false);
-
             OnDeactivate?.Invoke();
         }
 

@@ -24,11 +24,22 @@ namespace QFSW.QC.Suggestors.Tags
     {
         private readonly IQcSuggestorTag[] _tags;
 
-        /// <param name="suggestions">String-convertible suggestions.</param>
         public SuggestionsAttribute(params object[] suggestions)
         {
-            InlineSuggestionsTag tag = new InlineSuggestionsTag(
-                suggestions.Select(o => o.ToString()));
+            IEnumerable<string> suggestionStrings;
+
+            // Check if the first argument is an IEnumerable of strings
+            if (suggestions.Length == 1 && suggestions[0] is IEnumerable<string> stringEnumerable)
+            {
+                suggestionStrings = stringEnumerable;
+            }
+            else
+            {
+                // Convert each suggestion to a string
+                suggestionStrings = suggestions.Select(o => o.ToString());
+            }
+
+            InlineSuggestionsTag tag = new InlineSuggestionsTag(suggestionStrings);
             _tags = new IQcSuggestorTag[] { tag };
         }
 

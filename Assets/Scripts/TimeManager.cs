@@ -328,6 +328,7 @@ public class TimeManager : MonoBehaviour
         timeManagerSO.dayOfTheWeekString = dayOfTheWeekString;
         timeManagerSO.monthIndex = monthIndex;
         timeManagerSO.year = year;
+        timeManagerSO.secondsPerInGameTenMinutes = secondsPerInGameTenMinutes;
     }
     
     public void SaveRealTime()

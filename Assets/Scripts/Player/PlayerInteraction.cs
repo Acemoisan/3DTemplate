@@ -68,4 +68,10 @@ public class PlayerInteraction : MonoBehaviour
             interactee.Interact();
         }
     }
+
+    public Interactable GetInteractee()
+    {
+        if(interactee == null) { Debug.LogError("Interactee is null on " + gameObject);  }
+        return interactee;
+    }
 }

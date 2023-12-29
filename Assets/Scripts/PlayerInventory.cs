@@ -133,11 +133,6 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
-    public void AddItem(ItemSO item)
-    {
-        AddItem(item, 1);
-    }
-
     public void AddItem(ItemSO pickupItem, int count = 1)
     {
         if (pickupItem.IsStackable())

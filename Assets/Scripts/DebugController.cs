@@ -5,13 +5,19 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
 using QFSW.QC;
+using QFSW.QC.Suggestors.Tags;
+using System.Linq;
 
 public class DebugController : MonoBehaviour
 {
     [Header("Dependencies")]
+    [SerializeField] Transform playerEntity;
+    [SerializeField] ConsoleStats consoleStats;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] PlayerAnimation playerAnimation;
     [SerializeField] PlayerAttributes playerAttributes;
     [SerializeField] PlayerController playerController;
+    [SerializeField] PlayerInteraction playerInteraction;
     [SerializeField] CameraModeController cameraModeController;
     //[SerializeField] SceneLoader sceneLoader;
     [SerializeField] TimeManagerSO currentTime;
@@ -21,21 +27,26 @@ public class DebugController : MonoBehaviour
 
 
 
-    [Header("Text References")]
-    [SerializeField] TextMeshProUGUI healthValueRef;
-    [SerializeField] TextMeshProUGUI energyValueRef;
-    [SerializeField] TextMeshProUGUI speedValueRef;
-    [SerializeField] TextMeshProUGUI inGameDayValueRef;
-    [SerializeField] TextMeshProUGUI inGameTimeValueRef;
-    [SerializeField] TextMeshProUGUI inGameSecondsPerMinuteValueRef;
-
-
-
     [Header("Player Inventory Kit")]
     [SerializeField] List<ItemSlot> inventoryKit;
 
 
+    //private
+    public static List<string> itemNames;
 
+
+
+    void Start()
+    {
+        itemNames = itemDatabase.items.Select(item => item.name).ToList();
+    }
+
+
+    void Update()
+    {
+        consoleStats.UpdatePlayerStats(playerEntity, playerInventory, playerAttributes, playerController, playerAnimation, cameraModeController, playerInteraction);
+        consoleStats.UpdateWorldStats(currentTime);
+    }
 
 
 
@@ -44,7 +55,7 @@ public class DebugController : MonoBehaviour
 
     //TIME COMMANDS
     ///////////////
-    [Command("time_next_morning", "Skips to next morning. 6AM")]
+    [Command("time_next_day", "Skips to next morning. 6AM")]
     public void NextMorning()
     {
         currentTime.SkipToNextMorning();
@@ -62,7 +73,7 @@ public class DebugController : MonoBehaviour
         currentTime.SetTime(time);
     }
 
-    [Command("time_set_inc", "Sets Time Increment - (Seconds per in game 10 min) Default - 8")]
+    [Command("time_set_seconds_per_10_min", "Sets Time Increment - (Seconds per in game 10 min) Default - 8")]
     public void SetTimeIncrement(int increment)
     {
         currentTime.SetTimeIncrement(increment);
@@ -86,7 +97,7 @@ public class DebugController : MonoBehaviour
     }
 
     [Command("player_give_item", "Gives Player Item")]
-    public void GivePlayerItem(string itemName, int count)
+    public void GivePlayerItem([ItemName]string itemName, int count)
     {
         ItemSO itemToSpawn;
 
@@ -147,6 +158,18 @@ public class DebugController : MonoBehaviour
     public void SetPlayerSpeed(float value)
     {
         playerController.SetMoveSpeed(value);
+    }
+
+    [Command("player_set_jump_height", "Sets Player Jump Height")]
+    public void SetPlayerJumpHeight(float value)
+    {
+        playerController.SetJumpHeight(value);
+    }
+
+    [Command("player_set_gravity", "Sets Player Gravity")]
+    public void SetPlayerGravity(float value)
+    {
+        playerController.SetGravity(value);
     }
 
 

@@ -56,8 +56,11 @@ public abstract class PlayerController : MonoBehaviour
     //Private Variables
     protected float _speed;
     protected float jumpHeight;
+    public float JumpHeight { get { return jumpHeight; } }
     protected float originalJumpHeight;
+    public float OriginalJumpHeight { get { return originalJumpHeight; } }
     protected float gravity;
+    public float Gravity { get { return gravity; } }
     protected float originalGravity;
     protected float _verticalVelocity;
     protected float _terminalVelocity = 53.0f;
@@ -67,8 +70,10 @@ public abstract class PlayerController : MonoBehaviour
     protected float inputMagnitude;
     protected float targetSpeed;
     protected float walkSpeed;
+    public float WalkSpeed { get { return walkSpeed; } }
     protected float sprintSpeed;
     protected float originalWalkSpeed;
+    public float OriginalWalkSpeed { get { return originalWalkSpeed; } }
     protected float originalSprintSpeed;
     protected bool IsCurrentDeviceMouse
     {

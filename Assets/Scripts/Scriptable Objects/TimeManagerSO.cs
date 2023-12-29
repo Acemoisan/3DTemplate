@@ -13,6 +13,7 @@ public class TimeManagerSO : ScriptableObject
     public string dayOfTheWeekString;
     public float monthIndex;
     public float year;
+    public float secondsPerInGameTenMinutes;
 
     public void SkipToNextMorning()
     {
