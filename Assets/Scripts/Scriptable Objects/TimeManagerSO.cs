@@ -20,9 +20,9 @@ public class TimeManagerSO : ScriptableObject
         TimeManager.instance.SkipToNextMorning();
     }
 
-    public void SetTime(int time)
+    public void ManuallySetTime(int hour, int minute = 0)
     {
-        TimeManager.instance.SetTime(time);
+        TimeManager.instance.ManuallySetTime(hour, minute);
     }
 
     public void SetTimeIncrement(int time)
@@ -33,5 +33,20 @@ public class TimeManagerSO : ScriptableObject
     public void PauseTime(bool pause)
     {
         TimeManager.instance.PauseTime(pause);
+    }
+
+    public float GetDaylightPercentage()
+    {
+        return TimeManager.instance.GetDaylightPercentage();
+    }
+
+    public float GetDaylightSeconds()
+    {
+        return TimeManager.instance.GetDaylightSeconds();
+    }
+
+    public float GetTotalSeconds()
+    {
+        return TimeManager.instance.GetTotalSecondsInADay();
     }
 }

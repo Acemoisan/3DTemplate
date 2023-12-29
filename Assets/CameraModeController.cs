@@ -181,7 +181,7 @@ IEnumerator CheckCameraMode()
         topDownCamera.SetActive(cameraMode == CameraModes.AnimalCrossing);
         rpgCamera.SetActive(cameraMode == CameraModes.Ark);
         rpgAimCamera.SetActive(cameraMode == CameraModes.Ark);
-        aimCursor.SetActive(cameraMode == CameraModes.Ark || cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs);
+        //aimCursor.SetActive(cameraMode == CameraModes.Ark || cameraMode == CameraModes.GodOfWar || cameraMode == CameraModes.LastOfUs);
 
         yield return new WaitForSeconds(.5f);
     }

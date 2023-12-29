@@ -29,7 +29,7 @@ public class ConsoleStats : MonoBehaviour
     [SerializeField] TextMeshProUGUI inGameDayValueRef;
     [SerializeField] TextMeshProUGUI inGameTimeValueRef;
     [SerializeField] TextMeshProUGUI inGameSecondsPerMinuteValueRef;
-
+    [SerializeField] TextMeshProUGUI dayLightRef;
 
     [Space(20)]
     [Title("Performance Stats")]
@@ -74,6 +74,7 @@ public class ConsoleStats : MonoBehaviour
         inGameDayValueRef.text = $"<color=#{goldHex}>Day: </color>{time.dayOfTheMonthIndex}";
         inGameTimeValueRef.text = $"<color=#{goldHex}>Time: </color>{time.hour}:{time.minute}:{time.second}";
         inGameSecondsPerMinuteValueRef.text = $"<color=#{goldHex}>Seconds Per 10 Min: </color>{time.secondsPerInGameTenMinutes}";
+        dayLightRef.text = $"<color=#{goldHex}>Daylight: </color>{time.GetDaylightPercentage()}% <color=#{goldHex}>TotalSeconds:</color> {time.GetDaylightSeconds()} / {time.GetTotalSeconds()}";
     }
 
     void PerformanceStats()

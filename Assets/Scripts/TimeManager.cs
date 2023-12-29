@@ -34,6 +34,7 @@ public class TimeManager : MonoBehaviour
     public int minute;
     public int second;
     public int secondsPerInGameTenMinutes;
+    public int minuteIncrement = 10;
     public bool timePaused;
 
 
@@ -54,7 +55,8 @@ public class TimeManager : MonoBehaviour
 
 
     public int daylightSeconds;
-
+    float currentSecondOfTheDay;
+    float totalSecondsInADay;
 
     [Header("Events")]
     [SerializeField] UnityEvent dayCompleteEvent;
@@ -113,6 +115,13 @@ public class TimeManager : MonoBehaviour
             {
                 second++;
 
+                float increment = 60 / minuteIncrement;
+                totalSecondsInADay = (secondsPerInGameTenMinutes * increment) * 24;
+                float hourOfTheDayInSeconds = (secondsPerInGameTenMinutes * increment) * hour;
+                float minuteOfTheDayInSeconds = (minute / minuteIncrement) * secondsPerInGameTenMinutes;
+                currentSecondOfTheDay = hourOfTheDayInSeconds + minuteOfTheDayInSeconds + second;
+
+
                 if (second >= secondsPerInGameTenMinutes)
                 {
                     second = 0;
@@ -122,7 +131,7 @@ public class TimeManager : MonoBehaviour
 
                     if (minute < 50)
                     {
-                        minute += 10;
+                        minute += minuteIncrement;
                     }
                     else
                     {
@@ -145,7 +154,6 @@ public class TimeManager : MonoBehaviour
 
 
                         RaiseHourUpdateEvent();
-                        SetDaylightTime();
                         FindPhaseOfDay();
                     }
 
@@ -188,15 +196,24 @@ public class TimeManager : MonoBehaviour
         minute = 0;
         second = 0;
         NextDay();
-        SetDaylightTime();
     }
 
-    public void SetTime(int time)
+    public void ManuallySetTime(int hour, int minute = 0)
     {
-        hour = time;
-        minute = 0;
+        this.hour = hour;
+
+        // Round the minute to the nearest increment
+        int increment = minuteIncrement;
+        this.minute = ((minute + increment / 2) / increment) * increment;
+
+        // Ensure the minute does not exceed 59
+        if (this.minute >= 60) 
+        {
+            this.minute = 0;
+            this.hour = (this.hour + 1) % 24;
+        }
+
         second = 0;
-        SetDaylightTime();
         UpdateTimeOnUI();
         RaiseHourUpdateEvent();
     }
@@ -337,23 +354,21 @@ public class TimeManager : MonoBehaviour
         dateSaved = System.DateTime.Now.ToString("yyyy/MM/dd");
     }
 
-    public void SetDaylightTime()
-    {
-        daylightSeconds = (hour * 8) * 6;
-    }
     
-    public int GetDaylightSeconds()
+    public float GetDaylightSeconds()
     {
-        //THERE ARE 1152 SECONDS IN AN IN GAME DAY -- AT 8 SECONDS PER HOUR. (8 * 6) * 24 = 1152
-        int hourInSeconds = (secondsPerInGameTenMinutes * 6) * hour;
-        int additionalMinutes = (minute / 10) * secondsPerInGameTenMinutes;
-        return hourInSeconds + additionalMinutes + second;
+        return currentSecondOfTheDay;
+    }
+
+    public float GetTotalSecondsInADay()
+    {
+        return totalSecondsInADay;
     }
 
     public float GetDaylightPercentage()
     {
-        float totalSecondsInDay = (secondsPerInGameTenMinutes * 6) * 24;
-        return (float)GetDaylightSeconds() / totalSecondsInDay;
+        float daylightPercentage = currentSecondOfTheDay / totalSecondsInADay;
+        return daylightPercentage;
     }
 
     public void OnTimeScaleRequested(float scale)

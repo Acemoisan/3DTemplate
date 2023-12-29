@@ -69,9 +69,9 @@ public class DebugController : MonoBehaviour
     }
 
     [Command("time_set", "Sets Hour of Day (24HR)")]
-    public void SetTime(int time)
+    public void SetTime(int hour, int minute = 0)
     {
-        currentTime.SetTime(time);
+        currentTime.ManuallySetTime(hour, minute);
     }
 
     [Command("time_set_seconds_per_10_min", "Sets Time Increment - (Seconds per in game 10 min) Default - 8")]
