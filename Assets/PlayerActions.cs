@@ -45,7 +45,6 @@ public class PlayerActions : MonoBehaviour
                 if(playerInventory.GetActiveItem().GetAnimationString != UseAnimationString.NoAnimation)
                 {
                     playerAnimation.SetTrigger(playerInventory.GetActiveItem().GetAnimationString.ToString());
-                    Debug.Log(playerInventory.GetActiveItem() + " Animation String is " + playerInventory.GetActiveItem().GetAnimationString.ToString());
                 }
                 else 
                 {

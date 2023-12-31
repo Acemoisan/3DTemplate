@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Pickaxe
   itemDescription: Its a Pickaxe
-  icon: {fileID: 21300008, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  handPrefab: {fileID: 9063909686237879955, guid: b10e94583b8f1f84d95fe71e60f1e356,
+  icon: {fileID: -1522639227, guid: b235b3a7240b57741a486752e2b08c6f, type: 3}
+  handPrefab: {fileID: 9063909686237879955, guid: 50f958d8aac2fc647a7a9d2c280289e5,
     type: 3}
   itemClass: 16
   damageClass: 2

@@ -13,9 +13,9 @@ public class PlaceHolderActionSO : ItemActionSO
     public override void OnItemUsed(ItemSO usedItem, PlayerInventory playerInventory)
     {
         //reduce durability, and other logic here
-        if(usedItem.IsStackable())
-        {
-            playerInventory.RemoveItemFromHotbar(usedItem);
-        }
+        // if(usedItem.IsStackable())
+        // {
+        //     playerInventory.RemoveItemFromHotbar(usedItem);
+        // }
     }
 }

@@ -22,12 +22,6 @@ public class ResourceNodeCollider : MonoBehaviour, Damageable
     void Start()
     {
         currentHealth = maxhealth;
-        InvokeRepeating("Test", 1f, 1f);
-    }
-
-    void Test()
-    {
-        Debug.Log("Test");
     }
 
 

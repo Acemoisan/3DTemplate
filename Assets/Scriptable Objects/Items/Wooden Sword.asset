@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efe0d9cd5a259264c8ed0fc20ca4dc71, type: 3}
-  m_Name: CrossBow
+  m_Name: Wooden Sword
   m_EditorClassIdentifier: 
-  itemName: CrossBow
+  itemName: Wooden Sword
   itemDescription: Its a sword
-  icon: {fileID: 512847108, guid: 11665b29d1d74d24ba3544545ce4ab5b, type: 3}
+  icon: {fileID: -1976506221, guid: b235b3a7240b57741a486752e2b08c6f, type: 3}
   handPrefab: {fileID: 9063909686237879955, guid: 8c0cadcb8478ec845a1a6d37e4631f82,
     type: 3}
   itemClass: 13
@@ -24,6 +24,6 @@ MonoBehaviour:
   stackable: 0
   toolDamage: 5
   buttonTagEnum: 2
-  ItemAction: {fileID: 11400000, guid: a584bc7cb3d666b4a90968835fae8e08, type: 2}
-  animationString: 4
-  holdAnimationString: 1
+  ItemAction: {fileID: 11400000, guid: 0596a7162965ca646b1337f71127cf2f, type: 2}
+  animationString: 1
+  holdAnimationString: 0

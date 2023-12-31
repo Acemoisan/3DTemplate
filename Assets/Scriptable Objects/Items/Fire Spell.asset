@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Fire Spell
   itemDescription: Shoot Fire!
-  icon: {fileID: 563319209, guid: 11665b29d1d74d24ba3544545ce4ab5b, type: 3}
+  icon: {fileID: 1933103220, guid: b235b3a7240b57741a486752e2b08c6f, type: 3}
   handPrefab: {fileID: 9063909686237879955, guid: b10e94583b8f1f84d95fe71e60f1e356,
     type: 3}
   itemClass: 18
   damageClass: 4
-  animationString: 3
   itemLevel: 1
   itemSellValue: 0
   stackable: 1
   toolDamage: 0
   buttonTagEnum: 2
   ItemAction: {fileID: 11400000, guid: 55ec4b0a4f4e2b44a933bee773d70260, type: 2}
+  animationString: 3
+  holdAnimationString: 2
   spellType: 0
   spellPrefab: {fileID: 0}

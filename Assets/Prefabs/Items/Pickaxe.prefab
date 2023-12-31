@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3170599801134997860}
   - component: {fileID: 1491997611177157470}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.35052732, y: -0.33786863, z: -0.37326396, w: 0.78971475}
   m_LocalPosition: {x: -0.087, y: -0.262, z: -0.296}
-  m_LocalScale: {x: 0.040817328, y: 0.50163114, z: 0.040817328}
+  m_LocalScale: {x: 0.040817328, y: 0.2744775, z: 0.040817328}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 056543447cf96b64685b90796cc3190b, type: 2}
+  - {fileID: 2100000, guid: 07cd46d86f002b745ac35d0aff6fbacc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

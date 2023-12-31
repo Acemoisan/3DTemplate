@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efe0d9cd5a259264c8ed0fc20ca4dc71, type: 3}
-  m_Name: Bloody Sword
+  m_Name: Wooden Bow
   m_EditorClassIdentifier: 
-  itemName: Bloody Sword
+  itemName: Bow
   itemDescription: Its a sword
-  icon: {fileID: 21300004, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  handPrefab: {fileID: 9063909686237879955, guid: 8c0cadcb8478ec845a1a6d37e4631f82,
+  icon: {fileID: 1543204414, guid: b235b3a7240b57741a486752e2b08c6f, type: 3}
+  handPrefab: {fileID: 901764955684538018, guid: 3d95521858ef3154681eaf4b6e1099ec,
     type: 3}
   itemClass: 13
   damageClass: 1
   itemLevel: 1
   itemSellValue: 100
   stackable: 0
-  toolDamage: 5
+  toolDamage: 0
   buttonTagEnum: 2
-  ItemAction: {fileID: 11400000, guid: 0596a7162965ca646b1337f71127cf2f, type: 2}
-  animationString: 2
-  holdAnimationString: 0
+  ItemAction: {fileID: 11400000, guid: a584bc7cb3d666b4a90968835fae8e08, type: 2}
+  animationString: 4
+  holdAnimationString: 1
