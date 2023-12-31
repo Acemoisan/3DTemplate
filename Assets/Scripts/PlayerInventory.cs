@@ -11,7 +11,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] InventoryUI1 inventoryUI;
     [SerializeField] PlayerAnimation playerAnimation;
     //public InventorySO _inventorySO;
-    //[SerializeField] PopUpIndicatorUI pickedUpItemUIReference;
+    [SerializeField] PickedUpItemUI pickedUpItemUIReference;
     //[SerializeField] PlayerQuestManager playerQuestManager;
 
 
@@ -170,7 +170,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        //pickedUpItemUIReference.ShowPopup(pickupItem.GetIcon(), pickupItem.GetItemName(), count);
+        pickedUpItemUIReference.FillUI(pickupItem.GetIcon(), pickupItem.GetItemName(), count);
         inventoryUI.UpdateHotBarItemCount();
         //playerQuestManager.ItemCollectedForGoal(pickupItem, count);
     }
