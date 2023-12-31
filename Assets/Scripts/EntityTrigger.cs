@@ -28,6 +28,7 @@ public class EntityTrigger : Interactable
         if (GetPlayerInventory().CanFitItemInIventory(itemToGive, amountToGive))
         {
             GetPlayerInventory().AddItem(itemToGive, amountToGive);
+            AudioManager.instance.PlaySound(Sound.PickupItem);
             allowedToGive = false;
             Destroy(entity);        
         }
