@@ -169,6 +169,10 @@ public abstract class PlayerController : MonoBehaviour
         inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
 
+        // if(inputDirection != Vector3.zero)
+        // {
+        //     AudioManager.instance.PlaySound(Sound.PlayerAttack);
+        // }
         
         HandlePlayerObjectRotation();
         

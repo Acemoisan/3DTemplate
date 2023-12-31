@@ -19,10 +19,11 @@ MonoBehaviour:
     type: 3}
   itemClass: 13
   damageClass: 0
-  animationString: 4
   itemLevel: 1
   itemSellValue: 0
   stackable: 1
   toolDamage: 0
   buttonTagEnum: 2
   ItemAction: {fileID: 11400000, guid: 55ec4b0a4f4e2b44a933bee773d70260, type: 2}
+  animationString: 3
+  holdAnimationString: 0

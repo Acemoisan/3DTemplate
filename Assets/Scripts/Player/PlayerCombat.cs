@@ -19,15 +19,16 @@ public class PlayerCombat : MonoBehaviour
 
 
     //these are in invoked from StarterAssetsInput
-    public void AttackOne()
-    {
-        OnAttackOne?.Invoke();
-    }
+    //TODO: Currently ATTACKS are not being used
+    // public void AttackOne()
+    // {
+    //     OnAttackOne?.Invoke();
+    // }
 
-    public void AttackTwo()
-    {
-        OnAttackTwo?.Invoke();
-    }
+    // public void AttackTwo()
+    // {
+    //     OnAttackTwo?.Invoke();
+    // }
 
     public void Aim()
     {

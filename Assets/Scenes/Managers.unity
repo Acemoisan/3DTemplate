@@ -187,6 +187,7 @@ MonoBehaviour:
   minute: 0
   second: 0
   secondsPerInGameTenMinutes: 24
+  minuteIncrement: 10
   timePaused: 0
   seasonString: Summer
   morning: 0
@@ -403,8 +404,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxAudioSource: {fileID: 1055994457}
   growlAudioSource: {fileID: 1709782861}
-  randomSfxClips:
-  - {fileID: 8300000, guid: ea794cf6b00a2fc41bbe2ddb716d6f92, type: 3}
+  soundAudioClips:
+  - sound: 0
+    audioClip: {fileID: 8300000, guid: 3edcb877829eb0443b5b03c1e7d50e62, type: 3}
+  - sound: 1
+    audioClip: {fileID: 8300000, guid: 123ea073e11d35f4caac53bf7267933d, type: 3}
 --- !u!1 &1055994455
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1709782860
 Transform:
   m_ObjectHideFlags: 0

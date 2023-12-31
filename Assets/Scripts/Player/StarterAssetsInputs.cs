@@ -20,12 +20,10 @@ namespace StarterAssets
 		public bool allowedToAim;
 
 		[Header("Mouse Cursor Settings")]
-		public bool cursorLocked = true;
+		public bool cursorLocked = false;
 		public bool cursorInputForLook = true;
 
-		[Header("Events")]
-		public UnityEvent OnAttackOne;
-		public UnityEvent OnAttackTwo;
+
 
 
 		void Start()
@@ -82,23 +80,6 @@ namespace StarterAssets
 			move = newMoveDirection;
 		} 
 
-		public void AttackOne(InputAction.CallbackContext value)
-		{
-			if (value.started)
-			{
-				OnAttackOne.Invoke();
-			}
-		}
-
-		public void AttackTwo(InputAction.CallbackContext value)
-		{
-			if (value.started)
-			{
-				if(allowedToAim) return;
-
-				OnAttackTwo.Invoke();
-			}
-		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{

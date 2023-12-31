@@ -14,4 +14,9 @@ public class ItemActionSO : ScriptableObject
     {
         Debug.Log("On Apply was not usd as an override:");
     }
+
+    public virtual void OnItemSound()
+    {
+        Debug.Log("On Apply was not usd as an override:");
+    }
 }
