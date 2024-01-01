@@ -1,9 +1,3 @@
-/*
- *  Copyright � 2022 Omuhu Inc. - All Rights Reserved
- *  Unauthorized copying of this file, via any medium is strictly prohibited
- *  Proprietary and confidential
- */
-
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +12,7 @@ public class ItemDragAndDrop : MonoBehaviour
 
 
     //[SerializeField] Transform dropPos;
+    [SerializeField] Image imageRef;
     Sprite dragAndDropIcon;
     [SerializeField] ItemSlot itemSlot;
 
@@ -31,8 +26,24 @@ public class ItemDragAndDrop : MonoBehaviour
     public void SetDragAndDropIcon(Sprite icon)
     {
         dragAndDropIcon = icon;
+
+        if(icon == null)
+        {
+            imageRef.gameObject.SetActive(false);
+        }
     }
 
+
+    public void IconFollowMouse()
+    {
+        if (dragAndDropIcon != null)
+        {
+            imageRef.gameObject.SetActive(true);
+            imageRef.sprite = dragAndDropIcon;
+            Vector3 mousePos = Mouse.current.position.ReadValue();
+            imageRef.transform.position = mousePos;
+        }
+    }
  
 
     internal void OnClick(ItemSlot itemSlot)

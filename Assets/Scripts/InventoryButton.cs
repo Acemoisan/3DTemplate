@@ -22,9 +22,11 @@ public class InventoryButton : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     [Header("Dependencies")]
     //[SerializeField] InventorySO _playersInventorySO;
+    
     [SerializeField] PlayerInventory _playersInventory;
     [SerializeField] ItemDragAndDrop _dragAndDropReference;
     [SerializeField] InventoryUI1 _inventoryUIReference;
+    [SerializeField] PlayerControlScheme _playerControlScheme;
     [SerializeField] Transform toolTipPosition;
     [SerializeField] Image dragAndDropIcon;
 
@@ -138,6 +140,11 @@ public class InventoryButton : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         {
             StoreDragAndDropIcon(_dragAndDropReference.GetItemSlot().item.GetIcon());
             ShowDragAndDropIcon(true);
+
+            // if(_playerControlScheme.UsingKeyboard())
+            // {
+            //     _dragAndDropReference.IconFollowMouse();
+            // }
         }
         else 
         {
@@ -284,8 +291,10 @@ public class InventoryButton : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         //if (_inventoryUIReference.IsInventoryToggled() == false) { return; }
 
         ShowToolTip();
-        ShowDragAndDropIcon(true);
-
+        if(_playerControlScheme.UsingKeyboard() == false)
+        {
+            ShowDragAndDropIcon(true);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -305,7 +314,10 @@ public class InventoryButton : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     public void OnDeselect(BaseEventData eventData)
     {
         HideToolTip();
-        ShowDragAndDropIcon(false);
+        if(_playerControlScheme.UsingKeyboard() == false)
+        {
+            ShowDragAndDropIcon(false);
+        }
     }
     #endregion
 }

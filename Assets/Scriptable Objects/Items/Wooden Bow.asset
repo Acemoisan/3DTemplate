@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe0d9cd5a259264c8ed0fc20ca4dc71, type: 3}
   m_Name: Wooden Bow
   m_EditorClassIdentifier: 
-  itemName: Bow
+  itemName: Wooden Bow
   itemDescription: Its a sword
   icon: {fileID: 1543204414, guid: b235b3a7240b57741a486752e2b08c6f, type: 3}
   handPrefab: {fileID: 901764955684538018, guid: 3d95521858ef3154681eaf4b6e1099ec,
