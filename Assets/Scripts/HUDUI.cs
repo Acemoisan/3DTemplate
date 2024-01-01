@@ -91,7 +91,7 @@ public class HUDUI : MonoBehaviour
 
         DisableButtons();
         DisableNavigation();
-        StartCoroutine(UpdateHUD());
+       // StartCoroutine(UpdateHUD());
     }
 
     IEnumerator UpdateHUD()

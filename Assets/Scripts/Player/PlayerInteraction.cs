@@ -76,7 +76,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public Interactable GetInteractee()
     {
-        if(interactee == null) { Debug.LogError("Interactee is null on " + gameObject);  }
+        if(interactee == null) { return null; }
         return interactee;
     }
 }

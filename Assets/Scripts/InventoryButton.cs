@@ -31,7 +31,6 @@ public class InventoryButton : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
 
     [Header("Tags - (Clothing/Ring/Potion/General)")]
-    [SerializeField] string buttonTag;
     [SerializeField] ButtonTag buttonTagEnum;
 
     //private
