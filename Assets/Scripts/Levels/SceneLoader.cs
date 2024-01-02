@@ -5,29 +5,26 @@
  */
 
 using System.Collections;
+using ScriptableObjectArchitecture;
 using UnityEngine;
 //using ScriptableObjectArchitecture;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
     [Header("Configuration")]
     public SceneSO sceneToLoad;
     public LevelEntranceSO levelEntrance;
-    public bool activateLoadingScreen;
-    public GameObject loadingScreenGO; // Assign in Inspector
-    public UnityEngine.UI.Slider loadingBar; // Assign in Inspector if you have a loading bar
+    public bool showLoadingScreen;
     
 
 
     [Header("Player Path")]
     public PlayerEntranceSO playerPath;
 
-    //[Header("Broadcasting events")]
-    //public LoadSceneRequestGameEvent loadSceneEvent;
 
-    // [Header("ONLY NEEDED FOR MAIN MENU")]
-    // [SerializeField] SceneHolderSO sceneSaver;
+
 
     public void LoadScene()
     {
@@ -36,7 +33,7 @@ public class SceneLoader : MonoBehaviour
             this.playerPath.levelEntrance = this.levelEntrance;
         }
 
-        LoadSceneAsync(sceneToLoad.sceneName);
+        SceneLoaderManager.Instance.OnLoadLevelRequest(sceneToLoad, showLoadingScreen);
     }
 
     public void LoadScene(SceneSO scene)
@@ -46,36 +43,6 @@ public class SceneLoader : MonoBehaviour
             this.playerPath.levelEntrance = this.levelEntrance;
         }
 
-        LoadSceneAsync(scene.sceneName);
-    }
-
-    private void LoadSceneAsync(string sceneName)
-    {
-        StartCoroutine(LoadSceneCoroutine(sceneName));
-    }
-
-    private IEnumerator LoadSceneCoroutine(string sceneName)
-    {  
-        //loadingScreenGO.SetActive(true);
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-
-        while (!operation.isDone)
-        {
-            // Convert loading progress to the range of 0 to 1
-            //float progress = Mathf.Clamp01(operation.progress / 0.9f);
-
-            //if (loadingBar != null)
-            //{
-                //loadingBar.value = progress;
-            //}
-
-            Debug.Log("Loading progress: " + operation.progress);
-            yield return null; // Wait for the next frame
-        }
-
-        Debug.Log("Scene loaded");
-
-        //loadingScreenGO.SetActive(false);
+        SceneLoaderManager.Instance.OnLoadLevelRequest(scene, showLoadingScreen);
     }
 }

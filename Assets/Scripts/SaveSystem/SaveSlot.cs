@@ -22,6 +22,8 @@ public class SaveSlot : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI fileNameTextRef;
+    [SerializeField] TextMeshProUGUI dayTextRef;
+    [SerializeField] TextMeshProUGUI timeTextRef;
     //[SerializeField] Image icon;
 
     //[SerializeField] SaveMenuValuesSO saveMenuValuesSO;
@@ -44,7 +46,8 @@ public class SaveSlot : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     public void SetStats(SaveData file) 
     {
         fileNameTextRef.text = file.worldName;
-
+        dayTextRef.text = $"Day: {file.dayOfTheMonthIndex.ToString()}";
+        timeTextRef.text = $"{file.hour.ToString()} h  {file.minute.ToString()} m";
         // Sprite foundIcon = Resources.Load<Sprite>("SaveIcons/" + file.iconString);
         // icon.sprite = foundIcon;
     }
@@ -53,10 +56,9 @@ public class SaveSlot : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     public void LoadFile(int index) //LOADING A FILE BASED ON FILENAME. RETURNING A FILE //LOAD PROFILES BY ID.
     {
         saveSystem.GetWorldDataForSaveSlot(saveSystem.savedFiles.files[index], out SaveData file);
-        fileNameTextRef.text = saveSystem.savedFiles.files[index];
-        worldName = saveSystem.savedFiles.files[index];
+        this.worldName = saveSystem.savedFiles.files[index];
         this.saveData = file;
-        //SetStats(file);
+        SetStats(file);
     }
 
     public void LoadGame() //BUTTON ONCLICK EVENT

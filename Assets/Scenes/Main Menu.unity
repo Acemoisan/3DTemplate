@@ -1058,11 +1058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89a6d2a4e9a0e54fa0e7651650f40a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: {fileID: 0}
+  sceneToLoad: {fileID: 11400000, guid: b18b9db03cd66b349bc11969c38783e0, type: 2}
   levelEntrance: {fileID: 11400000, guid: 9ab3f0f6229623b44bb8de527c575373, type: 2}
-  activateLoadingScreen: 0
-  loadingScreenGO: {fileID: 0}
-  loadingBar: {fileID: 0}
+  showLoadingScreen: 1
   playerPath: {fileID: 11400000, guid: b4d4d34aa4a78844b99594c3a000c97e, type: 2}
 --- !u!1 &165524334
 GameObject:
@@ -14173,8 +14171,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6186645281021445585}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 33.007313, y: 7.04, z: 59.743492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.8, y: 6.7, z: 39.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14265,7 +14263,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.2
-  far clip plane: 200
+  far clip plane: 500
   field of view: 40
   orthographic: 0
   orthographic size: 10

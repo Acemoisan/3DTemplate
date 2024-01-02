@@ -86,6 +86,7 @@ public class TimeManager : MonoBehaviour
         StartCoroutine(IncreaseTime());
         //InvokeRepeating("IncreaseRealTime", 60, 60);
         //Invoke("DelaySetDaylightTime", 1);
+        Debug.Log("Time Manager Started");
     }  
 
 
