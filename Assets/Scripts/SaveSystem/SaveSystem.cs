@@ -493,6 +493,7 @@ public class SaveSystem : ScriptableObject
         // TimeManager.instance.dayOfTheWeekIndex = this.saveData.dayOfTheWeekIndex;
         // TimeManager.instance.dayOfTheWeekString = this.saveData.dayOfTheWeekString;
         timeManagerSO.ManuallySetTime(this.saveData.hour, this.saveData.minute);
+        timeManagerSO.ManuallySetDay(this.saveData.monthIndex, this.saveData.dayOfTheMonthIndex, this.saveData.year);
         Debug.Log("Loading time");
     }
 

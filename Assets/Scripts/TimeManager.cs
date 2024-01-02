@@ -219,6 +219,31 @@ public class TimeManager : MonoBehaviour
         RaiseHourUpdateEvent();
     }
 
+    public void ManuallySetDay(int monthIndex, int dayOfTheMonthIndex, int yearIndex)
+    {
+        this.monthIndex = monthIndex;
+        this.dayOfTheMonthIndex = dayOfTheMonthIndex;
+        this.year = yearIndex;
+
+        if(dayOfTheMonthIndex > 30)
+        {
+            dayOfTheMonthIndex = 30;
+        }
+        else if(dayOfTheMonthIndex < 1)
+        {
+            dayOfTheMonthIndex = 1;
+        }
+
+        if(monthIndex > 4)
+        {
+            monthIndex = 4;
+        }
+        else if(monthIndex < 0)
+        {
+            monthIndex = 0;
+        }
+    }
+
     public void SetTimeIncrement(int inc)
     {
         secondsPerInGameTenMinutes = inc;

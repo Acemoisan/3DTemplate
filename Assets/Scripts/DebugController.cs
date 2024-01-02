@@ -62,6 +62,12 @@ public class DebugController : MonoBehaviour
         currentTime.SkipToNextMorning();
     }
 
+    [Command("time_set_day", "MM DD YYYY -Sets Day of Month")]
+    public void SetDay(int monthIndex, int dayOfTheMonthIndex, int yearIndex)
+    {
+        currentTime.ManuallySetDay(monthIndex, dayOfTheMonthIndex, yearIndex);
+    }
+
     [Command("time_pause", "Pauses Time")]
     public void PauseTime(bool pause)
     {
@@ -73,6 +79,7 @@ public class DebugController : MonoBehaviour
     {
         currentTime.ManuallySetTime(hour, minute);
     }
+
 
     [Command("time_set_seconds_per_10_min", "Sets Time Increment - (Seconds per in game 10 min) Default - 8")]
     public void SetTimeIncrement(int increment)

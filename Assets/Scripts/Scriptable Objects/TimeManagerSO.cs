@@ -25,6 +25,11 @@ public class TimeManagerSO : ScriptableObject
         TimeManager.instance.ManuallySetTime(hour, minute);
     }
 
+    public void ManuallySetDay(int monthIndex, int dayOfTheMonthIndex, int yearIndex)
+    {
+        TimeManager.instance.ManuallySetDay(monthIndex, dayOfTheMonthIndex, yearIndex);
+    }
+
     public void SetTimeIncrement(int time)
     {
         TimeManager.instance.SetTimeIncrement(time);
