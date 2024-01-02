@@ -9,22 +9,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System.IO;
 
 [CreateAssetMenu(fileName = "SaveSystem", menuName = "Scriptable Objects/Save Manager/Save System")]
 public class SaveSystem : ScriptableObject
 {
     [Header("Dependencies")]
     public ItemDatabase _itemDatabase;
+    [SerializeField] TimeManagerSO timeManagerSO;
     //public VideoClipSO introCinematicClip;
 
 
+    [Header("Strings")]
+    [SerializeField] string worldFileFolderName = "World Files";
+    [SerializeField] string individualWorldFileName = "worldData.game";
 
-    [HideInInspector] public SaveData saveData = new SaveData();
-    [HideInInspector] public SaveFileSO saveFile = new SaveFileSO();
+
+
+    public SaveData saveData = new SaveData();
+    public SaveFileSO savedFiles = new SaveFileSO();
     [HideInInspector] public SceneData sceneData = new SceneData();
     [HideInInspector] public string iconString;
     [HideInInspector] public string playerLoadingName; //THIS IS FILLED FROM THE CHARACTER SLOT SCRIPT/BUTTON. IT IS PASSED TO THE PLAYER UPON LOADING THE GAME
-    [HideInInspector] string selectedFileString; //THIS IS FILLED WHEN LOADING GAME DATA OR CREATING A NEW GAME. THIS STAYS FOR THE DURATION OF THE GAME. IF THE PLAYER WANTS TO DELET THE FILE. THIS NAME IS USED.
+    [SerializeField] string selectedWorldString; //THIS IS FILLED WHEN LOADING GAME DATA OR CREATING A NEW GAME. THIS STAYS FOR THE DURATION OF THE GAME. IF THE PLAYER WANTS TO DELET THE FILE. THIS NAME IS USED.
     
     
     
@@ -33,7 +40,7 @@ public class SaveSystem : ScriptableObject
 
     public void ClearProfileID() //CLEARED ON MENU INITIALIZER SO THAT WHEN LOADING, A PREVIOUS NAME IS NOT USED
     {
-        selectedFileString = "";
+        selectedWorldString = "";
         playerLoadingName = "";
         iconString = "";
     }
@@ -47,19 +54,24 @@ public class SaveSystem : ScriptableObject
     ///////////////////////////////////////////
     //LOADING DATA FROM THE DISK // FILEMANAGER
     ///////////////////////////////////////////
-    void LoadSaveDataFromDisk(string profileID)
+    void LoadWorldFromDisk(string worldName)
     {
+        string worldNamePath = worldFileFolderName + "/" + worldName;
+
         // TRY TO FIND FILE
-        if (FileManager.LoadFromFile("data.game", profileID, out var json)) 
+        if (FileManager.LoadFromFile(individualWorldFileName, worldNamePath, out var json)) 
         {
             this.saveData.FromJson(json);
+            Debug.Log("World data loaded: " + Application.persistentDataPath + "/" + worldNamePath);
+            return;
         }
         // IF FILE NOT FOUND
         else
         {
             this.saveData.ApplyDefaultData(); //ADD DEFAULT DATA
             this.SaveDataToDisk(); //SAVING DATA
-            this.LoadSaveDataFromDisk(profileID); //LOADING THE DATA JUST CREATED
+            this.LoadWorldFromDisk(worldName); //LOADING THE DATA JUST CREATED
+            Debug.Log("World data not found. Creating new data: " + Application.persistentDataPath + "/" + worldNamePath);
         }
     }
 
@@ -101,7 +113,9 @@ public class SaveSystem : ScriptableObject
         // {
 
         // }
-        if (FileManager.WriteToFile("data.game", selectedFileString, saveData.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+
+        string worldNamePath = worldFileFolderName + "/" + selectedWorldString;
+        if (FileManager.WriteToFile(individualWorldFileName, worldNamePath, saveData.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
         {
             Debug.Log("Save successful!");
         }
@@ -117,23 +131,24 @@ public class SaveSystem : ScriptableObject
 
     void SaveGameSaveSlotsToDisk()
     {
-        if (FileManager.WriteToFile("gameFiles.files", "Game Files", saveFile.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+        if (FileManager.WriteToFile("savedFiles.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
         {
-            Debug.Log("Save successful!");
+            Debug.Log("Saved Game Worlds successfully! " + savedFiles.ToJson());
         }
     }
 
     public void LoadGameFilesFolder()
     {
         // FIRST TRIES TO FIND FILE WITH THE SAVED NAME. PULLS DATA
-        if (FileManager.LoadFromFile("gameFiles.files", "Game Files", out var json)) 
+        if (FileManager.LoadFromFile("savedFiles.files", worldFileFolderName, out var json)) 
         {
-            this.saveFile.FromJson(json);
+            this.savedFiles.FromJson(json);
+            return;
         }
         // IF FILE NOT FOUND
         else
         {
-            if (FileManager.WriteToFile("gameFiles.files", "Game Files", saveFile.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+            if (FileManager.WriteToFile("savedFiles.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
             {
                 LoadGameFilesFolder();
             }
@@ -153,10 +168,11 @@ public class SaveSystem : ScriptableObject
     public void LoadGame(string profileID)
     {
         //SELECTING WHICH FILE TO LOAD BASED ON THE PROFILE NAME GIVEN
-        selectedFileString = profileID;
+        selectedWorldString = profileID;
 
-        LoadSaveDataFromDisk(selectedFileString);
+        LoadWorldFromDisk(selectedWorldString);
 
+        Debug.Log(this.saveData.hour + ":" + this.saveData.minute);
         LoadGlobalData();
     }
 
@@ -181,11 +197,14 @@ public class SaveSystem : ScriptableObject
 
     public void DeleteFile() //used in game 
     {
-        string fileName = saveFile.files[activeSlotIndex];
-        FileManager.DeleteFile("data.game", selectedFileString);
-
+        FileManager.DeleteFile("data.game", selectedWorldString);
 
         this.SaveGameSaveSlotsToDisk();
+    }
+
+    public void DeleteAllFiles()
+    {
+        savedFiles.ClearAllfiles();
     }
     #endregion
 
@@ -194,15 +213,19 @@ public class SaveSystem : ScriptableObject
 
 
     #region ----------- LOADING GAME FILES -------------
-    public void LoadFile(string profileID, out SaveData file) //returning data to the save slots
+    //returning data to the save slots
+    public void GetWorldDataForSaveSlot(string profileID, out SaveData file) 
     {
-        if (FileManager.LoadFromFile("data.game", profileID, out var json)) 
+        string worldNamePath = worldFileFolderName + "/" + profileID;
+        //var fullPath = Path.Combine(Application.persistentDataPath, worldNamePath, individualWorldFileName);
+        if (FileManager.LoadFromFile(individualWorldFileName, worldNamePath, out var json)) 
         {
             file = new SaveData();
             file.FromJson(json);
         }
         else 
         {
+            Debug.Log("Save Slot could not find world: " + worldNamePath);
             file = null;
         }
     }
@@ -213,35 +236,33 @@ public class SaveSystem : ScriptableObject
 
 
     #region ----------- FUNCTIONS WHEN CREATING A NEW FILE -------------
-        int activeSlotIndex;
 
         ///////////////////////////////////////////
         //FUNCTIONS WHEN CREATING A NEW FILE
         ///////////////////////////////////////////
-        public void SetActiveProfile(int slotIndex)  //saving the active slot so that the correct file name can be saved
+        public void StartNewFile(string customName) 
         {
-            activeSlotIndex = slotIndex;
+            //savedFiles is initialized above. At LoadGameFilesFolder()
+            if(savedFiles.files.Contains(customName) == false) 
+            {
+                savedFiles.files.Add(customName);
+            }
+            
+            SaveGameSaveSlotsToDisk();
+
+            //Remove Later
+            LoadGame(customName);
         }
 
-        public void SaveFileName(string customName) //saving the file name based on the active slot
-        {
-            this.saveData.worldName = customName;
+        // public void SaveIconString(string iconObjectName)
+        // {
+        //     iconString = iconObjectName;
+        // }
 
-            this.saveFile.files.Add(customName);
-
-            selectedFileString = customName;
-            this.SaveGameSaveSlotsToDisk();
-        }
-
-        public void SaveIconString(string iconObjectName)
-        {
-            this.iconString = iconObjectName;
-        }
-
-        public void StartNewGame()
-        {
-            LoadGame(selectedFileString);
-        }
+        // public void StartNewGame()
+        // {
+        //     LoadGame(selectedWorldString);
+        // }
     #endregion
 
 
@@ -303,7 +324,7 @@ public class SaveSystem : ScriptableObject
     //////////////////////////
     void SaveWorldAttributes() 
     {
-        this.saveData.worldName = selectedFileString;
+        this.saveData.worldName = selectedWorldString;
 
         // if(this.saveData.iconString == "") 
         // {
@@ -457,20 +478,22 @@ public class SaveSystem : ScriptableObject
     //////////////////////////
     void LoadWorldAttributes()
     {
-        selectedFileString = saveData.worldName;
+        //selectedWorldString = saveData.worldName;
     }
 
     void LoadTime() 
     {
         //TimeManager.instance.daysPlaying = this.saveData.daysPlaying;
-        TimeManager.instance.hour = this.saveData.hour;
-        TimeManager.instance.minute = this.saveData.minute;
-        TimeManager.instance.second = this.saveData.second;
-        TimeManager.instance.secondsPerInGameTenMinutes = this.saveData.secondsPerInGameTenMinutes;
-        TimeManager.instance.monthIndex = this.saveData.monthIndex;
-        TimeManager.instance.dayOfTheMonthIndex = this.saveData.dayOfTheMonthIndex;
-        TimeManager.instance.dayOfTheWeekIndex = this.saveData.dayOfTheWeekIndex;
-        TimeManager.instance.dayOfTheWeekString = this.saveData.dayOfTheWeekString;
+        // TimeManager.instance.hour = this.saveData.hour;
+        // TimeManager.instance.minute = this.saveData.minute;
+        // TimeManager.instance.second = this.saveData.second;
+        // TimeManager.instance.secondsPerInGameTenMinutes = this.saveData.secondsPerInGameTenMinutes;
+        // TimeManager.instance.monthIndex = this.saveData.monthIndex;
+        // TimeManager.instance.dayOfTheMonthIndex = this.saveData.dayOfTheMonthIndex;
+        // TimeManager.instance.dayOfTheWeekIndex = this.saveData.dayOfTheWeekIndex;
+        // TimeManager.instance.dayOfTheWeekString = this.saveData.dayOfTheWeekString;
+        timeManagerSO.ManuallySetTime(this.saveData.hour, this.saveData.minute);
+        Debug.Log("Loading time");
     }
 
     void LoadRealTime()
@@ -626,7 +649,7 @@ public class SaveSystem : ScriptableObject
     #region ----------- GET -------------
     public string GetFileName()
     {
-        return selectedFileString;
+        return selectedWorldString;
     }
     #endregion
 

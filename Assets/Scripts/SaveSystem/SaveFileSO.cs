@@ -10,6 +10,7 @@ using UnityEngine;
 
 
 //[CreateAssetMenu(fileName = "New Save File", menuName = "Scriptable Objects/Save Manager/Save File")]
+[System.Serializable]
 public class SaveFileSO
 {
     //collect various SO's of objects I want in each save file
@@ -19,7 +20,10 @@ public class SaveFileSO
 
     public List<string> files;
 
-
+    public void ClearAllfiles()
+    {
+        files.Clear();
+    }
 
     public string ToJson()
     {

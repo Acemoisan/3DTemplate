@@ -5803,7 +5803,7 @@ PrefabInstance:
     - target: {fileID: 4580392745997748019, guid: 05f868f17b7a56e41812dbd443a8913a,
         type: 3}
       propertyPath: onDependenciesLoaded.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4580392745997748019, guid: 05f868f17b7a56e41812dbd443a8913a,
         type: 3}
@@ -21160,18 +21160,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: d24bfc005ef1fdf44b614d8e1a726e06, type: 2}
-        m_TargetAssemblyTypeName: TimeManagerSO, Assembly-CSharp
-        m_MethodName: SetTime
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 12
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -38719,6 +38707,11 @@ PrefabInstance:
     - target: {fileID: 5120513756004185408, guid: 4566296c3539b504aba3d8d5d46d87b5,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431358542284421464, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5586459120535229656, guid: 4566296c3539b504aba3d8d5d46d87b5,

@@ -66,6 +66,7 @@ public static class FileManager
     public static bool LoadFromFile(string fileName, string profileID, out string result)
     {
         var fullPath = Path.Combine(Application.persistentDataPath, profileID, fileName);
+        Debug.Log($"Loading {profileID}'\'{fileName} From: {fullPath}");
 
         try
         {

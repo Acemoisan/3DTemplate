@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: SaveSystem
   m_EditorClassIdentifier: 
   _itemDatabase: {fileID: 11400000, guid: bf60c240a8b534348b3757a3edc321c7, type: 2}
+  timeManagerSO: {fileID: 11400000, guid: d24bfc005ef1fdf44b614d8e1a726e06, type: 2}
+  worldFileFolderName: World Files
+  individualWorldFileName: worldData.game
   saveData:
-    worldName: 
+    worldName: MoistVille
     iconString: 
-    hour: 0
+    hour: 18
     minute: 0
-    second: 0
-    secondsPerInGameTenMinutes: 0
-    dayOfTheMonthIndex: 0
-    dayOfTheWeekIndex: 0
-    dayOfTheWeekString: 
-    year: 0
-    monthIndex: 0
+    second: 6
+    secondsPerInGameTenMinutes: 24
+    dayOfTheMonthIndex: 1
+    dayOfTheWeekIndex: 1
+    dayOfTheWeekString: Mon.
+    year: 1
+    monthIndex: 1
     realMinutes: 0
     realHours: 0
     dateSaved: 
@@ -32,5 +35,10 @@ MonoBehaviour:
     introCinematicState: 0
     divider: ==============================================================
     players: []
+  savedFiles:
+    files:
+    - MoistVille
+    - Woh There
   iconString: 
   playerLoadingName: 
+  selectedWorldString: MoistVille
