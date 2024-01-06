@@ -71,14 +71,21 @@ public class TimeManager : MonoBehaviour
     public GameEvent onHourUpdated;
 
 
-    public static TimeManager instance;
+    public static TimeManager Instance;
 
 
 
     private void Awake()
     {
-        instance = this;
-    }
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }    }
 
 
     private void Start()

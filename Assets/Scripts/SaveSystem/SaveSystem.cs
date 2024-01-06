@@ -336,25 +336,25 @@ public class SaveSystem : ScriptableObject
     public void SaveTime() 
     {
         //this.saveData.daysPlaying = TimeManager.instance.daysPlaying;
-        this.saveData.hour = TimeManager.instance.hour;
-        this.saveData.minute = TimeManager.instance.minute;
-        this.saveData.second = TimeManager.instance.second;
-        this.saveData.secondsPerInGameTenMinutes = TimeManager.instance.secondsPerInGameTenMinutes;
-        this.saveData.monthIndex = TimeManager.instance.monthIndex;
-        this.saveData.dayOfTheMonthIndex = TimeManager.instance.dayOfTheMonthIndex;
-        this.saveData.dayOfTheWeekIndex = TimeManager.instance.dayOfTheWeekIndex;
-        this.saveData.dayOfTheWeekString = TimeManager.instance.dayOfTheWeekString;
+        this.saveData.hour = TimeManager.Instance.hour;
+        this.saveData.minute = TimeManager.Instance.minute;
+        this.saveData.second = TimeManager.Instance.second;
+        this.saveData.secondsPerInGameTenMinutes = TimeManager.Instance.secondsPerInGameTenMinutes;
+        this.saveData.monthIndex = TimeManager.Instance.monthIndex;
+        this.saveData.dayOfTheMonthIndex = TimeManager.Instance.dayOfTheMonthIndex;
+        this.saveData.dayOfTheWeekIndex = TimeManager.Instance.dayOfTheWeekIndex;
+        this.saveData.dayOfTheWeekString = TimeManager.Instance.dayOfTheWeekString;
     }
 
     void SaveRealTime()
     {
         Debug.Log("Saving real time");
-        Debug.Log(TimeManager.instance.timeSaved);
-        Debug.Log(TimeManager.instance.dateSaved);
-        this.saveData.realMinutes = TimeManager.instance.realMinutes;
-        this.saveData.realHours = TimeManager.instance.realHours;
-        this.saveData.timeSaved = TimeManager.instance.timeSaved;
-        this.saveData.dateSaved = TimeManager.instance.dateSaved;
+        Debug.Log(TimeManager.Instance.timeSaved);
+        Debug.Log(TimeManager.Instance.dateSaved);
+        this.saveData.realMinutes = TimeManager.Instance.realMinutes;
+        this.saveData.realHours = TimeManager.Instance.realHours;
+        this.saveData.timeSaved = TimeManager.Instance.timeSaved;
+        this.saveData.dateSaved = TimeManager.Instance.dateSaved;
     }
 
     // void SaveCinematicState()
@@ -499,10 +499,10 @@ public class SaveSystem : ScriptableObject
 
     void LoadRealTime()
     {
-        TimeManager.instance.realMinutes = this.saveData.realMinutes;
-        TimeManager.instance.realHours = this.saveData.realHours;
-        TimeManager.instance.dateSaved = this.saveData.dateSaved;
-        TimeManager.instance.timeSaved = this.saveData.timeSaved;
+        TimeManager.Instance.realMinutes = this.saveData.realMinutes;
+        TimeManager.Instance.realHours = this.saveData.realHours;
+        TimeManager.Instance.dateSaved = this.saveData.dateSaved;
+        TimeManager.Instance.timeSaved = this.saveData.timeSaved;
     }
 
     // void LoadCinematicState()

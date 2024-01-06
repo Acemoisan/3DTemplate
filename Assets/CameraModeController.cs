@@ -78,7 +78,6 @@ public class CameraModeController : MonoBehaviour
 
     [Space(20)]
     [Title("Debug Settings")]
-    [SerializeField] bool debugRays = false;
     //[SerializeField] float debugRayRange;
     [SerializeField] LineRenderer baseLineRenderer;
     [SerializeField] LineRenderer aimLineRenderer;
@@ -116,6 +115,9 @@ public class CameraModeController : MonoBehaviour
     {
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
         StartCoroutine(CheckCameraMode());
+        debugTransform.SetActive(false);
+        aimLineRenderer.enabled = false;
+        baseLineRenderer.enabled = false;
     }
 
 
@@ -132,27 +134,29 @@ public class CameraModeController : MonoBehaviour
                 aimWorldPosition = AceUtils.GetMouseWorldPosition3D(_mainCamera, aimCollider);
             }
             
-
-            if(debugRays)
+            if(DebugManager.Instance != null)
             {
-                if(cameraMode == CameraModes.GodOfWar && _input.aiming
-                || cameraMode == CameraModes.Ark && _input.aiming
-                || cameraMode == CameraModes.LastOfUs)
+                if(DebugManager.Instance.debug_drawAimRays)
                 {
-                    debugTransform.SetActive(true);
-                    aimLineRenderer.enabled = true;
-                    baseLineRenderer.enabled = true;
-                    aimLineRenderer.transform.position = attackPointTransform.position;
-                    aimLineRenderer.transform.LookAt(aimWorldPosition);
-                    baseLineRenderer.transform.position = attackPointTransform.position;
-                    baseLineRenderer.transform.LookAt(attackPointTransform.position + _mainCamera.transform.forward);                
-                    debugTransform.transform.position = aimWorldPosition;
-                }
-                else 
-                {
-                    debugTransform.SetActive(false);
-                    aimLineRenderer.enabled = false;
-                    baseLineRenderer.enabled = false;
+                    if(cameraMode == CameraModes.GodOfWar && _input.aiming
+                    || cameraMode == CameraModes.Ark && _input.aiming
+                    || cameraMode == CameraModes.LastOfUs && _input.aiming)
+                    {
+                        debugTransform.SetActive(true);
+                        aimLineRenderer.enabled = true;
+                        baseLineRenderer.enabled = true;
+                        aimLineRenderer.transform.position = attackPointTransform.position;
+                        aimLineRenderer.transform.LookAt(aimWorldPosition);
+                        baseLineRenderer.transform.position = attackPointTransform.position;
+                        baseLineRenderer.transform.LookAt(attackPointTransform.position + _mainCamera.transform.forward);                
+                        debugTransform.transform.position = aimWorldPosition;
+                    }
+                    else 
+                    {
+                        debugTransform.SetActive(false);
+                        aimLineRenderer.enabled = false;
+                        baseLineRenderer.enabled = false;
+                    }
                 }
             }
         }

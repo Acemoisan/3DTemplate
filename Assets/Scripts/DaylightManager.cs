@@ -43,7 +43,7 @@ public class DaylightManager : MonoBehaviour
         // }
 
 
-        float percentageTime = TimeManager.instance.GetDaylightPercentage();
+        float percentageTime = TimeManager.Instance.GetDaylightPercentage();
         float v = dayLightCurve.Evaluate(percentageTime);
         Color c = Color.Lerp(dayTimeColor, nightTimeColor, v);
         globalLight.color = c;

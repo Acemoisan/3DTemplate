@@ -53,6 +53,13 @@ public class DebugController : MonoBehaviour
 
 
     #region QUICK COMMANDS
+    //DEBUG COMMANDS
+    ////////////////
+    [Command("debug_draw_aim_rays", "Draws Aim Rays")]
+    public void DrawAimRays(bool drawAimRays)
+    {
+        DebugManager.Instance.SetDebugDrawAimRays(drawAimRays);
+    }
 
     //TIME COMMANDS
     ///////////////

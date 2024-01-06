@@ -20,10 +20,12 @@ public class HUDUI : MonoBehaviour
     [SerializeField] PlayerInventory _playersInventory;        
     [SerializeField] List<Button> hotbarInventoryButtons;
     [SerializeField] List<Image> hotbarInventoryButtonImages;
+    [SerializeField] GameObject _activeItemTextObject;
     //[SerializeField] InventoryUI1 _inventoryReference;
 
 
     [Header("Text References")]
+    [SerializeField] TextMeshProUGUI _activeItemText;
     [SerializeField] TextMeshProUGUI _playersGoldText;
 
 
@@ -209,17 +211,45 @@ public class HUDUI : MonoBehaviour
     }
 
 
+
+    private Coroutine activeItemCoroutine;
+
     void SetActivePlayerItem(int buttonIndex)
     {
         if (_playersInventory.hotBarSlots[buttonIndex].item != null)
         {
-            _playersInventory.SetActiveItem(_playersInventory.hotBarSlots[buttonIndex].item);
+            ItemSO item = _playersInventory.hotBarSlots[buttonIndex].item;
+            _playersInventory.SetActiveItem(item);
         }
         else
         {
             _playersInventory.SetActiveItem(null);
+            _activeItemTextObject.SetActive(false);
+            return;
         }
-    }    
+
+        if (activeItemCoroutine != null)
+        {
+            StopCoroutine(activeItemCoroutine);
+        }
+        activeItemCoroutine = StartCoroutine(ActiveItemText(_playersInventory.hotBarSlots[buttonIndex].item.GetItemName()));
+    }
+
+    IEnumerator ActiveItemText(string itemName)
+    {
+        _activeItemTextObject.SetActive(true);
+        _activeItemText.text = itemName;
+
+        // Wait for 2 seconds to allow for quick switching
+        yield return new WaitForSeconds(2f);
+
+        // Check if the item name is still the same before hiding
+        if (_activeItemText.text == itemName)
+        {
+            _activeItemTextObject.SetActive(false);
+        }
+    }
+
 
 
     public void DisableButtons() //buttons disabled when in playing game state

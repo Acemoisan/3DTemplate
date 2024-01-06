@@ -24,10 +24,10 @@ public class TimeUI : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            hourText.text = ConvertTo12HourFormat(TimeManager.instance.hour).ToString("00");
-            minuteText.text = ":" + TimeManager.instance.minute.ToString("00");
-            dayOfTheWeekStringText.text = TimeManager.instance.dayOfTheWeekString;
-            dayIndexText.text = TimeManager.instance.dayOfTheMonthIndex.ToString();
+            hourText.text = ConvertTo12HourFormat(TimeManager.Instance.hour).ToString("00");
+            minuteText.text = ":" + TimeManager.Instance.minute.ToString("00");
+            dayOfTheWeekStringText.text = TimeManager.Instance.dayOfTheWeekString;
+            dayIndexText.text = TimeManager.Instance.dayOfTheMonthIndex.ToString();
             
         }
     }

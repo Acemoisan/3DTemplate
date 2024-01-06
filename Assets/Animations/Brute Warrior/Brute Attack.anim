@@ -46116,10 +46116,10 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
   m_Events:
-  - time: 0.56666666
-    functionName: InstantiateAttackEffectAtHand
+  - time: 0.6666667
+    functionName: InstantiateBullet
     data: 
-    objectReferenceParameter: {fileID: 8223844392111385441, guid: a1dab77a72ac5454dabf5a669fb666ac,
+    objectReferenceParameter: {fileID: 8223844392111385441, guid: 7a003029df566534188dbe89b9e6df52,
       type: 3}
     floatParameter: 0
     intParameter: 0

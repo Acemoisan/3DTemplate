@@ -17,41 +17,41 @@ public class TimeManagerSO : ScriptableObject
 
     public void SkipToNextMorning()
     {
-        TimeManager.instance.SkipToNextMorning();
+        TimeManager.Instance.SkipToNextMorning();
     }
 
     public void ManuallySetTime(int hour, int minute = 0)
     {
-        TimeManager.instance.ManuallySetTime(hour, minute);
+        TimeManager.Instance.ManuallySetTime(hour, minute);
     }
 
     public void ManuallySetDay(int monthIndex, int dayOfTheMonthIndex, int yearIndex)
     {
-        TimeManager.instance.ManuallySetDay(monthIndex, dayOfTheMonthIndex, yearIndex);
+        TimeManager.Instance.ManuallySetDay(monthIndex, dayOfTheMonthIndex, yearIndex);
     }
 
     public void SetTimeIncrement(int time)
     {
-        TimeManager.instance.SetTimeIncrement(time);
+        TimeManager.Instance.SetTimeIncrement(time);
     }
 
     public void PauseTime(bool pause)
     {
-        TimeManager.instance.PauseTime(pause);
+        TimeManager.Instance.PauseTime(pause);
     }
 
     public float GetDaylightPercentage()
     {
-        return TimeManager.instance.GetDaylightPercentage();
+        return TimeManager.Instance.GetDaylightPercentage();
     }
 
     public float GetDaylightSeconds()
     {
-        return TimeManager.instance.GetDaylightSeconds();
+        return TimeManager.Instance.GetDaylightSeconds();
     }
 
     public float GetTotalSeconds()
     {
-        return TimeManager.instance.GetTotalSecondsInADay();
+        return TimeManager.Instance.GetTotalSecondsInADay();
     }
 }
