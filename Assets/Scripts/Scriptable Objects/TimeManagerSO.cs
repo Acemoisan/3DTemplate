@@ -41,6 +41,12 @@ public class TimeManagerSO : ScriptableObject
         TimeManager.Instance.PauseTime(pause);
     }
 
+    public void SetTimeScale(float scale)
+    {
+        if(TimeManager.Instance == null) { Debug.Log($"Time Manager is null."); return;}
+        TimeManager.Instance.SetTimeScale(scale);
+    }
+
     public float GetDaylightPercentage()
     {
         return TimeManager.Instance.GetDaylightPercentage();

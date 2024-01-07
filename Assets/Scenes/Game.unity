@@ -34653,6 +34653,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1264281814763843220, guid: 4566296c3539b504aba3d8d5d46d87b5,
         type: 3}
+      propertyPath: OnPlay.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264281814763843220, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1162191427}
@@ -34665,6 +34670,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnEndGame.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264281814763843220, guid: 4566296c3539b504aba3d8d5d46d87b5,
+        type: 3}
+      propertyPath: OnPlay.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: PauseTime
       objectReference: {fileID: 0}
     - target: {fileID: 1264281814763843220, guid: 4566296c3539b504aba3d8d5d46d87b5,
         type: 3}

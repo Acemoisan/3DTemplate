@@ -57,6 +57,8 @@ public class TimeManager : MonoBehaviour
     public int daylightSeconds;
     float currentSecondOfTheDay;
     float totalSecondsInADay;
+    float activeTimeScale = 1f;
+
 
     [Header("Events")]
     [SerializeField] UnityEvent dayCompleteEvent;
@@ -266,7 +268,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
-            SetTimeScale(1);
+            SetTimeScale(activeTimeScale);
         }
     }
     
@@ -411,7 +413,8 @@ public class TimeManager : MonoBehaviour
 
     public void SetTimeScale(float scale)
     {
-        Time.timeScale = scale;
+        activeTimeScale = scale;
+        Time.timeScale = activeTimeScale;
     }
 
     public void ResetTimeScale()

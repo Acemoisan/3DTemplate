@@ -98,6 +98,7 @@ public class DebugController : MonoBehaviour
     }
 
 
+
     //DEBUG COMMANDS
     ////////////////
     [Command("debug_draw_aim_rays", "Draws Aim Rays")]
@@ -106,6 +107,8 @@ public class DebugController : MonoBehaviour
         if(DebugManager.Instance == null) return;
         DebugManager.Instance.SetDebugDrawAimRays(drawAimRays);
     }
+
+
 
     //TIME COMMANDS
     ///////////////
@@ -133,12 +136,18 @@ public class DebugController : MonoBehaviour
         currentTime.ManuallySetTime(hour, minute);
     }
 
-
     [Command("time_set_seconds_per_10_min", "Sets Time Increment - (Seconds per in game 10 min) Default - 8")]
     public void SetTimeIncrement(int increment)
     {
         currentTime.SetTimeIncrement(increment);
     }
+
+    [Command("time_set_scale", "Sets Time Scale")]
+    public void SetTimeScale(float timeScale = 1)
+    {
+        currentTime.SetTimeScale(timeScale);
+    }
+
 
 
 
@@ -184,7 +193,6 @@ public class DebugController : MonoBehaviour
 
 
     //STAT COMMANDS
-
     [Command("player_set_effect", "Sets Player Effect")]
     public void SetPlayerEffect(EffectType effectType, float duration = 5)
     {
