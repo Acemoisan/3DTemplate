@@ -24,6 +24,7 @@ public class TimeUI : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            if(TimeManager.Instance == null) continue;
             hourText.text = ConvertTo12HourFormat(TimeManager.Instance.hour).ToString("00");
             minuteText.text = ":" + TimeManager.Instance.minute.ToString("00");
             dayOfTheWeekStringText.text = TimeManager.Instance.dayOfTheWeekString;

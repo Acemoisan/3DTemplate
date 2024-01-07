@@ -20,12 +20,14 @@ public class ConsoleStats : MonoBehaviour
     [SerializeField] TextMeshProUGUI interacteeRef;
     [SerializeField] TextMeshProUGUI activeItem;
     [SerializeField] TextMeshProUGUI gravityValueRef;
+    [SerializeField] TextMeshProUGUI cameraModetextRef;
 
 
 
 
     [Space(20)]
     [Title("World Stats")]
+    [SerializeField] TextMeshProUGUI gameModeTextRef;
     [SerializeField] TextMeshProUGUI inGameDayValueRef;
     [SerializeField] TextMeshProUGUI inGameTimeValueRef;
     [SerializeField] TextMeshProUGUI inGameSecondsPerMinuteValueRef;
@@ -61,20 +63,27 @@ public class ConsoleStats : MonoBehaviour
         playerWorldPosition.text = $"<color=#{goldHex}>World Pos: </color>{player.position.x}, {player.position.y}, {player.position.z}";
         healthValueRef.text = $"<color=#{goldHex}>Health: </color><color=#{valueHexCode}>{playerAttributes.GetPlayerHealth()}</color> / {playerAttributes.GetPlayerMaxHealth()}(Max), (OG){playerAttributes.GetPlayerOriginalHealth()}";
         energyValueRef.text = $"<color=#{goldHex}>Energy:</color> (<color=#{parameterHex}>AutoRegen:</color> {playerAttributes.AutoRegenEnergy()}) <color=#{valueHexCode}>{playerAttributes.GetPlayerEnergy()}</color> / {playerAttributes.GetPlayerMaxEnergy()}(Max), (OG){playerAttributes.GetPlayerOriginalEnergy()}";
-        speedValueRef.text = $"<color=#{goldHex}>Speed: </color><color=#{valueHexCode}>{playerController.WalkSpeed}</color>, (OG){playerController.OriginalWalkSpeed}";
-        jumpHeightValueRef.text = $"<color=#{goldHex}>Jump Height: </color><color=#{valueHexCode}>{playerController.JumpHeight}</color>, (OG){playerController.OriginalJumpHeight}";
+        speedValueRef.text = $"<color=#{goldHex}>Speed: </color><color=#{valueHexCode}>{playerController.WalkSpeed}</color>, (OG){playerController.PlayerControllerSO.OriginalMoveSpeed}";
+        jumpHeightValueRef.text = $"<color=#{goldHex}>Jump Height: </color><color=#{valueHexCode}>{playerController.JumpHeight}</color>, (OG){playerController.PlayerControllerSO.OriginalJumpHeight}";
         if(playerInventory.GetActiveItem() != null) activeItem.text = $"<color=#{goldHex}>Active Item: </color>{playerInventory.GetActiveItem().name} (<color=#{parameterHex}>Damage:</color> {playerInventory.GetActiveItem().GetToolDamage()})";
         else activeItem.text = $"<color=#{goldHex}>Active Item: </color>None";
         gravityValueRef.text = $"<color=#{goldHex}>Gravity: </color>{playerController.Gravity}";
+        cameraModetextRef.text = $"<color=#{goldHex}>Camera Mode: </color><color=#{parameterHex}>{cameraModeController.GetCameraMode()}</color>";
     }
 
 
     public void UpdateWorldStats(TimeManagerSO time)
     {
-        inGameDayValueRef.text = $"<color=#{goldHex}>Day: </color>{time.dayOfTheMonthIndex}";
-        inGameTimeValueRef.text = $"<color=#{goldHex}>Time: </color>{time.hour}:{time.minute}:{time.second}";
-        inGameSecondsPerMinuteValueRef.text = $"<color=#{goldHex}>Seconds Per 10 Min: </color>{time.secondsPerInGameTenMinutes}";
-        dayLightRef.text = $"<color=#{goldHex}>Daylight: </color>{time.GetDaylightPercentage()}% <color=#{goldHex}>TotalSeconds:</color> {time.GetDaylightSeconds()} / {time.GetTotalSeconds()}";
+        if(GameManager.Instance!= null) { gameModeTextRef.text = $"<color=#{goldHex}>Game Mode: </color><color=#{parameterHex}>{GameManager.Instance.CurrentGameMode}</color>"; }
+        else { gameModeTextRef.text = $"<color=#{goldHex}>Game Mode: </color>None"; }
+
+        if(TimeManager.Instance != null)
+        {
+            inGameDayValueRef.text = $"<color=#{goldHex}>Day: </color>{time.dayOfTheMonthIndex}";
+            inGameTimeValueRef.text = $"<color=#{goldHex}>Time: </color>{time.hour}:{time.minute}:{time.second}";
+            inGameSecondsPerMinuteValueRef.text = $"<color=#{goldHex}>Seconds Per 10 Min: </color>{time.secondsPerInGameTenMinutes}";
+            dayLightRef.text = $"<color=#{goldHex}>Daylight: </color>{time.GetDaylightPercentage()}% <color=#{goldHex}>TotalSeconds:</color> {time.GetDaylightSeconds()} / {time.GetTotalSeconds()}";
+        }
     }
 
     void PerformanceStats()

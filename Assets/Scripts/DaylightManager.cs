@@ -42,7 +42,8 @@ public class DaylightManager : MonoBehaviour
         //     seasonalCurve = spring_SummerCurve;
         // }
 
-
+        if(TimeManager.Instance == null) return;
+        
         float percentageTime = TimeManager.Instance.GetDaylightPercentage();
         float v = dayLightCurve.Evaluate(percentageTime);
         Color c = Color.Lerp(dayTimeColor, nightTimeColor, v);

@@ -13,6 +13,7 @@ public abstract class PlayerController : MonoBehaviour
 {
     [Title("Dependencies")]
     [SerializeField] protected PlayerControllerSO _playerControllerSO;
+    public PlayerControllerSO PlayerControllerSO { get { if(_playerControllerSO == null){ Debug.Log($"No ControllerSO found on {this}"); } return _playerControllerSO; } }
     [SerializeField] protected PlayerInput _playerInput;
     [SerializeField] protected CharacterController _controller;
     [SerializeField] protected StarterAssetsInputs _input;
@@ -37,6 +38,14 @@ public abstract class PlayerController : MonoBehaviour
 
 
     [Space(20)]
+    [Title("Player Fly")]
+    [SerializeField] protected bool _flying = false;
+    [SerializeField] protected float _flySpeed = 10f;
+    public float FlySpeed { get { return _flySpeed; } }
+
+
+
+    [Space(20)]
     [Title("Player Audio")]
     public AudioClip LandingAudioClip;
     public AudioClip[] FootstepAudioClips;
@@ -57,11 +66,9 @@ public abstract class PlayerController : MonoBehaviour
     protected float _speed;
     protected float jumpHeight;
     public float JumpHeight { get { return jumpHeight; } }
-    protected float originalJumpHeight;
-    public float OriginalJumpHeight { get { return originalJumpHeight; } }
     protected float gravity;
     public float Gravity { get { return gravity; } }
-    protected float originalGravity;
+    protected bool wasFlyingLastFrame = false;
     protected float _verticalVelocity;
     protected float _terminalVelocity = 53.0f;
     protected float _jumpTimeoutDelta;
@@ -72,9 +79,6 @@ public abstract class PlayerController : MonoBehaviour
     protected float walkSpeed;
     public float WalkSpeed { get { return walkSpeed; } }
     protected float sprintSpeed;
-    protected float originalWalkSpeed;
-    public float OriginalWalkSpeed { get { return originalWalkSpeed; } }
-    protected float originalSprintSpeed;
     protected bool IsCurrentDeviceMouse
     {
         get
@@ -90,6 +94,7 @@ public abstract class PlayerController : MonoBehaviour
     protected int _animIDSpeed;
     protected int _animIDGrounded;
     protected int _animIDJump;
+    protected int _animIDFly;
     protected int _animIDFreeFall;
     protected int _animIDMotionSpeed;
     protected float _animationBlend;
@@ -100,16 +105,7 @@ public abstract class PlayerController : MonoBehaviour
     #region Methods
     public virtual void Start()
     {
-        _jumpTimeoutDelta = _playerControllerSO.JumpTimeout;
-        _fallTimeoutDelta = _playerControllerSO.FallTimeout;
-        walkSpeed = _playerControllerSO.MoveSpeed;
-        sprintSpeed = _playerControllerSO.SprintSpeedMultiplier * walkSpeed;
-        originalWalkSpeed = walkSpeed;
-        originalSprintSpeed = sprintSpeed;
-        jumpHeight = _playerControllerSO.JumpHeight;
-        originalJumpHeight = jumpHeight;
-        gravity = _playerControllerSO.Gravity;
-        originalGravity = gravity;
+        RevertStats();
         AssignAnimationIDs();
     }
 
@@ -121,12 +117,23 @@ public abstract class PlayerController : MonoBehaviour
         Move();
     }
         
+    public void RevertStats()
+    {
+        _jumpTimeoutDelta = _playerControllerSO.JumpTimeout;
+        _fallTimeoutDelta = _playerControllerSO.FallTimeout;
+        walkSpeed = _playerControllerSO.OriginalMoveSpeed;
+        sprintSpeed = walkSpeed * _playerControllerSO.SprintSpeedMultiplier;
+        jumpHeight = _playerControllerSO.OriginalJumpHeight;
+        gravity = _playerControllerSO.OriginalGravity;
+        _flySpeed = _playerControllerSO.OriginalFlySpeed;
+    }    
 
     private void AssignAnimationIDs()
     {
         _animIDSpeed = Animator.StringToHash("Speed");
         _animIDGrounded = Animator.StringToHash("Grounded");
         _animIDJump = Animator.StringToHash("Jump");
+        _animIDFly = Animator.StringToHash("Fly");
         _animIDFreeFall = Animator.StringToHash("FreeFall");
         _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
     }
@@ -236,7 +243,7 @@ public abstract class PlayerController : MonoBehaviour
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
         if (_verticalVelocity < _terminalVelocity)
         {
-            _verticalVelocity += _playerControllerSO.Gravity * Time.deltaTime;
+            _verticalVelocity += _playerControllerSO.OriginalGravity * Time.deltaTime;
         }
     }
 
@@ -263,6 +270,7 @@ public abstract class PlayerController : MonoBehaviour
     }
     protected virtual void GroundedEvent() {}
     protected virtual void JumpEvent() {}
+    protected virtual void FlyEvent() {}
     protected virtual void FreeFallEvent() {}
     protected virtual void GroundCheckEvent(){}
     #endregion
@@ -271,6 +279,11 @@ public abstract class PlayerController : MonoBehaviour
     {
         walkSpeed = speed;
         sprintSpeed = walkSpeed * _playerControllerSO.SprintSpeedMultiplier;
+    }
+
+    public void SetFlySpeed(float speed)
+    {
+        _flySpeed = speed;
     }
 
     public void SetJumpHeight(float height)
@@ -283,11 +296,19 @@ public abstract class PlayerController : MonoBehaviour
         gravity = value;
     }
 
-    public void RevertStats()
+    public void RestoreGravity()
     {
-        walkSpeed = originalWalkSpeed;
-        sprintSpeed = originalSprintSpeed;
-        jumpHeight = originalJumpHeight;
-        gravity = originalGravity;
+        gravity = _playerControllerSO.OriginalGravity;
+    }
+
+    public void SetFlying(bool flying, float flySpeed)
+    {
+        _flying = flying;
+        _flySpeed = flySpeed;
+
+        if(flying == false)
+        {
+            RestoreGravity();
+        }
     }
 }

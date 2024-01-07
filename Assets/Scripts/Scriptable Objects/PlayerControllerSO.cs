@@ -20,7 +20,7 @@ public class PlayerControllerSO : ScriptableObject
 
         [Header("Movement Speed")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 5.0f;
+		public float OriginalMoveSpeed = 5.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeedMultiplier = 1.5f;
         [Tooltip("Sprint speed of the character in m/s")]
@@ -33,10 +33,13 @@ public class PlayerControllerSO : ScriptableObject
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
-        public float JumpHeight = 1.2f;
+        public float OriginalJumpHeight = 1.2f;
 
         [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-        public float Gravity = -15.0f;
+        public float OriginalGravity = -15.0f;
+
+        [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+        public float OriginalFlySpeed = 10.0f;        
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]

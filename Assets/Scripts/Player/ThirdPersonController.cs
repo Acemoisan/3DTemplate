@@ -35,6 +35,7 @@ namespace StarterAssets
             base.Update();
         }
 
+
         protected override void HandleMovement()
         {
             if (_cameraModeController.GetCameraMode() == CameraModes.GodOfWar || 
@@ -46,8 +47,15 @@ namespace StarterAssets
                 cameraForward.y = 0; // Ignore camera's vertical angle
                 Vector3 cameraRight = _cameraModeController.GetCamera().transform.right;
 
+                HandleFlying();
+
+
                 // Calculate input direction based on camera's horizontal direction
                 inputDirection = inputDirection.x * cameraRight + inputDirection.z * cameraForward;
+                // if(flying)
+                // {
+                //     inputDirection.y = inputDirection.y * cameraForward.y;
+                // }
                 inputDirection.Normalize(); // Optional, to ensure consistent movement speed
 
                 _controller.Move(inputDirection * (_speed * Time.deltaTime) +
@@ -78,6 +86,46 @@ namespace StarterAssets
             }
         }
 
+        void HandleFlying()
+        {
+            if(GameManager.Instance == null) return;
+
+            if(GameManager.Instance.CurrentGameMode == GameMode.Creative && _flying) 
+            {
+                if(Input.GetKey(KeyCode.Space))
+                {
+                    _verticalVelocity = _flySpeed;
+
+                    if(!wasFlyingLastFrame) 
+                    {
+                        SetGravity(0); // Only called once when state changes to flying
+                        wasFlyingLastFrame = true;
+                    }
+                }
+                else if(Input.GetKey(KeyCode.LeftControl))
+                {
+                    _verticalVelocity = -_flySpeed;
+                }
+                else
+                {
+                    _verticalVelocity = 0f;
+                }
+
+                if(!Grounded)
+                {
+                  FlyEvent();
+                }
+            }
+            else 
+            {
+                if(wasFlyingLastFrame)
+                {
+                    RestoreGravity(); // Only called once when state changes to not flying
+                    wasFlyingLastFrame = false;
+                }
+            }
+        }
+
         protected override void HandleAnimator()
         {
             // update animator if using character
@@ -97,6 +145,7 @@ namespace StarterAssets
             {
                 _animator.SetBool(_animIDJump, false);
                 _animator.SetBool(_animIDFreeFall, false);
+                _animator.SetBool(_animIDFly, false);
             }
         }  
 
@@ -113,6 +162,14 @@ namespace StarterAssets
             if (_hasAnimator)
             {
                 _animator.SetBool(_animIDJump, true);
+            }        
+        }
+
+        protected override void FlyEvent()
+        {
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDFly, true);
             }        
         }
 

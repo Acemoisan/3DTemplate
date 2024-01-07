@@ -31,7 +31,6 @@ public class Damage : MonoBehaviour
         OnDamage();
 
         if(other.GetComponent<Damageable>() == null) return;
-        Debug.Log(other.name);
         target = other;
         damageableTargetRef = target.GetComponent<Damageable>();
 

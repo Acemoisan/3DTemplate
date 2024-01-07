@@ -37,6 +37,7 @@ public class TimeManagerSO : ScriptableObject
 
     public void PauseTime(bool pause)
     {
+        if(TimeManager.Instance == null) { Debug.Log($"Time Manager is null."); return;}
         TimeManager.Instance.PauseTime(pause);
     }
 

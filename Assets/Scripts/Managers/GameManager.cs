@@ -1,19 +1,31 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public enum GameState
+{
+    MainMenu,
+    Playing,
+    Paused,
+    GameOver
+}
+
+
+[System.Serializable]
+public enum GameMode{
+    Survival,
+    Creative
+}
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public enum GameState
-    {
-        MainMenu,
-        Playing,
-        Paused,
-        GameOver
-    }
-
-    public GameState CurrentGameState { get; private set; } = GameState.MainMenu;
+    [SerializeField] private GameState _currentGameState = GameState.MainMenu;
+    public GameState CurrentGameState { get { return _currentGameState; } }
+    [SerializeField] private GameMode _currentGameMode = GameMode.Survival;
+    public GameMode CurrentGameMode {get { return _currentGameMode; } }
 
     private void Awake()
     {
@@ -40,7 +52,13 @@ public class GameManager : MonoBehaviour
 
     private void ChangeGameState(GameState newState)
     {
-        CurrentGameState = newState;
+        _currentGameState = newState;
         // Handle any general game state changes, e.g., updating UI
+    }
+
+    public void ChangeGameMode(GameMode newGameMode)
+    {
+        _currentGameMode = newGameMode;
+        // Handle any general game mode changes, e.g., updating UI
     }
 }

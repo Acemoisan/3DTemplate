@@ -53,11 +53,20 @@ public class DebugController : MonoBehaviour
 
 
     #region QUICK COMMANDS
+    [Command("gamemode", "Set Game Mode")]
+    public void SetGameMode(GameMode gameMode = GameMode.Survival)
+    {
+        if(GameManager.Instance == null) return;
+        GameManager.Instance.ChangeGameMode(gameMode);
+    }
+
+
     //DEBUG COMMANDS
     ////////////////
     [Command("debug_draw_aim_rays", "Draws Aim Rays")]
     public void DrawAimRays(bool drawAimRays)
     {
+        if(DebugManager.Instance == null) return;
         DebugManager.Instance.SetDebugDrawAimRays(drawAimRays);
     }
 
@@ -187,6 +196,18 @@ public class DebugController : MonoBehaviour
     {
         playerController.SetJumpHeight(value);
     }
+
+    [Command("player_set_flying", "Sets Player Flight Bool")]
+    public void SetPlayerFlying(bool flying, float flyingSpeed = 10)
+    {
+        playerController.SetFlying(flying, flyingSpeed);
+    }   
+
+    [Command("player_set_flying_speed", "Sets Player Flight Speed")]
+    public void SetPlayerFlyingSpeed(float flyingSpeed = 10)
+    {
+        playerController.SetFlySpeed(flyingSpeed);
+    }     
 
     [Command("player_set_gravity", "Sets Player Gravity")]
     public void SetPlayerGravity(float value)
