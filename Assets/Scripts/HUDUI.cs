@@ -20,7 +20,8 @@ public class HUDUI : MonoBehaviour
     [SerializeField] PlayerInventory _playersInventory;        
     [SerializeField] List<Button> hotbarInventoryButtons;
     [SerializeField] List<Image> hotbarInventoryButtonImages;
-    [SerializeField] UnityEngine.GameObject _activeItemTextObject;
+    [SerializeField] GameObject _activeItemTextObject;
+    [SerializeField] CanvasGroup _hudCanvasGroup;
     //[SerializeField] InventoryUI1 _inventoryReference;
 
 
@@ -306,5 +307,10 @@ public class HUDUI : MonoBehaviour
     {
         int gold = _playersInventory.GetPlayerCurrencyValue();
         _playersGoldText.text = gold.ToString();
+    }
+
+    public void SetHUDVisibility(float alpha)
+    {
+        _hudCanvasGroup.alpha = alpha;
     }
 }

@@ -8,10 +8,20 @@ using QFSW.QC;
 using QFSW.QC.Suggestors.Tags;
 using System.Linq;
 
+
+[System.Serializable]
+public enum CanvasSize
+{
+    Small,
+    Medium,
+    Large
+}
+
 public class DebugController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] Transform playerEntity;
+    [SerializeField] GameObject playerArmature;
     [SerializeField] ConsoleStats consoleStats;
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] PlayerAnimation playerAnimation;
@@ -20,6 +30,8 @@ public class DebugController : MonoBehaviour
     [SerializeField] PlayerInteraction playerInteraction;
     [SerializeField] PlayerEffectsHandler playerEffectsHandler;
     [SerializeField] CameraModeController cameraModeController;
+    [SerializeField] SetHudSize setHudSize;
+    [SerializeField] HUDUI hudUI;
     //[SerializeField] SceneLoader sceneLoader;
     [SerializeField] TimeManagerSO currentTime;
     [SerializeField] ItemDatabase itemDatabase;
@@ -60,6 +72,29 @@ public class DebugController : MonoBehaviour
     {
         if(GameManager.Instance == null) return;
         GameManager.Instance.ChangeGameMode(gameMode);
+    }
+
+    [Command("hud_size", "Set HUD size")]
+    public void SetHudSize(CanvasSize canvasSize = CanvasSize.Medium)
+    {
+        if(setHudSize == null) return;
+        setHudSize.SetSize(canvasSize);
+    }
+
+    [Command("hud_toggle", "Toggle HUD")]
+    public void ToggleHud(bool toggle)
+    {
+        if(hudUI == null) return;
+        if(toggle)
+        {
+            hudUI.SetHUDVisibility(1);
+            return;
+        }
+        else
+        {
+            hudUI.SetHUDVisibility(0);
+            return;
+        }
     }
 
 
@@ -215,6 +250,12 @@ public class DebugController : MonoBehaviour
     public void SetPlayerGravity(float value)
     {
         playerController.SetGravity(value);
+    }
+
+    [Command("player_mesh_toggle", "Toggles Player Mesh")]
+    public void PlayerToggleMesh(bool toggle)
+    {
+        playerArmature.SetActive(toggle);
     }
 
 
