@@ -19,7 +19,7 @@ public class PlayerEffectsHandler : MonoBehaviour
     [SerializeField] VFXController vfxController;
     public EffectType currentEffect = EffectType.None;
     public float remainingDuration;
-    [SerializeField] List<GameObject> effects;
+    [SerializeField] List<UnityEngine.GameObject> effects;
 
 
 
@@ -87,7 +87,7 @@ public class PlayerEffectsHandler : MonoBehaviour
         currentEffect = EffectType.None;
     }
 
-    void SpawnParticleEffect(GameObject vfx)
+    void SpawnParticleEffect(UnityEngine.GameObject vfx)
     {
         if(vfx == null) { Debug.Log("VFX is null"); return;}
         vfxController.InstantiateVFXAboveHead(vfx);

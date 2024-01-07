@@ -9,7 +9,7 @@ public class NPCAnimationEvents : MonoBehaviour
     public UnityEvent MovementOn;
     public UnityEvent MovementOff;
 
-    public void AttackHitEvent(GameObject obj)
+    public void AttackHitEvent(UnityEngine.GameObject obj)
     {
         nPCCombat.InstantiateAttackEffect(obj);
     }

@@ -13,7 +13,7 @@ public class SpellProjectile : Damage
 {
     [SerializeField] ProjectileType projectileType;
     [SerializeField] protected float speed = 10f;
-    [SerializeField] GameObject attackVFX;
+    [SerializeField] UnityEngine.GameObject attackVFX;
     Vector3 shootingDirection;
     [SerializeField] float destroyTimer = 5;
 
@@ -60,7 +60,7 @@ public class SpellProjectile : Damage
     {
         if(attackVFX == null) return;
 
-        GameObject vfx = Instantiate(attackVFX, transform.position, Quaternion.identity) as GameObject;
+        UnityEngine.GameObject vfx = Instantiate(attackVFX, transform.position, Quaternion.identity) as UnityEngine.GameObject;
         Destroy(vfx, 1f);
     }
 }

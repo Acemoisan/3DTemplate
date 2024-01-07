@@ -7,7 +7,7 @@ public class NPCMovementScript : MonoBehaviour
     [SerializeField] NavMeshAgent navMeshAgent;
     [SerializeField] Animator _animator;
     [SerializeField] TriggerChecker triggerChecker;
-    [SerializeField] GameObject entity;
+    [SerializeField] UnityEngine.GameObject entity;
     
     // Define a variable for animation blend
     private float _animationBlend;
@@ -90,13 +90,13 @@ public class NPCMovementScript : MonoBehaviour
         //navMeshAgent.Move(navMeshAgent.desiredVelocity);
     }
 
-    public GameObject GetPlayer()
+    public UnityEngine.GameObject GetPlayer()
     {
         if(triggerChecker.GetPlayer() == null) { return null; }
         return triggerChecker.GetPlayer();
     }
 
-    public GameObject GetEntity()
+    public UnityEngine.GameObject GetEntity()
     {
         if(entity == null) { Debug.Log("Entity is null"); return null; }
         return entity;

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SceneLoaderManager : MonoBehaviour
 {
     public static SceneLoaderManager Instance;
-    public GameObject loadingScreenGO; // Assign in Inspector
+    public UnityEngine.GameObject loadingScreenGO; // Assign in Inspector
     public Slider loadingBar; // Assign in Inspector if you have a loading bar
 
     void Awake()

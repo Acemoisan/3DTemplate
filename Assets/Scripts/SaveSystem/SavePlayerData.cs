@@ -26,7 +26,7 @@ public class SavePlayerData : MonoBehaviour
     List<IPersistant> FindAllPersistantObjects()
     {
         List<IPersistant> persistantObjects = new List<IPersistant>();
-        foreach (var go in FindObjectsOfType<GameObject>())
+        foreach (var go in FindObjectsOfType<UnityEngine.GameObject>())
         {
             var persistant = go.GetComponent<IPersistant>();
             if (persistant != null)

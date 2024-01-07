@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] string interactableTag;
-    [SerializeField] GameObject playerEntity;
-    [SerializeField] GameObject interactionHUD;
+    [SerializeField] UnityEngine.GameObject playerEntity;
+    [SerializeField] UnityEngine.GameObject interactionHUD;
     [SerializeField] HUDMessage HUDMessage;
     Interactable interactee;
 

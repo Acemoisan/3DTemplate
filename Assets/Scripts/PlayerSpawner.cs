@@ -13,29 +13,29 @@ public class PlayerSpawner : MonoBehaviour
 {
     [Header("Dependencies")]
     public PlayerEntranceSO playerPath;
-    public GameObject playerPrefab;
+    public UnityEngine.GameObject playerPrefab;
     public LevelEntrance defaultEntrance;
 
     public void InstantiatePlayerOnLevel()
     {
-        GameObject player = GetPlayer();
+        UnityEngine.GameObject player = GetPlayer();
 
         Transform entrance = GetLevelEntrance(playerPath.levelEntrance);
 
         player.transform.position = entrance.position;
     }
 
-    public GameObject GetPlayer()
+    public UnityEngine.GameObject GetPlayer()
     {
-        GameObject playerObject;
+        UnityEngine.GameObject playerObject;
 
-        if(GameObject.FindGameObjectWithTag("Player") == null)
+        if(UnityEngine.GameObject.FindGameObjectWithTag("Player") == null)
         {
             playerObject = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);//, playerParent.transform);
         }
         else 
         {
-            playerObject = GameObject.FindGameObjectWithTag("Player");
+            playerObject = UnityEngine.GameObject.FindGameObjectWithTag("Player");
         }
 
            return playerObject;
@@ -44,7 +44,7 @@ public class PlayerSpawner : MonoBehaviour
     private Transform GetLevelEntrance(LevelEntranceSO playerEntrance)
     {
 
-        var levelEntrances = GameObject.FindObjectsOfType<LevelEntrance>();
+        var levelEntrances = UnityEngine.GameObject.FindObjectsOfType<LevelEntrance>();
 
         foreach (LevelEntrance levelEntrance in levelEntrances)
         {

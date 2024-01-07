@@ -19844,6 +19844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfxHitPosition: {fileID: 1671564879054805361}
+  aboveHeadVFXPosition: {fileID: 0}
 --- !u!1 &7143068094159152092
 GameObject:
   m_ObjectHideFlags: 0

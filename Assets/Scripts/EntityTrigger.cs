@@ -5,13 +5,13 @@ using UnityEngine;
 public class EntityTrigger : Interactable
 {
     //[HideInInspector]
-    [SerializeField] GameObject entity;
+    [SerializeField] UnityEngine.GameObject entity;
     [SerializeField] ItemSO itemToGive;
     [SerializeField] int amountToGive = 0;
 
     //[HideInInspector]
     public SpriteRenderer itemIcon;
-    public GameObject spawnedEntityObject;
+    public UnityEngine.GameObject spawnedEntityObject;
     bool allowedToGive = false;
     //[SerializeField] ItemEggSO egg;
     

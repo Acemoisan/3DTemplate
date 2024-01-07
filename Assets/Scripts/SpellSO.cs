@@ -9,7 +9,7 @@ using UnityEngine;
 public class SpellSO : ItemSO
 {
     public SpellType spellType;
-    public GameObject spellPrefab;
+    public UnityEngine.GameObject spellPrefab;
 }
 
 

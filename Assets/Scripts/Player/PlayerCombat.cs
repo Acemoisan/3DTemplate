@@ -40,7 +40,7 @@ public class PlayerCombat : MonoBehaviour
         StopAimEvent?.Invoke();
     }
 
-    public void InstantiateBullet(GameObject go)
+    public void InstantiateBullet(UnityEngine.GameObject go)
     {
         Vector3 aimDir; 
         Vector3 attackPoint = _cameraModeController.AttackPoint.position;

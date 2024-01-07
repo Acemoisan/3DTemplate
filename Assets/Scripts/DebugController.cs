@@ -23,7 +23,9 @@ public class DebugController : MonoBehaviour
     //[SerializeField] SceneLoader sceneLoader;
     [SerializeField] TimeManagerSO currentTime;
     [SerializeField] ItemDatabase itemDatabase;
+    [SerializeField] EntityDatabase entityDatabase;
     [SerializeField] ItemSpawnerSO itemSpawner;
+    [SerializeField] EntitySpawnerSO entitySpawner;
 
 
 
@@ -220,10 +222,25 @@ public class DebugController : MonoBehaviour
 
     //MIC COMMANDS
     //////////////
-    public void SpawnItemAtPosition(string itemName, int count, Vector3 position)
+    [Command("spawn_entity", "Spanws an Itemn Entity at a Position")]
+    public void SpawnItemAtPosition([ItemName]string itemName, Vector3 position, int count = 1)
     {
         ItemSO itemToSpawn = itemDatabase.GetMatchingItem(itemName);
         itemSpawner.SpawnItem(itemToSpawn, position, count);
+    }
+
+    [Command("summon", "Summons An Entity")]    
+    public void SpawnEntityAtPosition([EntityName]string entityName, Vector3 position)
+    {
+        GameObject entityToSpawn = entityDatabase.GetMatchingEntity(entityName);
+        entitySpawner.SpawnEntity(entityToSpawn, position);
+    }
+
+    [Command("spawn_prefab", "Spanws a Prefab at a Position")]
+    public void SpawnPrefabAtPosition([PrefabName]string prefabName, Vector3 position, int count = 1)
+    {
+        GameObject objectToSpawn = entityDatabase.GetMatchingPrefab(prefabName);
+        entitySpawner.SpawnEntity(objectToSpawn, position, count);
     }
 
     public void COM_PrintAllItemNamesToTextFile()

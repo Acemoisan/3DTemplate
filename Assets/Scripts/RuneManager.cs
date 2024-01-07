@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RuneManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> runeObjects;
+    [SerializeField] List<UnityEngine.GameObject> runeObjects;
     [SerializeField] TimeManagerSO timeManager;
     [SerializeField] int numbersOfRunesNeededToDestroy;
     [SerializeField] int runesDestroyed;

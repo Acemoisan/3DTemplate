@@ -7,8 +7,8 @@ public class Spawner : MonoBehaviour
     [Header("<color=#19bfbf>XXXXXXXXXXXXXXXXX</color>")]
     [Header("<color=#ffffff>XXXX SPAWNER XXXX</color>")]
     [SerializeField] TimeManagerSO TimeManagerSO;
-    [SerializeField] protected List<GameObject> prefabsToSpawn;
-    [SerializeField] protected GameObject itemParent;
+    [SerializeField] protected List<UnityEngine.GameObject> prefabsToSpawn;
+    [SerializeField] protected UnityEngine.GameObject itemParent;
     [SerializeField] protected int minimumEntitiesToSpawn;
     [SerializeField] protected int maximumEntitiesToSpawn;
     //[SerializeField] protected List<Collider2D> spawnAreas;
@@ -24,10 +24,10 @@ public class Spawner : MonoBehaviour
 
 
 
-    protected List<GameObject> entitiesSpawned = new List<GameObject>();
+    protected List<UnityEngine.GameObject> entitiesSpawned = new List<UnityEngine.GameObject>();
     Collider2D selectedSpawnArea;
 
-    [SerializeField] GameObject player;
+    [SerializeField] UnityEngine.GameObject player;
 
 
 
@@ -94,10 +94,10 @@ public class Spawner : MonoBehaviour
         return selectedSpawnArea;
     }
 
-    protected void Spawn(out GameObject spawnedEntity)
+    protected void Spawn(out UnityEngine.GameObject spawnedEntity)
     {
-        GameObject randomEntity = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Count)];
-        GameObject entity = Instantiate(randomEntity);
+        UnityEngine.GameObject randomEntity = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Count)];
+        UnityEngine.GameObject entity = Instantiate(randomEntity);
         entity.name = randomEntity.name;
         entity.transform.position = GetRandomPosition().position;
         entity.transform.parent = itemParent.transform;
@@ -105,10 +105,10 @@ public class Spawner : MonoBehaviour
         spawnedEntity = entity;
     }
 
-    protected void SpawnBasedOnTime(out GameObject spawnedEntity)
+    protected void SpawnBasedOnTime(out UnityEngine.GameObject spawnedEntity)
     {
-        GameObject randomEntity = GetRandomEntityBasedOnTime();
-        GameObject entity = Instantiate(randomEntity);
+        UnityEngine.GameObject randomEntity = GetRandomEntityBasedOnTime();
+        UnityEngine.GameObject entity = Instantiate(randomEntity);
         entity.name = randomEntity.name;
         entity.transform.position = GetRandomPosition().position;
         entity.transform.parent = itemParent.transform;
@@ -116,7 +116,7 @@ public class Spawner : MonoBehaviour
         spawnedEntity = entity;
     }
 
-    GameObject GetRandomEntityBasedOnTime()
+    UnityEngine.GameObject GetRandomEntityBasedOnTime()
     {
         switch(TimeManagerSO.hour)
         {

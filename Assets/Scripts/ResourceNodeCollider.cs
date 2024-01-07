@@ -7,7 +7,7 @@ using UnityEngine.TerrainUtils;
 [RequireComponent(typeof(Collider))]
 public class ResourceNodeCollider : MonoBehaviour, Damageable
 {
-    [SerializeField] GameObject node;
+    [SerializeField] UnityEngine.GameObject node;
     [SerializeField] float maxhealth;
     public DamageClasses bestHarvestedWith;
     [SerializeField] SpawnItem spawnItem;

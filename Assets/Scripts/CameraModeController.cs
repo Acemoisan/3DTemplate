@@ -40,25 +40,25 @@ public class CameraModeController : MonoBehaviour
     [Space(20)]
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     [GUIColor(0.8f, 0.3f, 0.8f, 1f)]
-    public GameObject CinemachineCameraTarget;   
+    public UnityEngine.GameObject CinemachineCameraTarget;   
 
 
 
     [Space(20)]
     [Header("TopDown")]     
-    [ShowIf("@this.cameraMode == CameraModes.AnimalCrossing")] public GameObject topDownCamera;
+    [ShowIf("@this.cameraMode == CameraModes.AnimalCrossing")] public UnityEngine.GameObject topDownCamera;
 
 
     [Space(20)]
     [Header("Third Person / Ark")]     
-    [ShowIf("@this.cameraMode == CameraModes.Ark")] public GameObject rpgCamera;
-    [ShowIf("@this.cameraMode == CameraModes.Ark")] public GameObject rpgAimCamera;
+    [ShowIf("@this.cameraMode == CameraModes.Ark")] public UnityEngine.GameObject rpgCamera;
+    [ShowIf("@this.cameraMode == CameraModes.Ark")] public UnityEngine.GameObject rpgAimCamera;
 
 
     [Space(20)]
     [Header("OTS")]     
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject overTheShoulderCamera;
-    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public GameObject overTheShoulderAimCamera;  
+    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public UnityEngine.GameObject overTheShoulderCamera;
+    [ShowIf("@this.cameraMode == CameraModes.GodOfWar || this.cameraMode == CameraModes.LastOfUs")] public UnityEngine.GameObject overTheShoulderAimCamera;  
 
 
     [Header("Misc")]  
@@ -70,7 +70,7 @@ public class CameraModeController : MonoBehaviour
 
     [Space(20)]
     [Header("General Mode Settings")]
-    [ShowIf("@this.cameraMode != CameraModes.AnimalCrossing")] public GameObject aimCursor;
+    [ShowIf("@this.cameraMode != CameraModes.AnimalCrossing")] public UnityEngine.GameObject aimCursor;
     [SerializeField] Transform attackPointTransform;
     [SerializeField] LayerMask aimCollider;
 
@@ -81,7 +81,7 @@ public class CameraModeController : MonoBehaviour
     //[SerializeField] float debugRayRange;
     [SerializeField] LineRenderer baseLineRenderer;
     [SerializeField] LineRenderer aimLineRenderer;
-    [SerializeField] GameObject debugTransform;
+    [SerializeField] UnityEngine.GameObject debugTransform;
 
 
 

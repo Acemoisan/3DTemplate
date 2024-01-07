@@ -10,8 +10,8 @@ public class DialogueUI : MonoBehaviour
     public float textSpeed;
 
     [Header("Dependencies")]
-    public GameObject leftCharacter;
-    public GameObject rightCharacter;
+    public UnityEngine.GameObject leftCharacter;
+    public UnityEngine.GameObject rightCharacter;
 
     public TextMeshProUGUI leftCharacterName;
     public Image leftCharacterPortrait;

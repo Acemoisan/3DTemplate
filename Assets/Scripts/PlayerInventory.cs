@@ -101,7 +101,7 @@ public class PlayerInventory : MonoBehaviour
                     }
                 }
 
-                GameObject handItem = Instantiate(item.GetHandPrefab(), primaryHandPosition);
+                UnityEngine.GameObject handItem = Instantiate(item.GetHandPrefab(), primaryHandPosition);
                 handItem.name = item.GetHandPrefab().name;
                 handItem.SetActive(true);
             }

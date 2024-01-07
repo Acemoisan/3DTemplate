@@ -40,11 +40,11 @@ public class EnemySpawner : Spawner
 
     IEnumerator SpawnOverTime()
     {
-        List<GameObject> enemiesToRemove = new List<GameObject>();
+        List<UnityEngine.GameObject> enemiesToRemove = new List<UnityEngine.GameObject>();
 
         while (true)
         {
-            foreach(GameObject enemy in entitiesSpawned)
+            foreach(UnityEngine.GameObject enemy in entitiesSpawned)
             {
                 if(enemy == null)
                 {
@@ -52,7 +52,7 @@ public class EnemySpawner : Spawner
                 }
             }
 
-            foreach(GameObject enemy in enemiesToRemove)
+            foreach(UnityEngine.GameObject enemy in enemiesToRemove)
             {
                 entitiesSpawned.Remove(enemy);
             }
@@ -68,7 +68,7 @@ public class EnemySpawner : Spawner
 
     void SpawnEnemy()
     {
-        GameObject spawnedEntity = null;
+        UnityEngine.GameObject spawnedEntity = null;
         //base.Spawn(out spawnedEntity);
         base.SpawnBasedOnTime(out spawnedEntity);
 

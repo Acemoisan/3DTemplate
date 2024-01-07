@@ -9,7 +9,7 @@ public class NPCCombat : MonoBehaviour
     [SerializeField] NPCTrigger alertTriggerChecker;
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> attackSFX;
-    [SerializeField] List<GameObject> playerTargetList;
+    [SerializeField] List<UnityEngine.GameObject> playerTargetList;
     //[SerializeField] LayerMask playerLayerMask;
     [SerializeField] string attackOneAnimationString;
     [SerializeField] string attackTwoAnimationString;
@@ -126,7 +126,7 @@ public class NPCCombat : MonoBehaviour
         npcAnim.TriggerAnimation(attackTwoAnimationString);
     }
 
-    public void InstantiateAttackEffect(GameObject vfx)
+    public void InstantiateAttackEffect(UnityEngine.GameObject vfx)
     {
         Instantiate(vfx, attackPoint.position, attackPoint.rotation);
     }
@@ -143,7 +143,7 @@ public class NPCCombat : MonoBehaviour
 
     public void RemovePlayerFromTargetList()
     {
-        foreach (GameObject player in playerTargetList)
+        foreach (UnityEngine.GameObject player in playerTargetList)
         {
             if (player == alertTriggerChecker.GetPlayer())
             {
@@ -152,7 +152,7 @@ public class NPCCombat : MonoBehaviour
         }
     }
 
-    GameObject FindRandomTarget()
+    UnityEngine.GameObject FindRandomTarget()
     {
         return playerTargetList[Random.Range(0, playerTargetList.Count)];
     }

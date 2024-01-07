@@ -15099,7 +15099,9 @@ MonoBehaviour:
   cameraModeController: {fileID: 5176140242270527011}
   currentTime: {fileID: 11400000, guid: d24bfc005ef1fdf44b614d8e1a726e06, type: 2}
   itemDatabase: {fileID: 11400000, guid: bf60c240a8b534348b3757a3edc321c7, type: 2}
+  entityDatabase: {fileID: 0}
   itemSpawner: {fileID: 11400000, guid: cc4c1067b15a88d42ac1ba1cbef56322, type: 2}
+  entitySpawner: {fileID: 0}
   inventoryKit: []
 --- !u!114 &6476441008551379854
 MonoBehaviour:
@@ -17592,6 +17594,8 @@ MonoBehaviour:
   interacteeRef: {fileID: 3993769851505845398}
   activeItem: {fileID: 1336538706739985572}
   gravityValueRef: {fileID: 4544292543601990449}
+  cameraModetextRef: {fileID: 0}
+  gameModeTextRef: {fileID: 0}
   inGameDayValueRef: {fileID: 5289578719004305355}
   inGameTimeValueRef: {fileID: 4570903005005313773}
   inGameSecondsPerMinuteValueRef: {fileID: 528086157606979900}
@@ -22705,6 +22709,8 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 256
+  _flying: 0
+  _flySpeed: 10
   LandingAudioClip: {fileID: 0}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5

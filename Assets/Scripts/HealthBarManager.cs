@@ -10,10 +10,10 @@ public class HealthBarManager : MonoBehaviour
     [SerializeField] bool heartsToggle;
 
     [Header("Dependencies")]
-    [SerializeField] GameObject _healthBarSliderObject;
-    [SerializeField] GameObject _healthBarHeartHolder;
+    [SerializeField] UnityEngine.GameObject _healthBarSliderObject;
+    [SerializeField] UnityEngine.GameObject _healthBarHeartHolder;
     [SerializeField] StatBar _healthBarSlider;
-    [SerializeField] List<GameObject> hearts;
+    [SerializeField] List<UnityEngine.GameObject> hearts;
 
 
     void Start()

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class RuneStoneCollider : MonoBehaviour, Damageable
 {
     [Header("Runestone Attributes")]
-    [SerializeField] GameObject runeStoneObject;
+    [SerializeField] UnityEngine.GameObject runeStoneObject;
     public ProjectileType runeType;
     [SerializeField] float runeHealth;
     public UnityEvent OnHit;

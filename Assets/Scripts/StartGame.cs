@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class StartGame : MonoBehaviour
 {
-    [SerializeField] ItemDatabase itemDatabase;
     public UnityEvent OnStartGame;
 
     public void StartGameEvent()
@@ -14,7 +13,5 @@ public class StartGame : MonoBehaviour
         {
             OnStartGame.Invoke();
         }
-
-        ItemNameSuggestor.itemDatabase = itemDatabase;
     }
 }

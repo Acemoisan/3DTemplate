@@ -20,7 +20,7 @@ public class HUDUI : MonoBehaviour
     [SerializeField] PlayerInventory _playersInventory;        
     [SerializeField] List<Button> hotbarInventoryButtons;
     [SerializeField] List<Image> hotbarInventoryButtonImages;
-    [SerializeField] GameObject _activeItemTextObject;
+    [SerializeField] UnityEngine.GameObject _activeItemTextObject;
     //[SerializeField] InventoryUI1 _inventoryReference;
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DrawGizmo : MonoBehaviour
 {
-    [SerializeField] GameObject positionCenter;
+    [SerializeField] UnityEngine.GameObject positionCenter;
     [SerializeField] float diameter;
     [SerializeField] Color gizmoColor;
 

@@ -51,7 +51,7 @@ public class ItemSpawnerSO : ScriptableObject
         }
     }
 
-    public void SpawnItemAndGetGameObject(ItemSO item, Vector3 itemLocation, out GameObject spawnedItem, int count = 1, Transform parent = null)
+    public void SpawnItemAndGetGameObject(ItemSO item, Vector3 itemLocation, out UnityEngine.GameObject spawnedItem, int count = 1, Transform parent = null)
     {
         itemEntityTrigger = itemEntity.GetComponentInChildren<EntityTrigger>();
         itemEntityTrigger.SetupEntity(item, count);
@@ -61,12 +61,12 @@ public class ItemSpawnerSO : ScriptableObject
         //AddForce();
     }
 
-    public void SpawnItem(GameObject item, Vector3 itemLocation)
+    public void SpawnItem(UnityEngine.GameObject item, Vector3 itemLocation)
     {
         Instantiate(item, itemLocation, Quaternion.identity);
     }
 
-    void AddForce(GameObject entity)
+    void AddForce(UnityEngine.GameObject entity)
     {
         //if(entity.GetComponent<Rigidbody2D>() == null) { Debug.LogError("Rigidbody2D not found on " + entity.name); return; }
         // entity.GetComponent<Rigidbody2D>().AddForce(entity.transform.up * 30, ForceMode2D.Impulse);

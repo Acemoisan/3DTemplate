@@ -9,7 +9,7 @@ public class SpawnSpell : MonoBehaviour//: ToolHit
 {
     [SerializeField] ItemSpawnerSO _itemSpawner;
     [SerializeField] TimeManagerSO TimeManagerSO;
-    [SerializeField] List<GameObject> spellsToSpawn;
+    [SerializeField] List<UnityEngine.GameObject> spellsToSpawn;
     [SerializeField] Transform _spawnLocation;
     [Range(0, 100)] [SerializeField] int chanceOfDropOutOf100;
     [SerializeField] int dropCountMinimum = 1;
@@ -18,7 +18,7 @@ public class SpawnSpell : MonoBehaviour//: ToolHit
 
 
     Vector3 spawnPos;
-    [SerializeField] GameObject spellToDrop;
+    [SerializeField] UnityEngine.GameObject spellToDrop;
 
 
     IEnumerator Start()

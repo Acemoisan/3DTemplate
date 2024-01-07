@@ -10,7 +10,7 @@ public class PickedUpItemUI : MonoBehaviour
 {
 
     [Header("Dependencies")]
-    [SerializeField] GameObject itemUIHolder;
+    [SerializeField] UnityEngine.GameObject itemUIHolder;
     [SerializeField] Image _itemIcon;
     [SerializeField] TextMeshProUGUI _itemCountText;
     [SerializeField] TextMeshProUGUI _itemNameText;

@@ -81,7 +81,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(Sound sound)
     {
         if(CanPlaySound(sound) == false) { return; }
-        GameObject soundGameObject = new GameObject("Sound");
+        UnityEngine.GameObject soundGameObject = new UnityEngine.GameObject("Sound");
         AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
         audioSource.PlayOneShot(instance.GetAudioClip(sound));
     }
@@ -90,7 +90,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(Sound sound, Vector3 pos)
     {
         if(CanPlaySound(sound) == false) { return; }
-        GameObject soundGameObject = new GameObject("Sound");
+        UnityEngine.GameObject soundGameObject = new UnityEngine.GameObject("Sound");
         soundGameObject.transform.position = pos;
         AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
         audioSource.clip = instance.GetAudioClip(sound);

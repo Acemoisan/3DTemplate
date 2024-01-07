@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class SaveSlotHolder : MonoBehaviour
 {
     [SerializeField] SaveSystem saveSystem;
-    [SerializeField] GameObject saveSlotholder;
-    [SerializeField] GameObject fileSlotPrefab;
+    [SerializeField] UnityEngine.GameObject saveSlotholder;
+    [SerializeField] UnityEngine.GameObject fileSlotPrefab;
     // [SerializeField] SaveMenuValuesSO saveMenuValuesSO;
     // [SerializeField] GameObject statsPanel;
 
@@ -72,7 +72,7 @@ public class SaveSlotHolder : MonoBehaviour
 
     void InstantiateSaveSlot(int index)
     {
-        GameObject newSlot = Instantiate(fileSlotPrefab, saveSlotholder.transform);
+        UnityEngine.GameObject newSlot = Instantiate(fileSlotPrefab, saveSlotholder.transform);
         newSlot.GetComponent<SaveSlot>().LoadFile(index);
     }
 }

@@ -40,7 +40,7 @@ public class InventoryUI1 : MonoBehaviour
     public List<InventoryButton> mainInventoryButtons;
     public List<InventoryButton> hotBarButtons;
     public List<InventoryButton> miscButtons;
-    [SerializeField] List<GameObject> inventoryPages;
+    [SerializeField] List<UnityEngine.GameObject> inventoryPages;
     [SerializeField] List<Image> inventoryTabButtons;
 
 
@@ -293,7 +293,7 @@ public class InventoryUI1 : MonoBehaviour
 
     void ChangeInventoryPage(int tab)
     {
-        foreach (GameObject tabIndex in inventoryPages)
+        foreach (UnityEngine.GameObject tabIndex in inventoryPages)
         {
             tabIndex.gameObject.SetActive(false);
         }
