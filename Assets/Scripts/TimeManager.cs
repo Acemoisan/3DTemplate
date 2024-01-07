@@ -264,7 +264,7 @@ public class TimeManager : MonoBehaviour
 
         if (timePaused)
         {
-            SetTimeScale(0);
+            Time.timeScale = 0f;
         }
         else
         {
