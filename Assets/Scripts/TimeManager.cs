@@ -92,6 +92,7 @@ public class TimeManager : MonoBehaviour
 
     private void Start()
     {
+        DefaultStartTime();
         StartCoroutine(IncreaseTime());
         //InvokeRepeating("IncreaseRealTime", 60, 60);
         //Invoke("DelaySetDaylightTime", 1);
@@ -99,9 +100,18 @@ public class TimeManager : MonoBehaviour
     }  
 
 
-    void DelaySetDaylightTime()
+    public void DefaultStartTime()
     {
-        //SetDaylightTime();
+        hour = 12;
+        minute = 0;
+        second = 0;
+        secondsPerInGameTenMinutes = 24;
+        monthIndex = 0;
+        dayOfTheMonthIndex = 1;
+        year = 1;
+        dayOfTheWeekIndex = 0;
+        dayOfTheWeekString = daysOfTheWeek[dayOfTheWeekIndex];
+        UpdateTimeOnUI();
     }
 
 

@@ -67,6 +67,19 @@ public class DebugController : MonoBehaviour
 
 
     #region QUICK COMMANDS
+    [Command("default_settings", "Set the Settings back to Default")]
+    public void DefaultSettings()
+    {
+        if(GameManager.Instance != null) { GameManager.Instance.ChangeGameMode(GameMode.Survival); }
+        SetHudSize(CanvasSize.Medium);
+        ToggleHud(true);
+        DrawAimRays(false);
+        if(TimeManager.Instance != null) { TimeManager.Instance.DefaultStartTime(); }
+        SetPlayerCameraMode(CameraModes.LastOfUs);
+        RevertPlayerStats();
+        SetPlayerEffect(EffectType.None);
+    }
+
     [Command("gamemode", "Set Game Mode")]
     public void SetGameMode(GameMode gameMode = GameMode.Survival)
     {
@@ -142,7 +155,7 @@ public class DebugController : MonoBehaviour
         currentTime.SetTimeIncrement(increment);
     }
 
-    [Command("time_set_scale", "Sets Time Scale")]
+    [Command("time_set_scale", "Sets Time Scale (Slowmotion!)")]
     public void SetTimeScale(float timeScale = 1)
     {
         currentTime.SetTimeScale(timeScale);

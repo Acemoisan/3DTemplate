@@ -89,6 +89,7 @@ namespace StarterAssets
         void HandleFlying()
         {
             if(GameManager.Instance == null) return;
+            if(_flying && GameManager.Instance.CurrentGameMode != GameMode.Creative) { Debug.Log($"Player is flying but not in creative mode."); return;}
 
             if(GameManager.Instance.CurrentGameMode == GameMode.Creative && _flying) 
             {

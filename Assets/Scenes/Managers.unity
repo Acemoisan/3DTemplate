@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021648036, g: 0.012958044, b: 0.06586024, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &392191333
 RectTransform:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 131063
 --- !u!114 &392191335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &402644639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -728,6 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1090603998}
   - component: {fileID: 1090604000}
+  - component: {fileID: 1090604001}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -763,8 +764,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1cd82836182ea43a8de5db759b6be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1090604001}
   loadingScreenGO: {fileID: 402644638}
   loadingBar: {fileID: 1844175054}
+--- !u!95 &1090604001
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090603997}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: efdcf39434b06d74db1842677041e1b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1688267470
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd81048af6f84ea43bc9355b2f321a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGameState: 0
+  _currentGameMode: 0
 --- !u!1 &1709782859
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cd3c404fd1d514e830e4d7a455296e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 0
+  debug_drawColliderBoxes: 0
 --- !u!1 &1785414087
 GameObject:
   m_ObjectHideFlags: 0

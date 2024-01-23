@@ -15,6 +15,11 @@ public class TimeManagerSO : ScriptableObject
     public float year;
     public float secondsPerInGameTenMinutes;
 
+
+    public void DefaultTime()
+    {
+        TimeManager.Instance.DefaultStartTime();
+    }
     public void SkipToNextMorning()
     {
         TimeManager.Instance.SkipToNextMorning();

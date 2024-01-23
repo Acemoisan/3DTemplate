@@ -2,9 +2,9 @@ Workflow for Custom Textmesh Pro Material Presets.
 
 1. Find a font. 
 2. Import TextMeshPro
-3. Window > TextMesh > Create Font Asset
+3. Window > TextMesh > Font Asset Creator
 4. Drag in Your Font
-5. create font with "smooth" render. (This will generate the TextMeshPro Font)
+5. Create font with "smooth" render. (This will generate the TextMeshPro Font)
 6. To generate font atlas (for photoshop editing). Select TMPFont. click on 3 dots > Extract Atlas. (this can be edited in PS)
 7. To create a material Preset.  Right click on TMP Component. scroll to material at bottom of inspector. Right Click > Create Material Preset
 8. this allows all material presets to be selected, under the preset list, on the TMP component.

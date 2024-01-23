@@ -45,4 +45,9 @@ public class SceneLoader : MonoBehaviour
 
         SceneLoaderManager.Instance.OnLoadLevelRequest(scene, showLoadingScreen);
     }
+
+    public void ReloadScene()
+    {
+        SceneLoaderManager.Instance.ReloadCurrentScene();
+    }
 }

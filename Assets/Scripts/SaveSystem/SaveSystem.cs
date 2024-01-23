@@ -131,7 +131,7 @@ public class SaveSystem : ScriptableObject
 
     void SaveGameSaveSlotsToDisk()
     {
-        if (FileManager.WriteToFile("savedFiles.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+        if (FileManager.WriteToFile("savedFileNames.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
         {
             Debug.Log("Saved Game Worlds successfully! " + savedFiles.ToJson());
         }
@@ -140,7 +140,7 @@ public class SaveSystem : ScriptableObject
     public void LoadGameFilesFolder()
     {
         // FIRST TRIES TO FIND FILE WITH THE SAVED NAME. PULLS DATA
-        if (FileManager.LoadFromFile("savedFiles.files", worldFileFolderName, out var json)) 
+        if (FileManager.LoadFromFile("savedFileNames.files", worldFileFolderName, out var json)) 
         {
             this.savedFiles.FromJson(json);
             return;
@@ -148,7 +148,7 @@ public class SaveSystem : ScriptableObject
         // IF FILE NOT FOUND
         else
         {
-            if (FileManager.WriteToFile("savedFiles.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+            if (FileManager.WriteToFile("savedFileNames.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
             {
                 LoadGameFilesFolder();
             }

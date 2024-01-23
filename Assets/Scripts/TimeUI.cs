@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class TimeUI : MonoBehaviour
 {
-    [SerializeField] TimeManagerSO timeManagerSO;
+    //[SerializeField] TimeManagerSO timeManagerSO;
     [SerializeField] TextMeshProUGUI hourText;
     [SerializeField] TextMeshProUGUI minuteText;
     [SerializeField] TextMeshProUGUI dayOfTheWeekStringText;

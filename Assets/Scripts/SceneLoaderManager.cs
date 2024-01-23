@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SceneLoaderManager : MonoBehaviour
 {
     public static SceneLoaderManager Instance;
+    [SerializeField] Animator animator;
     public UnityEngine.GameObject loadingScreenGO; // Assign in Inspector
     public Slider loadingBar; // Assign in Inspector if you have a loading bar
 
@@ -36,6 +37,13 @@ public class SceneLoaderManager : MonoBehaviour
         }
     }
 
+    public void ReloadCurrentScene()
+    {
+        SceneSO sceneSO = new SceneSO();
+        sceneSO.sceneName = SceneManager.GetActiveScene().name;
+        StartCoroutine(ProcessLevelLoading(sceneSO, true));
+    }
+
 
     private bool IsSceneAlreadyLoaded(SceneSO scene)
     {
@@ -48,33 +56,47 @@ public class SceneLoaderManager : MonoBehaviour
     {
         if (scene != null)
         {
+            if(showLoadingScreen)
+            {
+                animator.SetTrigger("Load");
+                Debug.Log("Loading scene: " + scene.sceneName);
+                // this.DisplayLoadingScreen(true);
+                // this.DisplaySliderValue(loadSceneProcess.progress);
+            }
+
+
             var currentLoadedLevel = SceneManager.GetActiveScene();
             SceneManager.UnloadSceneAsync(currentLoadedLevel);
 
-            AsyncOperation loadSceneProcess = SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Additive);
+            AsyncOperation loadSceneProcess = SceneManager.LoadSceneAsync(scene.sceneName, LoadSceneMode.Additive);
+
+
 
             while(!loadSceneProcess.isDone)
             {
-                if(showLoadingScreen)
-                {
-                    this.DisplayLoadingScreen(true);
-                    this.DisplaySliderValue(loadSceneProcess.progress);
-                }
-                else
-                {
-                    this.DisplayLoadingScreen(false);
-                }
+                // if(showLoadingScreen)
+                // {
+                //     animator.SetTrigger("Load");
+                //     Debug.Log("Loading scene: " + scene.name);
+                //     // this.DisplayLoadingScreen(true);
+                //     // this.DisplaySliderValue(loadSceneProcess.progress);
+                // }
+                // else
+                // {
+                //     //this.DisplayLoadingScreen(false);
+                // }
                 yield return null;
             }
 
-            this.DisplayLoadingScreen(false);
+
+            //this.DisplayLoadingScreen(false);
             ActivateLevel(scene);
         }
     }
 
     private void ActivateLevel(SceneSO scene)
     {
-        var loadedLevel = SceneManager.GetSceneByName(scene.name);
+        var loadedLevel = SceneManager.GetSceneByName(scene.sceneName);
         SceneManager.SetActiveScene(loadedLevel);
     }
 
