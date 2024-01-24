@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 2443694664786067964}
   - component: {fileID: 7348513543868979591}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3815,7 +3815,7 @@ MonoBehaviour:
   _animator: {fileID: 2167394182189445678}
   triggerChecker: {fileID: 7824644108737000529}
   entity: {fileID: 2236343266428742927}
-  movementSpeed: 5.5
+  movementSpeed: 0
   scaledSpeedConfig: 6
   wanderRadius: 15
   SpeedChangeRate: 10

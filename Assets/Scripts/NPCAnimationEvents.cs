@@ -8,6 +8,9 @@ public class NPCAnimationEvents : MonoBehaviour
     [SerializeField] NPCCombat nPCCombat;
     public UnityEvent MovementOn;
     public UnityEvent MovementOff;
+    public UnityEvent EnableColliderEvent;
+    public UnityEvent DisableColliderEvent;
+
 
     public void AttackHitEvent(UnityEngine.GameObject obj)
     {
@@ -23,5 +26,15 @@ public class NPCAnimationEvents : MonoBehaviour
     public void TriggerMovementOff()
     {
         MovementOff.Invoke();
+    }
+
+    public void EnableCollider()
+    {
+        EnableColliderEvent.Invoke();
+    }
+
+    public void DisableCollider()
+    {
+        DisableColliderEvent.Invoke();
     }
 }

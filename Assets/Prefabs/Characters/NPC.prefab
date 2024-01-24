@@ -11739,6 +11739,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  EnableColliderEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DisableColliderEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7184162978335335413
 GameObject:
   m_ObjectHideFlags: 0

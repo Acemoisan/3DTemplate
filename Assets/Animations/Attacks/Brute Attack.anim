@@ -46117,7 +46117,15 @@ AnimationClip:
   m_HasMotionFloatCurves: 1
   m_Events:
   - time: 0.6666667
-    functionName: InstantiateBullet
+    functionName: EnableCollider
+    data: 
+    objectReferenceParameter: {fileID: 8223844392111385441, guid: 7a003029df566534188dbe89b9e6df52,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: DisableCollider
     data: 
     objectReferenceParameter: {fileID: 8223844392111385441, guid: 7a003029df566534188dbe89b9e6df52,
       type: 3}
