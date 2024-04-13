@@ -59,7 +59,7 @@ public class SaveSlotHolder : MonoBehaviour
             Destroy(slot.gameObject);
         }
 
-        for (int slot = 0; slot < saveSystem.savedFiles.files.Count; slot++)
+        for (int slot = 0; slot < saveSystem.GetSavedFiles().files.Count; slot++)
         {
             InstantiateSaveSlot(slot);
         }

@@ -1,10 +1,4 @@
-﻿/*
- *  Copyright © 2022 Omuhu Inc. - All Rights Reserved
- *  Unauthorized copying of this file, via any medium is strictly prohibited
- *  Proprietary and confidential
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,6 +17,7 @@ public class SaveSystem : ScriptableObject
     [Header("Strings")]
     [SerializeField] string worldFileFolderName = "World Files";
     [SerializeField] string individualWorldFileName = "worldData.game";
+    //[SerializeField] List<string> directories = new List<string>() { "worlds", "packs" };
 
 
 
@@ -59,7 +54,7 @@ public class SaveSystem : ScriptableObject
         string worldNamePath = worldFileFolderName + "/" + worldName;
 
         // TRY TO FIND FILE
-        if (FileManager.LoadFromFile(individualWorldFileName, worldNamePath, out var json)) 
+        if (FileManager.LoadFromFile(worldNamePath, individualWorldFileName, out var json)) 
         {
             this.saveData.FromJson(json);
             Debug.Log("World data loaded: " + Application.persistentDataPath + "/" + worldNamePath);
@@ -115,7 +110,7 @@ public class SaveSystem : ScriptableObject
         // }
 
         string worldNamePath = worldFileFolderName + "/" + selectedWorldString;
-        if (FileManager.WriteToFile(individualWorldFileName, worldNamePath, saveData.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+        if (FileManager.WriteToFile(worldNamePath, individualWorldFileName, saveData.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
         {
             Debug.Log("Save successful!");
         }
@@ -131,28 +126,38 @@ public class SaveSystem : ScriptableObject
 
     void SaveGameSaveSlotsToDisk()
     {
-        if (FileManager.WriteToFile("savedFileNames.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+        if (FileManager.WriteToFile(worldFileFolderName, "savedFileNames.files", GetSavedFiles().ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
         {
-            Debug.Log("Saved Game Worlds successfully! " + savedFiles.ToJson());
+            Debug.Log("Saved Game Worlds successfully! " + GetSavedFiles().ToJson());
         }
     }
 
     public void LoadGameFilesFolder()
     {
+        this.GetSavedFiles().ClearAllfiles();
         // FIRST TRIES TO FIND FILE WITH THE SAVED NAME. PULLS DATA
-        if (FileManager.LoadFromFile("savedFileNames.files", worldFileFolderName, out var json)) 
+        if (FileManager.LoadFromFile(worldFileFolderName, "savedFileNames.files", out var json)) 
         {
-            this.savedFiles.FromJson(json);
+            this.GetSavedFiles().FromJson(json);
             return;
         }
         // IF FILE NOT FOUND
         else
         {
-            if (FileManager.WriteToFile("savedFileNames.files", worldFileFolderName, savedFiles.ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
+            if (FileManager.WriteToFile(worldFileFolderName, "savedFileNames.files", GetSavedFiles().ToJson())) //CREATING A FILE AND PASSING ITS CONTENTS
             {
                 LoadGameFilesFolder();
             }
         }
+    }
+
+    public SaveFileSO GetSavedFiles()
+    {
+        if(savedFiles.files.Count == 0) 
+        {
+            Debug.Log("No files found");
+        }
+        return savedFiles;
     }
     #endregion
 
@@ -204,7 +209,7 @@ public class SaveSystem : ScriptableObject
 
     public void DeleteAllFiles()
     {
-        savedFiles.ClearAllfiles();
+        GetSavedFiles().ClearAllfiles();
     }
     #endregion
 
@@ -218,7 +223,7 @@ public class SaveSystem : ScriptableObject
     {
         string worldNamePath = worldFileFolderName + "/" + profileID;
         //var fullPath = Path.Combine(Application.persistentDataPath, worldNamePath, individualWorldFileName);
-        if (FileManager.LoadFromFile(individualWorldFileName, worldNamePath, out var json)) 
+        if (FileManager.LoadFromFile(worldNamePath, individualWorldFileName, out var json)) 
         {
             file = new SaveData();
             file.FromJson(json);
@@ -243,9 +248,13 @@ public class SaveSystem : ScriptableObject
         public void StartNewFile(string customName) 
         {
             //savedFiles is initialized above. At LoadGameFilesFolder()
-            if(savedFiles.files.Contains(customName) == false) 
+            if(GetSavedFiles().files.Contains(customName) == false) 
             {
-                savedFiles.files.Add(customName);
+                GetSavedFiles().files.Add(customName);
+            }
+            else 
+            {
+                Debug.Log("File already exists");
             }
             
             SaveGameSaveSlotsToDisk();

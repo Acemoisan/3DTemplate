@@ -17,39 +17,39 @@ public abstract class ItemSO : ScriptableObject
     [Tooltip("Should be same name as Scriptable Object")] 
     //[BoxGroup("General Item Info")]
     //[LabelWidth(150)]
-    [SerializeField] string itemName;
+    public string itemName;
 
 
     [Space(10)]
     [TextArea]
     [Tooltip("Limit to 24 characters")] 
     //[BoxGroup("General Item Info")]
-    [SerializeField] string itemDescription;
+    public string itemDescription;
 
 
     [Space(10)]
     [PreviewField(50, ObjectFieldAlignment.Left)]
     [HideLabel]
     //[BoxGroup("General Item Info")]
-    [SerializeField] Sprite icon;
-    [SerializeField] GameObject handPrefab;
+    public Sprite icon;
+    public GameObject handPrefab;
 
     
     [Tooltip("Used by Tooltip to show the class of item. And by incubator. To determine if the item is an 'Egg'")] 
     //[BoxGroup("General Item Info")]
-    [SerializeField] ItemClassNames itemClass;
-    [SerializeField] DamageClasses damageClass;
-    [Range(1, 5)] [SerializeField] int itemLevel = 1;
-    [Range(0, 10000)] [SerializeField] int itemSellValue;
-    [SerializeField] bool stackable;
-    [SerializeField] float toolDamage;
+    public ItemClassNames itemClass;
+    public DamageClasses damageClass;
+    [Range(1, 5)] public int itemLevel = 1;
+    [Range(0, 10000)] public int itemSellValue;
+    public bool stackable;
+    public float toolDamage; 
 
 
     [Space(30)]
     //[GUIColor(0.3f, 0.8f, 0.8f, 1f)]
     [Header("    Tag - Used by Inventory Buttons to categorize where items can be placed")]
     [Tooltip("TAG MUST BE (Clothing/Ring/Potion/General) - Used by Inventory Buttons to categorize where items can be placed")] 
-    [SerializeField] ButtonTag buttonTagEnum;
+    public ButtonTag buttonTagEnum;
 
 
     //[Space(10)]
@@ -59,9 +59,9 @@ public abstract class ItemSO : ScriptableObject
     public ItemActionSO ItemAction;
 
     [Header("Item Animations")]
-    [SerializeField] UseAnimationString animationString;
+    public UseAnimationString animationString;
     public UseAnimationString GetAnimationString { get { return animationString; } }
-    [SerializeField] HoldAnimationString holdAnimationString = HoldAnimationString.Default;
+    public HoldAnimationString holdAnimationString = HoldAnimationString.Default;
     public HoldAnimationString GetHoldAnimationString { get { return holdAnimationString; } }
     //[Header("Animation Trigger")]
     //public AnimationSO primaryToolAnimationTriggerName;

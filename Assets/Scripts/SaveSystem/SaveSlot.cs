@@ -55,8 +55,8 @@ public class SaveSlot : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
     public void LoadFile(int index) //LOADING A FILE BASED ON FILENAME. RETURNING A FILE //LOAD PROFILES BY ID.
     {
-        saveSystem.GetWorldDataForSaveSlot(saveSystem.savedFiles.files[index], out SaveData file);
-        this.worldName = saveSystem.savedFiles.files[index];
+        saveSystem.GetWorldDataForSaveSlot(saveSystem.GetSavedFiles().files[index], out SaveData file);
+        this.worldName = saveSystem.GetSavedFiles().files[index];
         this.saveData = file;
         SetStats(file);
     }

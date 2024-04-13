@@ -35,9 +35,9 @@ public static class FileManager
     //     }
     // }
 
-    public static bool WriteToFile(string fileName, string profileID, string fileContents) 
+    public static bool WriteToFile(string folderName, string fileName, string fileContents) 
     {
-        var fullPath = Path.Combine(Application.persistentDataPath, profileID, fileName);
+        var fullPath = Path.Combine(Application.persistentDataPath, folderName, fileName);
 
 
         try
@@ -63,10 +63,10 @@ public static class FileManager
     ///////////////////////////////////////////////   
     //USED TO READ A FILENAME AND RETURN ITS CONTENTS
     ///////////////////////////////////////////////
-    public static bool LoadFromFile(string fileName, string profileID, out string result)
+    public static bool LoadFromFile(string folderName, string fileName, out string result)
     {
-        var fullPath = Path.Combine(Application.persistentDataPath, profileID, fileName);
-        Debug.Log($"'Loading <color=#78D09F>{profileID}/{fileName}</color> From: <color=#EFB628>{fullPath}</color>");
+        var fullPath = Path.Combine(Application.persistentDataPath, folderName, fileName);
+        Debug.Log($"'Loading <color=#78D09F>{folderName}/{fileName}</color> From: <color=#EFB628>{fullPath}</color>");
 
         try
         {
