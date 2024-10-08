@@ -18,9 +18,9 @@ public class PreferencesUI : MonoBehaviour
     public Slider ambientSlider;
 
 
-    [Header("Extras")]
-    public PlayerControllerSO playerControllerSO;
-    public Slider lookSpeedSlider;
+    // [Header("Extras")]
+    // public PlayerControllerSO playerControllerSO;
+    // public Slider lookSpeedSlider;
 
 
     private void Start()
@@ -31,7 +31,7 @@ public class PreferencesUI : MonoBehaviour
             this.preferencesSystem.volumeAmbient
         );
 
-        UpdateLookSpeed();
+        //UpdateLookSpeed();
     }
 
     public void UpdateUI(
@@ -44,8 +44,8 @@ public class PreferencesUI : MonoBehaviour
         //this.ambientSlider.value = volumeAmbient;
     }
 
-    public void UpdateLookSpeed()
-    {
-        this.lookSpeedSlider.value = this.playerControllerSO.lookSpeed;
-    }
+    // public void UpdateLookSpeed()
+    // {
+    //     this.lookSpeedSlider.value = this.playerControllerSO.lookSpeed;
+    // }
 }
