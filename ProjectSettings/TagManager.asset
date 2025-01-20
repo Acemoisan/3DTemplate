@@ -4,9 +4,32 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CinemachineTarget
+  - Action
+  - AutoCrouch
+  - Ragdoll
+  - Ignore Ragdoll
+  - Boss
+  - Enemy
+  - CompanionAI
+  - Weapon
+  - LookAt
+  - Dirt
+  - Wood
+  - Metal
+  - Concrete
+  - Glass
+  - Water
+  - LadderTrigger
+  - ExitWater
+  - Barrel
+  - FreeClimb
+  - ClimbDirection
+  - Zipline
+  - PlayerUI
+  - Collectable
+  - CoverPoint
   - Interactable
-  - Button
+  - AIAction
   layers:
   - Default
   - TransparentFX
@@ -14,17 +37,19 @@ TagManager:
   - 
   - Water
   - UI
+  - 
+  - 
   - Player
   - Enemy
-  - Ground
-  - PlayerCollider
-  - EnemyCollider
-  - EnemyProjectile
-  - PlayerProjectile
-  - Interactable
-  - Solid
-  - 'First Person '
-  - Hidden
+  - CompanionAI
+  - Triggers
+  - StopMove
+  - 
+  - HeadTrack
+  - BodyPart
+  - BlockAIRayCast
+  - Pushable
+  - CoverPoint
   - 
   - 
   - 
@@ -37,13 +62,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - PostProcess
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Top
-    uniqueID: 435434887
     locked: 0
